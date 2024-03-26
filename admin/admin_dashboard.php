@@ -4,13 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Skyline - Admin Dashboard</title>
-    <link rel="icon" href="../assets/images/favicon.jpg">
+    <link rel="icon" href="/assets/images/favicon.jpg">
     <link rel="stylesheet" href="../css/admin_dasboard.css">
 </head>
 <body>
 <header>
     <div class="logo">
-        <img src="../assets/images/logo.jpg" alt="Airline Logo">
+        <img src="/assets/images/logo.jpg" alt="Airline Logo">
         <div class="title">
             <h1>Skyline Admin Page</h1>
         </div>
@@ -28,12 +28,12 @@
                 echo '<button class="dropbtn">Hello, ' . $_SESSION['username'] . '</button>';
                 echo '<div class="dropdown-content">';
                 echo '<a href="#">Profile</a>';
-                echo '<a href="logout.php" class="logout">Logout</a>';
+                echo '<a href="/logout.php" class="logout">Logout</a>';
                 echo '</div>';
                 echo '</div>';
             } else {
                 // If the user is not logged in, display a login link
-                echo '<li><a href="login.php">Login</a></li>';
+                echo '<li><a href="/login.php">Login</a></li>';
             }
             ?> 
         </ul>  
@@ -70,7 +70,7 @@ document.addEventListener("DOMContentLoaded", function() {
         alert("You have been logged out successfully!");
         
         // Redirect to logout.php after the alert is shown
-        window.location.href = "../logout.php";
+        window.location.href = "/logout.php";
     });
 });
 </script>

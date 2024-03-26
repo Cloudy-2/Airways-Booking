@@ -17,16 +17,15 @@
     </div>
     <nav>
         <ul>
-            <li><a href="index.php">Home</a></li>
+            <li><a href="dashboard.php">Dashboard</a></li>
             <li><a href="#">Flights</a></li>
-            <li><a href="#">Analytics</a></li>
+         
         </ul>
     </nav>
-</header>
+</header> 
   <div class="container">
     <h1>Current Offers</h1>
     <div id="offers" class="offers-container"></div>
-    <a href="login.php" class="back-button">Login to Search Available Flights?</a>
   </div>
 
   <script src="./js/offers.js"></script>
