@@ -8,13 +8,13 @@
     <link href="https://cdn.jsdelivr.net/npm/remixicon@3.4.0/fonts/remixicon.css"  rel="stylesheet"
     />
     <link rel="stylesheet" href="./css/dashboard.css" />
-    <link rel="icon" href="./assets/images/favicon.jpg">
+    <link rel="icon" href="/assets/images/favicon.jpg">
     <title>Skyline - Dashboard</title>
   </head>
   <body>
     <header>
       <div class="logo">
-          <img src="./assets/images/logo.jpg" alt="Airline Logo">
+          <img src="/assets/images/logo.jpg" alt="Airline Logo">
           <div class="title">
               <h1>Skyline Airlines Dashboard</h1>
           </div>
@@ -22,7 +22,7 @@
       <nav>
           <ul>
               <li><a href="index.php">Home</a></li>
-              <li><a href="offers.php">Offers</a></li>
+              <li><a href=/offers.php">Offers</a></li>
               <li><a href="flights.php">Flights</a></li>
               <li><a href="contact.php">Contact</a></li> 
               <?php
@@ -64,7 +64,7 @@
                         <input type="text" list="locations" id="locationInput" />
                         <label>Location</label>
                     </div>
-                    <p>Select or Input nearest Airport at your location</p>
+                    <p>Select a location</p>
                 </div>
                 <datalist id="locations">
                     <option value="Manila">
@@ -79,7 +79,6 @@
                     <option value="Tagbilaran ">
                     <option value="Puerto Princesa City">
                     <option value="Kalibo ">
-                      
                     <!-- Dari pag add pang ilisi lang ang lugar sa taas -->
                 </datalist>
             </div>
@@ -93,7 +92,7 @@
                     </div>
                     <p>Select a destination</p>
                 </div>
-                <datalist id="destinations">
+                <datalist id="locations">
                     <option value="Manila">
                     <option value="Cebu">
                     <option value="Boracay">
@@ -121,12 +120,9 @@
               </div>
           </div>
 
-          <div class="form__group btn__group">
-    <button type="submit" class="btn" id= "Search" name="search_button">
-        <i class="ri-search-line"></i>
-    </button>
-</div>
-
+        <div class="form__group btn__group">
+          <button class="btn"><i class="ri-search-line"></i></button>
+        </div>
       </form>
     </section>
 
@@ -218,7 +214,6 @@
       </div>
     </section>
     </main>
-    
 
     <footer class="footer">
       <div class="section__container footer__container">
@@ -242,7 +237,7 @@
         </div>
         <div class="footer__col">
           <h4>CONTACT</h4>
-          <p><a href="./Airline_Ticket_Reservation_System/pages/pages/contact.html">Support</a></p>
+          <p><a href="/Airline_Ticket_Reservation_System/pages/pages/contact.html">Support</a></p>
           <p>Media</p>
           <p>Socials</p>
         </div>
@@ -258,6 +253,6 @@
       </div>
     </footer>
 
-     <script src="./js/dashboard.js"></script>
+    <script src="./js/dashboard.js"></script>
   </body>
 </html>

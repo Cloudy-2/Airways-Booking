@@ -1,4 +1,84 @@
-<?php include('./models/LoginReq.php'); ?>
+<?php
+session_start(); // Start session at the beginning of the script
+
+// Check if the user is already logged in
+if(isset($_SESSION['username'])) {
+    // If the user is logged in, redirect to mainmenu.php or admin_dashboard.php
+    if ($_SESSION['is_admin'] == 1) {
+        header("Location: ../admin/admin_dashboard.php");
+    } else {
+        header("Location: index.php");
+    }
+    exit();
+}
+
+include_once 'config/database.php';
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+    $user_type = $_POST['user_type']; // New line: Get the selected user type from the form
+
+    if ($user_type == 'admin') {
+        // Check if the user is an admin
+        $stmt = $conn->prepare("SELECT * FROM admins WHERE username = ?");
+        $stmt->bind_param("s", $username);
+        $stmt->execute();
+        $admin_result = $stmt->get_result();
+
+        if ($admin_result->num_rows == 1) {
+            // Admin user exists, fetch user details
+            $admin_row = $admin_result->fetch_assoc();
+            $admin_stored_password = $admin_row['password'];
+        
+            // Compare plain text passwords
+            if ($password === $admin_stored_password) {
+                // Password is correct, set session variables
+                $_SESSION['username'] = $username;
+                $_SESSION['is_admin'] = 1;
+                // Redirect to admin dashboard
+                header("Location: ../admin/admin_dashboard.php");
+                exit();
+            } else {
+                // Incorrect password
+                $errorMessage = "Invalid password. Please try again.";
+            }
+        } else {
+            // Admin user does not exist
+            $errorMessage = "Invalid username or password. Please try again.";
+        }
+    } elseif ($user_type == 'regular') {
+        // Check if the user is a regular user
+        $stmt = $conn->prepare("SELECT * FROM logindata WHERE Email = ?");
+        $stmt->bind_param("s", $username);
+        $stmt->execute();
+        $regular_result = $stmt->get_result();
+
+        if ($regular_result->num_rows == 1) {
+            // Regular user exists, fetch user details
+            $regular_row = $regular_result->fetch_assoc();
+            $regular_stored_password = $regular_row['password'];
+            if (password_verify($password, $regular_stored_password)) {
+                // Password is correct, set session variables
+                $_SESSION['username'] = $username;
+                // No need to set is_admin for regular users
+                // Redirect to main menu
+                header("Location: dashboard.php");
+                exit();
+            } else {
+                // Incorrect password
+                $errorMessage = "Invalid password. Please try again.";
+            }
+        } else {
+            // Regular user does not exist
+            $errorMessage = "Invalid username or password. Please try again.";
+        }
+    } else {
+        // Invalid user type
+        $errorMessage = "Invalid user type selected.";
+    }
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -25,7 +105,7 @@
             <?php
             if(isset($_SESSION['username'])) {
                 // If the user is logged in, display the logout button
-                echo '<li><a href="logout.php">Logout</a></li>';
+                echo '<li><a href="/logout.php">Logout</a></li>';
             }
             ?>
         </ul>
