@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 27, 2024 at 06:10 AM
+-- Generation Time: Mar 30, 2024 at 02:05 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -110,7 +110,7 @@ INSERT INTO `flights` (`id`, `flight_number`, `departure_location`, `arrival_loc
 (2, 'FN002', 'Manila - Ninoy Aquino International Airport (MNL)', 'Davao - Francisco Bangoy International Airport (DVO)', '06:00:00', '07:45:00', 2985.00),
 (3, 'FN003', 'Manila - Ninoy Aquino International Airport (MNL)', 'Tacloban - Daniel Z Romualdez Airport (TAC)', '06:00:00', '07:13:00', 4643.00),
 (4, 'FN004', 'Manila - Ninoy Aquino International Airport (MNL)', 'Iloilo - Iloilo International Airport (ILO)', '06:00:00', '07:05:00', 3036.00),
-(5, 'FN005', 'Manila - Ninoy Aquino International Airport (MNL)', 'Boracay - Boracay Airport (MPH)', '06:00:00', '07:10:00', 13592.00),
+(5, 'FN005', 'Manila - Ninoy Aquino International Airport (MNL)', 'Boracay - Boracay Airport (MPH)', '06:00:00', '07:10:00', 3667.00),
 (6, 'FN006', 'Manila - Ninoy Aquino International Airport (MNL)', 'Bacolod - Bacolod Silay International Airport (BCD)', '06:00:00', '07:15:00', 2764.00),
 (7, 'FN007', 'Manila - Ninoy Aquino International Airport (MNL)', 'Cagayan de Oro - Laguindingan Airport (CGY)', '06:00:00', '07:35:00', 2834.00),
 (8, 'FN008', 'Manila - Ninoy Aquino International Airport (MNL)', 'Tagbilaran - Bohol Panglao International Airport (TAG)', '06:00:00', '07:25:00', 5862.00),
@@ -120,7 +120,7 @@ INSERT INTO `flights` (`id`, `flight_number`, `departure_location`, `arrival_loc
 (13, 'FN0013', 'Manila - Ninoy Aquino International Airport (MNL)', 'Davao - Francisco Bangoy International Airport (DVO)', '10:00:00', '11:45:00', 2985.00),
 (14, 'FN0014', 'Manila - Ninoy Aquino International Airport (MNL)', 'Tacloban - Daniel Z Romualdez Airport (TAC)', '10:00:00', '11:13:00', 4643.00),
 (15, 'FN0015', 'Manila - Ninoy Aquino International Airport (MNL)', 'Iloilo - Iloilo International Airport (ILO)', '10:00:00', '11:05:00', 3036.00),
-(16, 'FN0016', 'Manila - Ninoy Aquino International Airport (MNL)', 'Boracay - Boracay Airport (MPH)', '10:00:00', '11:10:00', 13592.00),
+(16, 'FN0016', 'Manila - Ninoy Aquino International Airport (MNL)', 'Boracay - Boracay Airport (MPH)', '10:00:00', '11:10:00', 3667.00),
 (17, 'FN0017', 'Manila - Ninoy Aquino International Airport (MNL)', 'Bacolod - Bacolod Silay International Airport (BCD)', '10:00:00', '11:15:00', 2764.00),
 (18, 'FN0018', 'Manila - Ninoy Aquino International Airport (MNL)', 'Cagayan de Oro - Laguindingan Airport (CGY)', '10:00:00', '11:35:00', 2834.00),
 (19, 'FN0019', 'Manila - Ninoy Aquino International Airport (MNL)', 'Tagbilaran - Bohol Panglao International Airport (TAG)', '10:00:00', '11:25:00', 5862.00),
@@ -130,7 +130,7 @@ INSERT INTO `flights` (`id`, `flight_number`, `departure_location`, `arrival_loc
 (24, 'FN024', 'Manila - Ninoy Aquino International Airport (MNL)', 'Davao - Francisco Bangoy International Airport (DVO)', '13:00:00', '14:45:00', 2985.00),
 (25, 'FN0025', 'Manila - Ninoy Aquino International Airport (MNL)', 'Tacloban - Daniel Z Romualdez Airport (TAC)', '13:00:00', '14:13:00', 4643.00),
 (26, 'FN0026', 'Manila - Ninoy Aquino International Airport (MNL)', 'Iloilo - Iloilo International Airport (ILO)', '13:00:00', '14:05:00', 3036.00),
-(27, 'FN0027', 'Manila - Ninoy Aquino International Airport (MNL)', 'Boracay - Boracay Airport (MPH)', '13:00:00', '14:10:00', 13592.00),
+(27, 'FN0027', 'Manila - Ninoy Aquino International Airport (MNL)', 'Boracay - Boracay Airport (MPH)', '13:00:00', '14:10:00', 3667.00),
 (28, 'FN0028', 'Manila - Ninoy Aquino International Airport (MNL)', 'Bacolod - Bacolod Silay International Airport (BCD)', '13:00:00', '14:15:00', 2764.00),
 (29, 'FN0029', 'Manila - Ninoy Aquino International Airport (MNL)', 'Cagayan de Oro - Laguindingan Airport (CGY)', '13:00:00', '14:35:00', 2834.00),
 (30, 'FN0030', 'Manila - Ninoy Aquino International Airport (MNL)', 'Tagbilaran - Bohol Panglao International Airport (TAG)', '13:00:00', '14:25:00', 5862.00),
@@ -140,184 +140,176 @@ INSERT INTO `flights` (`id`, `flight_number`, `departure_location`, `arrival_loc
 (35, 'FN035', 'Manila - Ninoy Aquino International Airport (MNL)', 'Davao - Francisco Bangoy International Airport (DVO)', '17:00:00', '18:45:00', 2985.00),
 (36, 'FN036', 'Manila - Ninoy Aquino International Airport (MNL)', 'Tacloban - Daniel Z Romualdez Airport (TAC)', '17:00:00', '18:13:00', 4643.00),
 (37, 'FN037', 'Manila - Ninoy Aquino International Airport (MNL)', 'Iloilo - Iloilo International Airport (ILO)', '17:00:00', '18:05:00', 3036.00),
-(38, 'FN038', 'Manila - Ninoy Aquino International Airport (MNL)', 'Boracay - Boracay Airport (MPH)', '17:00:00', '18:10:00', 13592.00),
+(38, 'FN038', 'Manila - Ninoy Aquino International Airport (MNL)', 'Boracay - Boracay Airport (MPH)', '17:00:00', '18:10:00', 3667.00),
 (39, 'FN039', 'Manila - Ninoy Aquino International Airport (MNL)', 'Bacolod - Bacolod Silay International Airport (BCD)', '17:00:00', '18:15:00', 2764.00),
 (40, 'FN040', 'Manila - Ninoy Aquino International Airport (MNL)', 'Cagayan de Oro - Laguindingan Airport (CGY)', '17:00:00', '18:35:00', 2834.00),
 (41, 'FN041', 'Manila - Ninoy Aquino International Airport (MNL)', 'Tagbilaran - Bohol Panglao International Airport (TAG)', '17:00:00', '18:25:00', 5862.00),
 (42, 'FN042', 'Manila - Ninoy Aquino International Airport (MNL)', 'Puerto Princesa City - Puerto Princesa International Airport (PPS)', '17:00:00', '18:30:00', 5583.00),
 (44, 'FN044', 'Manila - Ninoy Aquino International Airport (MNL)', 'Kalibo - Kalibo International Airport (KLO)', '17:00:00', '18:15:00', 3195.00),
-(45, 'FN045', 'Cebu - Mactan Cebu International Airport (CEB)', 'Davao - Francisco Bangoy International Airport (DVO)', '00:00:00', '00:00:00', 0.00),
-(46, 'FN046', 'Cebu - Mactan Cebu International Airport (CEB)', 'Tacloban - Daniel Z Romualdez Airport (TAC)', '00:00:00', '00:00:00', 0.00),
-(47, 'FN047', 'Cebu - Mactan Cebu International Airport (CEB)', 'Iloilo - Iloilo International Airport (ILO)', '00:00:00', '00:00:00', 0.00),
-(48, 'FN048', 'Cebu - Mactan Cebu International Airport (CEB)', 'Boracay - Boracay Airport (MPH)', '00:00:00', '00:00:00', 0.00),
-(49, 'FN049', 'Cebu - Mactan Cebu International Airport (CEB)', 'Bacolod - Bacolod Silay International Airport (BCD)', '00:00:00', '00:00:00', 0.00),
-(50, 'FN050', 'Cebu - Mactan Cebu International Airport (CEB)', 'Cagayan de Oro - Laguindingan Airport (CGY)', '00:00:00', '00:00:00', 0.00),
-(51, 'FN051', 'Cebu - Mactan Cebu International Airport (CEB)', 'Tagbilaran - Bohol Panglao International Airport (TAG)', '00:00:00', '00:00:00', 0.00),
-(52, 'FN052', 'Cebu - Mactan Cebu International Airport (CEB)', 'Puerto Princesa City - Puerto Princesa International Airport (PPS)', '00:00:00', '00:00:00', 0.00),
-(53, 'FN053', 'Cebu - Mactan Cebu International Airport (CEB)', 'Angeles - Clark International Airport (CRK)', '00:00:00', '00:00:00', 0.00),
-(54, 'FN054', 'Cebu - Mactan Cebu International Airport (CEB)', 'Kalibo - Kalibo International Airport (KLO)', '00:00:00', '00:00:00', 0.00),
-(55, 'FN055', 'Cebu - Mactan Cebu International Airport (CEB)', 'Davao - Francisco Bangoy International Airport (DVO)', '00:00:00', '00:00:00', 0.00),
-(56, 'FN056', 'Cebu - Mactan Cebu International Airport (CEB)', 'Tacloban - Daniel Z Romualdez Airport (TAC)', '00:00:00', '00:00:00', 0.00),
-(57, 'FN057', 'Cebu - Mactan Cebu International Airport (CEB)', 'Iloilo - Iloilo International Airport (ILO)', '00:00:00', '00:00:00', 0.00),
-(58, 'FN058', 'Cebu - Mactan Cebu International Airport (CEB)', 'Boracay - Boracay Airport (MPH)', '00:00:00', '00:00:00', 0.00),
-(59, 'FN059', 'Cebu - Mactan Cebu International Airport (CEB)', 'Bacolod - Bacolod Silay International Airport (BCD)', '00:00:00', '00:00:00', 0.00),
-(60, 'FN060', 'Cebu - Mactan Cebu International Airport (CEB)', 'Cagayan de Oro - Laguindingan Airport (CGY)', '00:00:00', '00:00:00', 0.00),
-(61, 'FN061', 'Cebu - Mactan Cebu International Airport (CEB)', 'Tagbilaran - Bohol Panglao International Airport (TAG)', '00:00:00', '00:00:00', 0.00),
-(62, 'FN062', 'Cebu - Mactan Cebu International Airport (CEB)', 'Puerto Princesa City - Puerto Princesa International Airport (PPS)', '00:00:00', '00:00:00', 0.00),
-(63, 'FN063', 'Cebu - Mactan Cebu International Airport (CEB)', 'Angeles - Clark International Airport (CRK)', '00:00:00', '00:00:00', 0.00),
-(64, 'FN064', 'Cebu - Mactan Cebu International Airport (CEB)', 'Kalibo - Kalibo International Airport (KLO)', '00:00:00', '00:00:00', 0.00),
-(65, 'FN065', 'Cebu - Mactan Cebu International Airport (CEB)', 'Davao - Francisco Bangoy International Airport (DVO)', '00:00:00', '00:00:00', 0.00),
-(66, 'FN066', 'Cebu - Mactan Cebu International Airport (CEB)', 'Tacloban - Daniel Z Romualdez Airport (TAC)', '00:00:00', '00:00:00', 0.00),
-(67, 'FN067', 'Cebu - Mactan Cebu International Airport (CEB)', 'Iloilo - Iloilo International Airport (ILO)', '00:00:00', '00:00:00', 0.00),
-(68, 'FN068', 'Cebu - Mactan Cebu International Airport (CEB)', 'Boracay - Boracay Airport (MPH)', '00:00:00', '00:00:00', 0.00),
-(69, 'FN069', 'Cebu - Mactan Cebu International Airport (CEB)', 'Bacolod - Bacolod Silay International Airport (BCD)', '00:00:00', '00:00:00', 0.00),
-(70, 'FN070', 'Cebu - Mactan Cebu International Airport (CEB)', 'Cagayan de Oro - Laguindingan Airport (CGY)', '00:00:00', '00:00:00', 0.00),
-(71, 'FN071', 'Cebu - Mactan Cebu International Airport (CEB)', 'Tagbilaran - Bohol Panglao International Airport (TAG)', '00:00:00', '00:00:00', 0.00),
-(72, 'FN072', 'Cebu - Mactan Cebu International Airport (CEB)', 'Puerto Princesa City - Puerto Princesa International Airport (PPS)', '00:00:00', '00:00:00', 0.00),
-(73, 'FN073', 'Cebu - Mactan Cebu International Airport (CEB)', 'Angeles - Clark International Airport (CRK)', '00:00:00', '00:00:00', 0.00),
-(74, 'FN074', 'Cebu - Mactan Cebu International Airport (CEB)', 'Kalibo - Kalibo International Airport (KLO)', '00:00:00', '00:00:00', 0.00),
-(75, 'FN075', 'Cebu - Mactan Cebu International Airport (CEB)', 'Davao - Francisco Bangoy International Airport (DVO)', '00:00:00', '00:00:00', 0.00),
-(76, 'FN076', 'Cebu - Mactan Cebu International Airport (CEB)', 'Tacloban - Daniel Z Romualdez Airport (TAC)', '00:00:00', '00:00:00', 0.00),
-(77, 'FN077', 'Cebu - Mactan Cebu International Airport (CEB)', 'Iloilo - Iloilo International Airport (ILO)', '00:00:00', '00:00:00', 0.00),
-(78, 'FN078', 'Cebu - Mactan Cebu International Airport (CEB)', 'Boracay - Boracay Airport (MPH)', '00:00:00', '00:00:00', 0.00),
-(79, 'FN079', 'Cebu - Mactan Cebu International Airport (CEB)', 'Bacolod - Bacolod Silay International Airport (BCD)', '00:00:00', '00:00:00', 0.00),
-(80, 'FN080', 'Cebu - Mactan Cebu International Airport (CEB)', 'Cagayan de Oro - Laguindingan Airport (CGY)', '00:00:00', '00:00:00', 0.00),
-(81, 'FN081', 'Cebu - Mactan Cebu International Airport (CEB)', 'Tagbilaran - Bohol Panglao International Airport (TAG)', '00:00:00', '00:00:00', 0.00),
-(82, 'FN082', 'Cebu - Mactan Cebu International Airport (CEB)', 'Puerto Princesa City - Puerto Princesa International Airport (PPS)', '00:00:00', '00:00:00', 0.00),
-(83, 'FN083', 'Cebu - Mactan Cebu International Airport (CEB)', 'Angeles - Clark International Airport (CRK)', '00:00:00', '00:00:00', 0.00),
-(84, 'FN084', 'Cebu - Mactan Cebu International Airport (CEB)', 'Kalibo - Kalibo International Airport (KLO)', '00:00:00', '00:00:00', 0.00),
-(85, 'FN085', 'Davao - Francisco Bangoy International Airport (DVO)', 'Cebu - Mactan Cebu International Airport (CEB)', '00:00:00', '00:00:00', 0.00),
-(86, 'FN086', 'Davao - Francisco Bangoy International Airport (DVO)', 'Manila - Ninoy Aquino International Airport (MNL)', '00:00:00', '00:00:00', 0.00),
-(87, 'FN087', 'Davao - Francisco Bangoy International Airport (DVO)', 'Tacloban - Daniel Z Romualdez Airport (TAC)', '00:00:00', '00:00:00', 0.00),
-(88, 'FN088', 'Davao - Francisco Bangoy International Airport (DVO)', 'Iloilo - Iloilo International Airport (ILO)', '00:00:00', '00:00:00', 0.00),
-(89, 'FN089', 'Davao - Francisco Bangoy International Airport (DVO)', 'Boracay - Boracay Airport (MPH)', '00:00:00', '00:00:00', 0.00),
-(90, 'FN090', 'Davao - Francisco Bangoy International Airport (DVO)', 'Bacolod - Bacolod Silay International Airport (BCD)', '00:00:00', '00:00:00', 0.00),
-(91, 'FN091', 'Davao - Francisco Bangoy International Airport (DVO)', 'Cagayan de Oro - Laguindingan Airport (CGY)', '00:00:00', '00:00:00', 0.00),
-(92, 'FN092', 'Davao - Francisco Bangoy International Airport (DVO)', 'Tagbilaran - Bohol Panglao International Airport (TAG)', '00:00:00', '00:00:00', 0.00),
-(93, 'FN093', 'Davao - Francisco Bangoy International Airport (DVO)', 'Puerto Princesa City - Puerto Princesa International Airport (PPS)', '00:00:00', '00:00:00', 0.00),
-(94, 'FN094', 'Davao - Francisco Bangoy International Airport (DVO)', 'Angeles - Clark International Airport (CRK)', '00:00:00', '00:00:00', 0.00),
-(95, 'FN095', 'Davao - Francisco Bangoy International Airport (DVO)', 'Kalibo - Kalibo International Airport (KLO)', '00:00:00', '00:00:00', 0.00),
-(96, 'FN096', 'Davao - Francisco Bangoy International Airport (DVO)', 'Cebu - Mactan Cebu International Airport (CEB)', '00:00:00', '00:00:00', 0.00),
-(97, 'FN097', 'Davao - Francisco Bangoy International Airport (DVO)', 'Manila - Ninoy Aquino International Airport (MNL)', '00:00:00', '00:00:00', 0.00),
-(98, 'FN098', 'Davao - Francisco Bangoy International Airport (DVO)', 'Tacloban - Daniel Z Romualdez Airport (TAC)', '00:00:00', '00:00:00', 0.00),
-(99, 'FN099', 'Davao - Francisco Bangoy International Airport (DVO)', 'Iloilo - Iloilo International Airport (ILO)', '00:00:00', '00:00:00', 0.00),
-(100, 'FN100', 'Davao - Francisco Bangoy International Airport (DVO)', 'Boracay - Boracay Airport (MPH)', '00:00:00', '00:00:00', 0.00),
-(101, 'FN0101', 'Davao - Francisco Bangoy International Airport (DVO)', 'Bacolod - Bacolod Silay International Airport (BCD)', '00:00:00', '00:00:00', 0.00),
-(102, 'FN102', 'Davao - Francisco Bangoy International Airport (DVO)', 'Cagayan de Oro - Laguindingan Airport (CGY)', '00:00:00', '00:00:00', 0.00),
-(103, 'FN103', 'Davao - Francisco Bangoy International Airport (DVO)', 'Tagbilaran - Bohol Panglao International Airport (TAG)', '00:00:00', '00:00:00', 0.00),
-(104, 'FN104', 'Davao - Francisco Bangoy International Airport (DVO)', 'Puerto Princesa City - Puerto Princesa International Airport (PPS)', '00:00:00', '00:00:00', 0.00),
-(105, 'FN105', 'Davao - Francisco Bangoy International Airport (DVO)', 'Angeles - Clark International Airport (CRK)', '00:00:00', '00:00:00', 0.00),
-(106, 'FN106', 'Davao - Francisco Bangoy International Airport (DVO)', 'Kalibo - Kalibo International Airport (KLO)', '00:00:00', '00:00:00', 0.00),
-(107, 'FN107', 'Davao - Francisco Bangoy International Airport (DVO)', 'Cebu - Mactan Cebu International Airport (CEB)', '00:00:00', '00:00:00', 0.00),
-(108, 'FN108', 'Davao - Francisco Bangoy International Airport (DVO)', 'Manila - Ninoy Aquino International Airport (MNL)', '00:00:00', '00:00:00', 0.00),
-(109, 'FN109', 'Davao - Francisco Bangoy International Airport (DVO)', 'Tacloban - Daniel Z Romualdez Airport (TAC)', '00:00:00', '00:00:00', 0.00),
-(110, 'FN110', 'Davao - Francisco Bangoy International Airport (DVO)', 'Iloilo - Iloilo International Airport (ILO)', '00:00:00', '00:00:00', 0.00),
-(111, 'FN111', 'Davao - Francisco Bangoy International Airport (DVO)', 'Boracay - Boracay Airport (MPH)', '00:00:00', '00:00:00', 0.00),
-(112, 'FN112', 'Davao - Francisco Bangoy International Airport (DVO)', 'Bacolod - Bacolod Silay International Airport (BCD)', '00:00:00', '00:00:00', 0.00),
-(113, 'FN113', 'Davao - Francisco Bangoy International Airport (DVO)', 'Cagayan de Oro - Laguindingan Airport (CGY)', '00:00:00', '00:00:00', 0.00),
-(114, 'FN114', 'Davao - Francisco Bangoy International Airport (DVO)', 'Tagbilaran - Bohol Panglao International Airport (TAG)', '00:00:00', '00:00:00', 0.00),
-(115, 'FN115', 'Davao - Francisco Bangoy International Airport (DVO)', 'Puerto Princesa City - Puerto Princesa International Airport (PPS)', '00:00:00', '00:00:00', 0.00),
-(116, 'FN116', 'Davao - Francisco Bangoy International Airport (DVO)', 'Angeles - Clark International Airport (CRK)', '00:00:00', '00:00:00', 0.00),
-(117, 'FN117', 'Davao - Francisco Bangoy International Airport (DVO)', 'Kalibo - Kalibo International Airport (KLO)', '00:00:00', '00:00:00', 0.00),
-(118, 'FN118', 'Davao - Francisco Bangoy International Airport (DVO)', 'Cebu - Mactan Cebu International Airport (CEB)', '00:00:00', '00:00:00', 0.00),
-(119, 'FN119', 'Davao - Francisco Bangoy International Airport (DVO)', 'Manila - Ninoy Aquino International Airport (MNL)', '00:00:00', '00:00:00', 0.00),
-(120, 'FN120', 'Davao - Francisco Bangoy International Airport (DVO)', 'Tacloban - Daniel Z Romualdez Airport (TAC)', '00:00:00', '00:00:00', 0.00),
-(121, 'FN121', 'Davao - Francisco Bangoy International Airport (DVO)', 'Iloilo - Iloilo International Airport (ILO)', '00:00:00', '00:00:00', 0.00),
-(122, 'FN122', 'Davao - Francisco Bangoy International Airport (DVO)', 'Boracay - Boracay Airport (MPH)', '00:00:00', '00:00:00', 0.00),
-(123, 'FN123', 'Davao - Francisco Bangoy International Airport (DVO)', 'Bacolod - Bacolod Silay International Airport (BCD)', '00:00:00', '00:00:00', 0.00),
-(124, 'FN124', 'Davao - Francisco Bangoy International Airport (DVO)', 'Cagayan de Oro - Laguindingan Airport (CGY)', '00:00:00', '00:00:00', 0.00),
-(125, 'FN125', 'Davao - Francisco Bangoy International Airport (DVO)', 'Tagbilaran - Bohol Panglao International Airport (TAG)', '00:00:00', '00:00:00', 0.00),
-(126, 'FN126', 'Davao - Francisco Bangoy International Airport (DVO)', 'Puerto Princesa City - Puerto Princesa International Airport (PPS)', '00:00:00', '00:00:00', 0.00),
-(127, 'FN127', 'Davao - Francisco Bangoy International Airport (DVO)', 'Angeles - Clark International Airport (CRK)', '00:00:00', '00:00:00', 0.00),
-(128, 'FN128', 'Davao - Francisco Bangoy International Airport (DVO)', 'Kalibo - Kalibo International Airport (KLO)', '00:00:00', '00:00:00', 0.00),
-(129, 'FN129', 'Tacloban - Daniel Z Romualdez Airport (TAC)', 'Manila - Ninoy Aquino International Airport (MNL)', '00:00:00', '00:00:00', 0.00),
-(130, 'FN130', 'Tacloban - Daniel Z Romualdez Airport (TAC)', 'Cebu - Mactan Cebu International Airport (CEB)', '00:00:00', '00:00:00', 0.00),
-(131, 'FN131', 'Tacloban - Daniel Z Romualdez Airport (TAC)', 'Davao - Francisco Bangoy International Airport (DVO)', '00:00:00', '00:00:00', 0.00),
-(132, 'FN132', 'Tacloban - Daniel Z Romualdez Airport (TAC)', 'Iloilo - Iloilo International Airport (ILO)', '00:00:00', '00:00:00', 0.00),
-(133, 'FN133', 'Tacloban - Daniel Z Romualdez Airport (TAC)', 'Boracay - Boracay Airport (MPH)', '00:00:00', '00:00:00', 0.00),
-(134, 'FN134', 'Tacloban - Daniel Z Romualdez Airport (TAC)', 'Bacolod - Bacolod Silay International Airport (BCD)', '00:00:00', '00:00:00', 0.00),
-(135, 'FN135', 'Tacloban - Daniel Z Romualdez Airport (TAC)', 'Cagayan de Oro - Laguindingan Airport (CGY)', '00:00:00', '00:00:00', 0.00),
-(136, 'FN136', 'Tacloban - Daniel Z Romualdez Airport (TAC)', 'Tagbilaran - Bohol Panglao International Airport (TAG)', '00:00:00', '00:00:00', 0.00),
-(137, 'FN137', 'Tacloban - Daniel Z Romualdez Airport (TAC)', 'Puerto Princesa City - Puerto Princesa International Airport (PPS)', '00:00:00', '00:00:00', 0.00),
-(138, 'FN138', 'Tacloban - Daniel Z Romualdez Airport (TAC)', 'Angeles - Clark International Airport (CRK)', '00:00:00', '00:00:00', 0.00),
-(139, 'FN139', 'Tacloban - Daniel Z Romualdez Airport (TAC)', 'Kalibo - Kalibo International Airport (KLO)', '00:00:00', '00:00:00', 0.00),
-(140, 'FN140', 'Tacloban - Daniel Z Romualdez Airport (TAC)', 'Manila - Ninoy Aquino International Airport (MNL)', '00:00:00', '00:00:00', 0.00),
-(141, 'FN141', 'Tacloban - Daniel Z Romualdez Airport (TAC)', 'Cebu - Mactan Cebu International Airport (CEB)', '00:00:00', '00:00:00', 0.00),
-(142, 'FN142', 'Tacloban - Daniel Z Romualdez Airport (TAC)', 'Davao - Francisco Bangoy International Airport (DVO)', '00:00:00', '00:00:00', 0.00),
-(143, 'FN143', 'Tacloban - Daniel Z Romualdez Airport (TAC)', 'Iloilo - Iloilo International Airport (ILO)', '00:00:00', '00:00:00', 0.00),
-(144, 'FN144', 'Tacloban - Daniel Z Romualdez Airport (TAC)', 'Boracay - Boracay Airport (MPH)', '00:00:00', '00:00:00', 0.00),
-(145, 'FN145', 'Tacloban - Daniel Z Romualdez Airport (TAC)', 'Bacolod - Bacolod Silay International Airport (BCD)', '00:00:00', '00:00:00', 0.00),
-(146, 'FN146', 'Tacloban - Daniel Z Romualdez Airport (TAC)', 'Cagayan de Oro - Laguindingan Airport (CGY)', '00:00:00', '00:00:00', 0.00),
-(147, 'FN147', 'Tacloban - Daniel Z Romualdez Airport (TAC)', 'Tagbilaran - Bohol Panglao International Airport (TAG)', '00:00:00', '00:00:00', 0.00),
-(148, 'FN148', 'Tacloban - Daniel Z Romualdez Airport (TAC)', 'Puerto Princesa City - Puerto Princesa International Airport (PPS)', '00:00:00', '00:00:00', 0.00),
-(149, 'FN149', 'Tacloban - Daniel Z Romualdez Airport (TAC)', 'Angeles - Clark International Airport (CRK)', '00:00:00', '00:00:00', 0.00),
-(150, 'FN150', 'Tacloban - Daniel Z Romualdez Airport (TAC)', 'Kalibo - Kalibo International Airport (KLO)', '00:00:00', '00:00:00', 0.00),
-(151, 'FN151', 'Tacloban - Daniel Z Romualdez Airport (TAC)', 'Manila - Ninoy Aquino International Airport (MNL)', '00:00:00', '00:00:00', 0.00),
-(152, 'FN152', 'Tacloban - Daniel Z Romualdez Airport (TAC)', 'Cebu - Mactan Cebu International Airport (CEB)', '00:00:00', '00:00:00', 0.00),
-(153, 'FN153', 'Tacloban - Daniel Z Romualdez Airport (TAC)', 'Davao - Francisco Bangoy International Airport (DVO)', '00:00:00', '00:00:00', 0.00),
-(154, 'FN154', 'Tacloban - Daniel Z Romualdez Airport (TAC)', 'Iloilo - Iloilo International Airport (ILO)', '00:00:00', '00:00:00', 0.00),
-(155, 'FN155', 'Tacloban - Daniel Z Romualdez Airport (TAC)', 'Boracay - Boracay Airport (MPH)', '00:00:00', '00:00:00', 0.00),
-(156, 'FN156', 'Tacloban - Daniel Z Romualdez Airport (TAC)', 'Bacolod - Bacolod Silay International Airport (BCD)', '00:00:00', '00:00:00', 0.00),
-(157, 'FN157', 'Tacloban - Daniel Z Romualdez Airport (TAC)', 'Cagayan de Oro - Laguindingan Airport (CGY)', '00:00:00', '00:00:00', 0.00),
-(158, 'FN158', 'Tacloban - Daniel Z Romualdez Airport (TAC)', 'Tagbilaran - Bohol Panglao International Airport (TAG)', '00:00:00', '00:00:00', 0.00),
-(159, 'FN159', 'Tacloban - Daniel Z Romualdez Airport (TAC)', 'Puerto Princesa City - Puerto Princesa International Airport (PPS)', '00:00:00', '00:00:00', 0.00),
-(160, 'FN160', 'Tacloban - Daniel Z Romualdez Airport (TAC)', 'Angeles - Clark International Airport (CRK)', '00:00:00', '00:00:00', 0.00),
-(161, 'FN161', 'Tacloban - Daniel Z Romualdez Airport (TAC)', 'Kalibo - Kalibo International Airport (KLO)', '00:00:00', '00:00:00', 0.00),
-(162, 'FN162', 'Tacloban - Daniel Z Romualdez Airport (TAC)', 'Manila - Ninoy Aquino International Airport (MNL)', '00:00:00', '00:00:00', 0.00),
-(163, 'FN163', 'Tacloban - Daniel Z Romualdez Airport (TAC)', 'Cebu - Mactan Cebu International Airport (CEB)', '00:00:00', '00:00:00', 0.00),
-(164, 'FN164', 'Tacloban - Daniel Z Romualdez Airport (TAC)', 'Davao - Francisco Bangoy International Airport (DVO)', '00:00:00', '00:00:00', 0.00),
-(165, 'FN165', 'Tacloban - Daniel Z Romualdez Airport (TAC)', 'Iloilo - Iloilo International Airport (ILO)', '00:00:00', '00:00:00', 0.00),
-(166, 'FN166', 'Tacloban - Daniel Z Romualdez Airport (TAC)', 'Boracay - Boracay Airport (MPH)', '00:00:00', '00:00:00', 0.00),
-(167, 'FN167', 'Tacloban - Daniel Z Romualdez Airport (TAC)', 'Bacolod - Bacolod Silay International Airport (BCD)', '00:00:00', '00:00:00', 0.00),
-(168, 'FN168', 'Tacloban - Daniel Z Romualdez Airport (TAC)', 'Cagayan de Oro - Laguindingan Airport (CGY)', '00:00:00', '00:00:00', 0.00),
-(169, 'FN169', 'Tacloban - Daniel Z Romualdez Airport (TAC)', 'Tagbilaran - Bohol Panglao International Airport (TAG)', '00:00:00', '00:00:00', 0.00),
-(170, 'FN170', 'Tacloban - Daniel Z Romualdez Airport (TAC)', 'Puerto Princesa City - Puerto Princesa International Airport (PPS)', '00:00:00', '00:00:00', 0.00),
-(171, 'FN171', 'Tacloban - Daniel Z Romualdez Airport (TAC)', 'Angeles - Clark International Airport (CRK)', '00:00:00', '00:00:00', 0.00),
-(172, 'FN172', 'Tacloban - Daniel Z Romualdez Airport (TAC)', 'Kalibo - Kalibo International Airport (KLO)', '00:00:00', '00:00:00', 0.00),
-(173, 'FN173', 'Iloilo - Iloilo International Airport (ILO)', 'Manila - Ninoy Aquino International Airport (MNL)', '00:00:00', '00:00:00', 0.00),
-(174, 'FN174', 'Iloilo - Iloilo International Airport (ILO)', 'Cebu - Mactan Cebu International Airport (CEB)', '00:00:00', '00:00:00', 0.00),
-(175, 'FN175', 'Iloilo - Iloilo International Airport (ILO)', 'Davao - Francisco Bangoy International Airport (DVO)', '00:00:00', '00:00:00', 0.00),
-(176, 'FN176', 'Iloilo - Iloilo International Airport (ILO)', 'Tacloban - Daniel Z Romualdez Airport (TAC)', '00:00:00', '00:00:00', 0.00),
-(177, 'FN177', 'Iloilo - Iloilo International Airport (ILO)', 'Boracay - Boracay Airport (MPH)', '00:00:00', '00:00:00', 0.00),
-(178, 'FN178', 'Iloilo - Iloilo International Airport (ILO)', 'Bacolod - Bacolod Silay International Airport (BCD)', '00:00:00', '00:00:00', 0.00),
-(179, 'FN179', 'Iloilo - Iloilo International Airport (ILO)', 'Cagayan de Oro - Laguindingan Airport (CGY)', '00:00:00', '00:00:00', 0.00),
-(180, 'FN180', 'Iloilo - Iloilo International Airport (ILO)', 'Tagbilaran - Bohol Panglao International Airport (TAG)', '00:00:00', '00:00:00', 0.00),
-(181, 'FN181', 'Iloilo - Iloilo International Airport (ILO)', 'Puerto Princesa City - Puerto Princesa International Airport (PPS)', '00:00:00', '00:00:00', 0.00),
-(182, 'FN182', 'Iloilo - Iloilo International Airport (ILO)', 'Angeles - Clark International Airport (CRK)', '00:00:00', '00:00:00', 0.00),
-(183, 'FN183', 'Iloilo - Iloilo International Airport (ILO)', 'Kalibo - Kalibo International Airport (KLO)', '00:00:00', '00:00:00', 0.00),
-(184, 'FN184', 'Iloilo - Iloilo International Airport (ILO)', 'Manila - Ninoy Aquino International Airport (MNL)', '00:00:00', '00:00:00', 0.00),
-(185, 'FN185', 'Iloilo - Iloilo International Airport (ILO)', 'Cebu - Mactan Cebu International Airport (CEB)', '00:00:00', '00:00:00', 0.00),
-(186, 'FN186', 'Iloilo - Iloilo International Airport (ILO)', 'Davao - Francisco Bangoy International Airport (DVO)', '00:00:00', '00:00:00', 0.00),
-(187, 'FN187', 'Iloilo - Iloilo International Airport (ILO)', 'Tacloban - Daniel Z Romualdez Airport (TAC)', '00:00:00', '00:00:00', 0.00),
-(188, 'FN188', 'Iloilo - Iloilo International Airport (ILO)', 'Boracay - Boracay Airport (MPH)', '00:00:00', '00:00:00', 0.00),
-(189, 'FN189', 'Iloilo - Iloilo International Airport (ILO)', 'Bacolod - Bacolod Silay International Airport (BCD)', '00:00:00', '00:00:00', 0.00),
-(190, 'FN190', 'Iloilo - Iloilo International Airport (ILO)', 'Cagayan de Oro - Laguindingan Airport (CGY)', '00:00:00', '00:00:00', 0.00),
-(191, 'FN191', 'Iloilo - Iloilo International Airport (ILO)', 'Tagbilaran - Bohol Panglao International Airport (TAG)', '00:00:00', '00:00:00', 0.00),
-(192, 'FN192', 'Iloilo - Iloilo International Airport (ILO)', 'Puerto Princesa City - Puerto Princesa International Airport (PPS)', '00:00:00', '00:00:00', 0.00),
-(193, 'FN193', 'Iloilo - Iloilo International Airport (ILO)', 'Angeles - Clark International Airport (CRK)', '00:00:00', '00:00:00', 0.00),
-(194, 'FN194', 'Iloilo - Iloilo International Airport (ILO)', 'Kalibo - Kalibo International Airport (KLO)', '00:00:00', '00:00:00', 0.00),
-(195, 'FN195', 'Iloilo - Iloilo International Airport (ILO)', 'Manila - Ninoy Aquino International Airport (MNL)', '00:00:00', '00:00:00', 0.00),
-(196, 'FN196', 'Iloilo - Iloilo International Airport (ILO)', 'Cebu - Mactan Cebu International Airport (CEB)', '00:00:00', '00:00:00', 0.00),
-(197, 'FN197', 'Iloilo - Iloilo International Airport (ILO)', 'Davao - Francisco Bangoy International Airport (DVO)', '00:00:00', '00:00:00', 0.00),
-(198, 'FN198', 'Iloilo - Iloilo International Airport (ILO)', 'Tacloban - Daniel Z Romualdez Airport (TAC)', '00:00:00', '00:00:00', 0.00),
-(199, 'FN199', 'Iloilo - Iloilo International Airport (ILO)', 'Boracay - Boracay Airport (MPH)', '00:00:00', '00:00:00', 0.00),
-(200, 'FN200', 'Iloilo - Iloilo International Airport (ILO)', 'Bacolod - Bacolod Silay International Airport (BCD)', '00:00:00', '00:00:00', 0.00),
-(201, 'FN201', 'Iloilo - Iloilo International Airport (ILO)', 'Cagayan de Oro - Laguindingan Airport (CGY)', '00:00:00', '00:00:00', 0.00),
-(202, 'FN202', 'Iloilo - Iloilo International Airport (ILO)', 'Tagbilaran - Bohol Panglao International Airport (TAG)', '00:00:00', '00:00:00', 0.00),
-(203, 'FN203', 'Iloilo - Iloilo International Airport (ILO)', 'Puerto Princesa City - Puerto Princesa International Airport (PPS)', '00:00:00', '00:00:00', 0.00),
-(204, 'FN204', 'Iloilo - Iloilo International Airport (ILO)', 'Angeles - Clark International Airport (CRK)', '00:00:00', '00:00:00', 0.00),
-(205, 'FN205', 'Iloilo - Iloilo International Airport (ILO)', 'Kalibo - Kalibo International Airport (KLO)', '00:00:00', '00:00:00', 0.00),
-(206, 'FN206', 'Iloilo - Iloilo International Airport (ILO)', 'Manila - Ninoy Aquino International Airport (MNL)', '00:00:00', '00:00:00', 0.00),
-(207, 'FN207', 'Iloilo - Iloilo International Airport (ILO)', 'Cebu - Mactan Cebu International Airport (CEB)', '00:00:00', '00:00:00', 0.00),
-(208, 'FN208', 'Iloilo - Iloilo International Airport (ILO)', 'Davao - Francisco Bangoy International Airport (DVO)', '00:00:00', '00:00:00', 0.00),
-(209, 'FN209', 'Iloilo - Iloilo International Airport (ILO)', 'Tacloban - Daniel Z Romualdez Airport (TAC)', '00:00:00', '00:00:00', 0.00),
-(210, 'FN210', 'Iloilo - Iloilo International Airport (ILO)', 'Boracay - Boracay Airport (MPH)', '00:00:00', '00:00:00', 0.00),
-(211, 'FN211', 'Iloilo - Iloilo International Airport (ILO)', 'Bacolod - Bacolod Silay International Airport (BCD)', '00:00:00', '00:00:00', 0.00),
-(212, 'FN212', 'Iloilo - Iloilo International Airport (ILO)', 'Cagayan de Oro - Laguindingan Airport (CGY)', '00:00:00', '00:00:00', 0.00),
-(213, 'FN213', 'Iloilo - Iloilo International Airport (ILO)', 'Tagbilaran - Bohol Panglao International Airport (TAG)', '00:00:00', '00:00:00', 0.00),
-(214, 'FN214', 'Iloilo - Iloilo International Airport (ILO)', 'Puerto Princesa City - Puerto Princesa International Airport (PPS)', '00:00:00', '00:00:00', 0.00),
-(215, 'FN215', 'Iloilo - Iloilo International Airport (ILO)', 'Angeles - Clark International Airport (CRK)', '00:00:00', '00:00:00', 0.00),
-(216, 'FN216', 'Iloilo - Iloilo International Airport (ILO)', 'Kalibo - Kalibo International Airport (KLO)', '00:00:00', '00:00:00', 0.00),
+(45, 'FN045', 'Cebu - Mactan Cebu International Airport (CEB)', 'Davao - Francisco Bangoy International Airport (DVO)', '06:00:00', '07:15:00', 3331.00),
+(46, 'FN046', 'Cebu - Mactan Cebu International Airport (CEB)', 'Tacloban - Daniel Z Romualdez Airport (TAC)', '06:00:00', '06:55:00', 4051.00),
+(47, 'FN047', 'Cebu - Mactan Cebu International Airport (CEB)', 'Iloilo - Iloilo International Airport (ILO)', '06:00:00', '06:55:00', 3727.00),
+(48, 'FN048', 'Cebu - Mactan Cebu International Airport (CEB)', 'Boracay - Boracay Airport (MPH)', '06:00:00', '06:45:00', 3667.00),
+(49, 'FN049', 'Cebu - Mactan Cebu International Airport (CEB)', 'Bacolod - Bacolod Silay International Airport (BCD)', '06:00:00', '06:50:00', 3406.00),
+(50, 'FN050', 'Cebu - Mactan Cebu International Airport (CEB)', 'Cagayan de Oro - Laguindingan Airport (CGY)', '06:00:00', '06:55:00', 2585.00),
+(52, 'FN052', 'Cebu - Mactan Cebu International Airport (CEB)', 'Puerto Princesa City - Puerto Princesa International Airport (PPS)', '06:00:00', '07:25:00', 3388.00),
+(53, 'FN053', 'Cebu - Mactan Cebu International Airport (CEB)', 'Angeles - Clark International Airport (CRK)', '06:00:00', '07:30:00', 4155.00),
+(54, 'FN054', 'Cebu - Mactan Cebu International Airport (CEB)', 'Kalibo - Kalibo International Airport (KLO)', '06:00:00', '07:00:00', 2500.00),
+(55, 'FN055', 'Cebu - Mactan Cebu International Airport (CEB)', 'Davao - Francisco Bangoy International Airport (DVO)', '10:00:00', '11:30:00', 3331.00),
+(56, 'FN056', 'Cebu - Mactan Cebu International Airport (CEB)', 'Tacloban - Daniel Z Romualdez Airport (TAC)', '10:00:00', '11:00:00', 3675.00),
+(57, 'FN057', 'Cebu - Mactan Cebu International Airport (CEB)', 'Iloilo - Iloilo International Airport (ILO)', '10:00:00', '11:00:00', 2667.00),
+(58, 'FN058', 'Cebu - Mactan Cebu International Airport (CEB)', 'Boracay - Boracay Airport (MPH)', '10:00:00', '11:20:00', 6485.00),
+(59, 'FN059', 'Cebu - Mactan Cebu International Airport (CEB)', 'Bacolod - Bacolod Silay International Airport (BCD)', '10:00:00', '10:50:00', 3406.00),
+(60, 'FN060', 'Cebu - Mactan Cebu International Airport (CEB)', 'Cagayan de Oro - Laguindingan Airport (CGY)', '10:00:00', '10:55:00', 2585.00),
+(62, 'FN062', 'Cebu - Mactan Cebu International Airport (CEB)', 'Puerto Princesa City - Puerto Princesa International Airport (PPS)', '10:00:00', '11:25:00', 3388.00),
+(63, 'FN063', 'Cebu - Mactan Cebu International Airport (CEB)', 'Angeles - Clark International Airport (CRK)', '10:00:00', '11:30:00', 4155.00),
+(64, 'FN064', 'Cebu - Mactan Cebu International Airport (CEB)', 'Kalibo - Kalibo International Airport (KLO)', '10:00:00', '11:00:00', 2500.00),
+(65, 'FN065', 'Cebu - Mactan Cebu International Airport (CEB)', 'Davao - Francisco Bangoy International Airport (DVO)', '13:00:00', '14:30:00', 3331.00),
+(66, 'FN066', 'Cebu - Mactan Cebu International Airport (CEB)', 'Tacloban - Daniel Z Romualdez Airport (TAC)', '13:00:00', '14:00:00', 3675.00),
+(67, 'FN067', 'Cebu - Mactan Cebu International Airport (CEB)', 'Iloilo - Iloilo International Airport (ILO)', '13:00:00', '14:00:00', 2667.00),
+(68, 'FN068', 'Cebu - Mactan Cebu International Airport (CEB)', 'Boracay - Boracay Airport (MPH)', '13:00:00', '14:20:00', 6485.00),
+(69, 'FN069', 'Cebu - Mactan Cebu International Airport (CEB)', 'Bacolod - Bacolod Silay International Airport (BCD)', '13:00:00', '13:50:00', 3406.00),
+(70, 'FN070', 'Cebu - Mactan Cebu International Airport (CEB)', 'Cagayan de Oro - Laguindingan Airport (CGY)', '13:00:00', '13:55:00', 2585.00),
+(72, 'FN072', 'Cebu - Mactan Cebu International Airport (CEB)', 'Puerto Princesa City - Puerto Princesa International Airport (PPS)', '13:00:00', '14:25:14', 3388.00),
+(73, 'FN073', 'Cebu - Mactan Cebu International Airport (CEB)', 'Angeles - Clark International Airport (CRK)', '13:00:00', '14:30:00', 4155.00),
+(74, 'FN074', 'Cebu - Mactan Cebu International Airport (CEB)', 'Kalibo - Kalibo International Airport (KLO)', '13:00:00', '14:00:00', 2500.00),
+(75, 'FN075', 'Cebu - Mactan Cebu International Airport (CEB)', 'Davao - Francisco Bangoy International Airport (DVO)', '17:00:00', '18:30:00', 3331.00),
+(76, 'FN076', 'Cebu - Mactan Cebu International Airport (CEB)', 'Tacloban - Daniel Z Romualdez Airport (TAC)', '17:00:00', '18:00:00', 3784.00),
+(77, 'FN077', 'Cebu - Mactan Cebu International Airport (CEB)', 'Iloilo - Iloilo International Airport (ILO)', '17:00:00', '18:00:00', 2667.00),
+(78, 'FN078', 'Cebu - Mactan Cebu International Airport (CEB)', 'Boracay - Boracay Airport (MPH)', '17:00:00', '18:20:00', 6485.00),
+(79, 'FN079', 'Cebu - Mactan Cebu International Airport (CEB)', 'Bacolod - Bacolod Silay International Airport (BCD)', '17:00:00', '17:50:00', 3406.00),
+(80, 'FN080', 'Cebu - Mactan Cebu International Airport (CEB)', 'Cagayan de Oro - Laguindingan Airport (CGY)', '17:00:00', '17:55:00', 2585.00),
+(82, 'FN082', 'Cebu - Mactan Cebu International Airport (CEB)', 'Puerto Princesa City - Puerto Princesa International Airport (PPS)', '17:00:00', '18:25:00', 3388.00),
+(83, 'FN083', 'Cebu - Mactan Cebu International Airport (CEB)', 'Angeles - Clark International Airport (CRK)', '17:00:00', '18:00:00', 4155.00),
+(84, 'FN084', 'Cebu - Mactan Cebu International Airport (CEB)', 'Kalibo - Kalibo International Airport (KLO)', '17:00:00', '18:20:00', 2500.00),
+(85, 'FN085', 'Davao - Francisco Bangoy International Airport (DVO)', 'Cebu - Mactan Cebu International Airport (CEB)', '06:00:00', '07:05:00', 1795.00),
+(86, 'FN086', 'Davao - Francisco Bangoy International Airport (DVO)', 'Manila - Ninoy Aquino International Airport (MNL)', '06:00:00', '07:50:00', 3773.00),
+(87, 'FN087', 'Davao - Francisco Bangoy International Airport (DVO)', 'Tacloban - Daniel Z Romualdez Airport (TAC)', '06:00:00', '07:30:00', 3784.00),
+(88, 'FN088', 'Davao - Francisco Bangoy International Airport (DVO)', 'Iloilo - Iloilo International Airport (ILO)', '06:00:00', '07:20:00', 3539.00),
+(89, 'FN089', 'Davao - Francisco Bangoy International Airport (DVO)', 'Boracay - Boracay Airport (MPH)', '06:00:00', '07:25:00', 4046.00),
+(90, 'FN090', 'Davao - Francisco Bangoy International Airport (DVO)', 'Bacolod - Bacolod Silay International Airport (BCD)', '06:00:00', '07:20:00', 3539.00),
+(91, 'FN091', 'Davao - Francisco Bangoy International Airport (DVO)', 'Cagayan de Oro - Laguindingan Airport (CGY)', '06:00:00', '07:00:00', 3110.00),
+(92, 'FN092', 'Davao - Francisco Bangoy International Airport (DVO)', 'Tagbilaran - Bohol Panglao International Airport (TAG)', '06:00:00', '07:05:00', 3429.00),
+(93, 'FN093', 'Davao - Francisco Bangoy International Airport (DVO)', 'Puerto Princesa City - Puerto Princesa International Airport (PPS)', '06:00:00', '10:00:00', 4744.00),
+(94, 'FN094', 'Davao - Francisco Bangoy International Airport (DVO)', 'Angeles - Clark International Airport (CRK)', '06:00:00', '07:55:00', 5590.00),
+(95, 'FN095', 'Davao - Francisco Bangoy International Airport (DVO)', 'Kalibo - Kalibo International Airport (KLO)', '06:00:00', '08:12:00', 4113.00),
+(96, 'FN096', 'Davao - Francisco Bangoy International Airport (DVO)', 'Cebu - Mactan Cebu International Airport (CEB)', '10:00:00', '11:00:00', 1795.00),
+(97, 'FN097', 'Davao - Francisco Bangoy International Airport (DVO)', 'Manila - Ninoy Aquino International Airport (MNL)', '10:00:00', '11:40:00', 3773.00),
+(98, 'FN098', 'Davao - Francisco Bangoy International Airport (DVO)', 'Tacloban - Daniel Z Romualdez Airport (TAC)', '10:00:00', '11:30:00', 3784.00),
+(99, 'FN099', 'Davao - Francisco Bangoy International Airport (DVO)', 'Iloilo - Iloilo International Airport (ILO)', '10:00:00', '11:20:00', 3539.00),
+(100, 'FN100', 'Davao - Francisco Bangoy International Airport (DVO)', 'Boracay - Boracay Airport (MPH)', '10:00:00', '11:25:00', 4046.00),
+(101, 'FN0101', 'Davao - Francisco Bangoy International Airport (DVO)', 'Bacolod - Bacolod Silay International Airport (BCD)', '10:00:00', '11:20:00', 3539.00),
+(102, 'FN102', 'Davao - Francisco Bangoy International Airport (DVO)', 'Cagayan de Oro - Laguindingan Airport (CGY)', '10:00:00', '11:00:00', 3110.00),
+(103, 'FN103', 'Davao - Francisco Bangoy International Airport (DVO)', 'Tagbilaran - Bohol Panglao International Airport (TAG)', '10:00:00', '11:05:00', 3429.00),
+(104, 'FN104', 'Davao - Francisco Bangoy International Airport (DVO)', 'Puerto Princesa City - Puerto Princesa International Airport (PPS)', '10:00:00', '14:00:00', 4744.00),
+(105, 'FN105', 'Davao - Francisco Bangoy International Airport (DVO)', 'Angeles - Clark International Airport (CRK)', '10:00:00', '11:55:00', 5590.00),
+(106, 'FN106', 'Davao - Francisco Bangoy International Airport (DVO)', 'Kalibo - Kalibo International Airport (KLO)', '10:00:00', '12:12:00', 4113.00),
+(107, 'FN107', 'Davao - Francisco Bangoy International Airport (DVO)', 'Cebu - Mactan Cebu International Airport (CEB)', '13:00:00', '14:00:00', 1795.00),
+(108, 'FN108', 'Davao - Francisco Bangoy International Airport (DVO)', 'Manila - Ninoy Aquino International Airport (MNL)', '13:00:00', '14:40:00', 3773.00),
+(109, 'FN109', 'Davao - Francisco Bangoy International Airport (DVO)', 'Tacloban - Daniel Z Romualdez Airport (TAC)', '13:00:00', '14:30:00', 3784.00),
+(110, 'FN110', 'Davao - Francisco Bangoy International Airport (DVO)', 'Iloilo - Iloilo International Airport (ILO)', '13:00:00', '14:20:00', 3539.00),
+(111, 'FN111', 'Davao - Francisco Bangoy International Airport (DVO)', 'Boracay - Boracay Airport (MPH)', '13:00:00', '14:25:00', 4046.00),
+(112, 'FN112', 'Davao - Francisco Bangoy International Airport (DVO)', 'Bacolod - Bacolod Silay International Airport (BCD)', '13:00:00', '14:20:00', 3539.00),
+(113, 'FN113', 'Davao - Francisco Bangoy International Airport (DVO)', 'Cagayan de Oro - Laguindingan Airport (CGY)', '13:00:00', '14:00:00', 3110.00),
+(114, 'FN114', 'Davao - Francisco Bangoy International Airport (DVO)', 'Tagbilaran - Bohol Panglao International Airport (TAG)', '13:00:00', '14:05:00', 3429.00),
+(115, 'FN115', 'Davao - Francisco Bangoy International Airport (DVO)', 'Puerto Princesa City - Puerto Princesa International Airport (PPS)', '13:00:00', '17:00:00', 4744.00),
+(116, 'FN116', 'Davao - Francisco Bangoy International Airport (DVO)', 'Angeles - Clark International Airport (CRK)', '13:00:00', '14:45:00', 5590.00),
+(117, 'FN117', 'Davao - Francisco Bangoy International Airport (DVO)', 'Kalibo - Kalibo International Airport (KLO)', '13:00:00', '15:12:00', 4113.00),
+(118, 'FN118', 'Davao - Francisco Bangoy International Airport (DVO)', 'Cebu - Mactan Cebu International Airport (CEB)', '17:00:00', '18:00:00', 1795.00),
+(119, 'FN119', 'Davao - Francisco Bangoy International Airport (DVO)', 'Manila - Ninoy Aquino International Airport (MNL)', '17:00:00', '18:40:00', 3773.00),
+(120, 'FN120', 'Davao - Francisco Bangoy International Airport (DVO)', 'Tacloban - Daniel Z Romualdez Airport (TAC)', '17:00:00', '18:30:00', 3784.00),
+(121, 'FN121', 'Davao - Francisco Bangoy International Airport (DVO)', 'Iloilo - Iloilo International Airport (ILO)', '17:00:00', '18:20:00', 3539.00),
+(122, 'FN122', 'Davao - Francisco Bangoy International Airport (DVO)', 'Boracay - Boracay Airport (MPH)', '17:00:00', '18:25:00', 4046.00),
+(123, 'FN123', 'Davao - Francisco Bangoy International Airport (DVO)', 'Bacolod - Bacolod Silay International Airport (BCD)', '17:00:00', '18:20:00', 3539.00),
+(124, 'FN124', 'Davao - Francisco Bangoy International Airport (DVO)', 'Cagayan de Oro - Laguindingan Airport (CGY)', '17:00:00', '18:00:00', 3110.00),
+(125, 'FN125', 'Davao - Francisco Bangoy International Airport (DVO)', 'Tagbilaran - Bohol Panglao International Airport (TAG)', '17:00:00', '18:05:00', 3429.00),
+(126, 'FN126', 'Davao - Francisco Bangoy International Airport (DVO)', 'Puerto Princesa City - Puerto Princesa International Airport (PPS)', '17:00:00', '21:00:00', 4744.00),
+(127, 'FN127', 'Davao - Francisco Bangoy International Airport (DVO)', 'Angeles - Clark International Airport (CRK)', '17:00:00', '18:45:00', 5590.00),
+(128, 'FN128', 'Davao - Francisco Bangoy International Airport (DVO)', 'Kalibo - Kalibo International Airport (KLO)', '17:00:00', '19:12:00', 4113.00),
+(129, 'FN129', 'Tacloban - Daniel Z Romualdez Airport (TAC)', 'Manila - Ninoy Aquino International Airport (MNL)', '06:00:00', '07:15:00', 2516.00),
+(130, 'FN130', 'Tacloban - Daniel Z Romualdez Airport (TAC)', 'Cebu - Mactan Cebu International Airport (CEB)', '06:00:00', '06:25:00', 1562.00),
+(131, 'FN131', 'Tacloban - Daniel Z Romualdez Airport (TAC)', 'Davao - Francisco Bangoy International Airport (DVO)', '06:00:00', '07:25:00', 2568.00),
+(132, 'FN132', 'Tacloban - Daniel Z Romualdez Airport (TAC)', 'Iloilo - Iloilo International Airport (ILO)', '06:00:00', '06:45:00', 2653.00),
+(133, 'FN133', 'Tacloban - Daniel Z Romualdez Airport (TAC)', 'Boracay - Boracay Airport (MPH)', '06:00:00', '06:55:00', 3020.00),
+(134, 'FN134', 'Tacloban - Daniel Z Romualdez Airport (TAC)', 'Bacolod - Bacolod Silay International Airport (BCD)', '06:00:00', '06:30:00', 2850.00),
+(135, 'FN135', 'Tacloban - Daniel Z Romualdez Airport (TAC)', 'Cagayan de Oro - Laguindingan Airport (CGY)', '06:00:00', '07:45:00', 3120.00),
+(136, 'FN136', 'Tacloban - Daniel Z Romualdez Airport (TAC)', 'Tagbilaran - Bohol Panglao International Airport (TAG)', '06:00:00', '06:25:00', 2020.00),
+(137, 'FN137', 'Tacloban - Daniel Z Romualdez Airport (TAC)', 'Puerto Princesa City - Puerto Princesa International Airport (PPS)', '06:00:00', '08:15:00', 5305.00),
+(138, 'FN138', 'Tacloban - Daniel Z Romualdez Airport (TAC)', 'Angeles - Clark International Airport (CRK)', '06:00:00', '08:30:00', 5639.00),
+(139, 'FN139', 'Tacloban - Daniel Z Romualdez Airport (TAC)', 'Kalibo - Kalibo International Airport (KLO)', '06:00:00', '07:00:00', 2348.00),
+(140, 'FN140', 'Tacloban - Daniel Z Romualdez Airport (TAC)', 'Manila - Ninoy Aquino International Airport (MNL)', '10:00:00', '11:15:00', 2516.00),
+(141, 'FN141', 'Tacloban - Daniel Z Romualdez Airport (TAC)', 'Cebu - Mactan Cebu International Airport (CEB)', '10:00:00', '10:25:00', 1562.00),
+(142, 'FN142', 'Tacloban - Daniel Z Romualdez Airport (TAC)', 'Davao - Francisco Bangoy International Airport (DVO)', '10:00:00', '11:25:00', 2568.00),
+(143, 'FN143', 'Tacloban - Daniel Z Romualdez Airport (TAC)', 'Iloilo - Iloilo International Airport (ILO)', '10:00:00', '10:45:00', 2653.00),
+(144, 'FN144', 'Tacloban - Daniel Z Romualdez Airport (TAC)', 'Boracay - Boracay Airport (MPH)', '10:00:00', '10:45:00', 3020.00),
+(145, 'FN145', 'Tacloban - Daniel Z Romualdez Airport (TAC)', 'Bacolod - Bacolod Silay International Airport (BCD)', '10:00:00', '10:30:00', 2850.00),
+(146, 'FN146', 'Tacloban - Daniel Z Romualdez Airport (TAC)', 'Cagayan de Oro - Laguindingan Airport (CGY)', '10:00:00', '11:45:00', 3120.00),
+(147, 'FN147', 'Tacloban - Daniel Z Romualdez Airport (TAC)', 'Tagbilaran - Bohol Panglao International Airport (TAG)', '10:00:00', '10:25:00', 2020.00),
+(148, 'FN148', 'Tacloban - Daniel Z Romualdez Airport (TAC)', 'Puerto Princesa City - Puerto Princesa International Airport (PPS)', '10:00:00', '12:15:00', 5305.00),
+(149, 'FN149', 'Tacloban - Daniel Z Romualdez Airport (TAC)', 'Angeles - Clark International Airport (CRK)', '10:00:00', '12:30:00', 5639.00),
+(150, 'FN150', 'Tacloban - Daniel Z Romualdez Airport (TAC)', 'Kalibo - Kalibo International Airport (KLO)', '10:00:00', '11:00:00', 2348.00),
+(151, 'FN151', 'Tacloban - Daniel Z Romualdez Airport (TAC)', 'Manila - Ninoy Aquino International Airport (MNL)', '13:00:00', '14:15:00', 2516.00),
+(152, 'FN152', 'Tacloban - Daniel Z Romualdez Airport (TAC)', 'Cebu - Mactan Cebu International Airport (CEB)', '13:00:00', '13:25:00', 1562.00),
+(153, 'FN153', 'Tacloban - Daniel Z Romualdez Airport (TAC)', 'Davao - Francisco Bangoy International Airport (DVO)', '13:00:00', '14:25:00', 2568.00),
+(154, 'FN154', 'Tacloban - Daniel Z Romualdez Airport (TAC)', 'Iloilo - Iloilo International Airport (ILO)', '13:00:00', '13:45:00', 2653.00),
+(155, 'FN155', 'Tacloban - Daniel Z Romualdez Airport (TAC)', 'Boracay - Boracay Airport (MPH)', '13:00:00', '13:45:00', 3020.00),
+(156, 'FN156', 'Tacloban - Daniel Z Romualdez Airport (TAC)', 'Bacolod - Bacolod Silay International Airport (BCD)', '13:00:00', '13:30:00', 2850.00),
+(157, 'FN157', 'Tacloban - Daniel Z Romualdez Airport (TAC)', 'Cagayan de Oro - Laguindingan Airport (CGY)', '13:00:00', '14:45:00', 3120.00),
+(158, 'FN158', 'Tacloban - Daniel Z Romualdez Airport (TAC)', 'Tagbilaran - Bohol Panglao International Airport (TAG)', '13:00:00', '13:25:00', 2020.00),
+(159, 'FN159', 'Tacloban - Daniel Z Romualdez Airport (TAC)', 'Puerto Princesa City - Puerto Princesa International Airport (PPS)', '13:00:00', '15:15:00', 5305.00),
+(160, 'FN160', 'Tacloban - Daniel Z Romualdez Airport (TAC)', 'Angeles - Clark International Airport (CRK)', '13:00:00', '15:30:00', 5639.00),
+(161, 'FN161', 'Tacloban - Daniel Z Romualdez Airport (TAC)', 'Kalibo - Kalibo International Airport (KLO)', '13:00:00', '14:00:00', 2348.00),
+(162, 'FN162', 'Tacloban - Daniel Z Romualdez Airport (TAC)', 'Manila - Ninoy Aquino International Airport (MNL)', '17:00:00', '18:15:00', 2516.00),
+(163, 'FN163', 'Tacloban - Daniel Z Romualdez Airport (TAC)', 'Cebu - Mactan Cebu International Airport (CEB)', '17:00:00', '17:25:00', 1562.00),
+(164, 'FN164', 'Tacloban - Daniel Z Romualdez Airport (TAC)', 'Davao - Francisco Bangoy International Airport (DVO)', '17:00:00', '18:25:00', 2568.00),
+(165, 'FN165', 'Tacloban - Daniel Z Romualdez Airport (TAC)', 'Iloilo - Iloilo International Airport (ILO)', '17:00:00', '17:45:00', 2653.00),
+(166, 'FN166', 'Tacloban - Daniel Z Romualdez Airport (TAC)', 'Boracay - Boracay Airport (MPH)', '17:00:00', '17:45:00', 3020.00),
+(167, 'FN167', 'Tacloban - Daniel Z Romualdez Airport (TAC)', 'Bacolod - Bacolod Silay International Airport (BCD)', '17:00:00', '17:30:00', 2850.00),
+(168, 'FN168', 'Tacloban - Daniel Z Romualdez Airport (TAC)', 'Cagayan de Oro - Laguindingan Airport (CGY)', '17:00:00', '18:45:00', 3120.00),
+(169, 'FN169', 'Tacloban - Daniel Z Romualdez Airport (TAC)', 'Tagbilaran - Bohol Panglao International Airport (TAG)', '17:00:00', '17:25:00', 2020.00),
+(170, 'FN170', 'Tacloban - Daniel Z Romualdez Airport (TAC)', 'Puerto Princesa City - Puerto Princesa International Airport (PPS)', '17:00:00', '19:15:00', 5305.00),
+(171, 'FN171', 'Tacloban - Daniel Z Romualdez Airport (TAC)', 'Angeles - Clark International Airport (CRK)', '17:00:00', '19:30:00', 5639.00),
+(172, 'FN172', 'Tacloban - Daniel Z Romualdez Airport (TAC)', 'Kalibo - Kalibo International Airport (KLO)', '17:00:00', '18:00:00', 2348.00),
+(173, 'FN173', 'Iloilo - Iloilo International Airport (ILO)', 'Manila - Ninoy Aquino International Airport (MNL)', '06:00:00', '07:10:00', 1759.00),
+(174, 'FN174', 'Iloilo - Iloilo International Airport (ILO)', 'Cebu - Mactan Cebu International Airport (CEB)', '06:00:00', '06:25:00', 1569.00),
+(175, 'FN175', 'Iloilo - Iloilo International Airport (ILO)', 'Davao - Francisco Bangoy International Airport (DVO)', '06:00:00', '07:10:00', 3661.00),
+(176, 'FN176', 'Iloilo - Iloilo International Airport (ILO)', 'Tacloban - Daniel Z Romualdez Airport (TAC)', '06:00:00', '06:30:00', 1635.00),
+(177, 'FN177', 'Iloilo - Iloilo International Airport (ILO)', 'Boracay - Boracay Airport (MPH)', '06:00:00', '06:20:00', 2056.00),
+(178, 'FN178', 'Iloilo - Iloilo International Airport (ILO)', 'Bacolod - Bacolod Silay International Airport (BCD)', '06:00:00', '06:20:00', 1524.00),
+(179, 'FN179', 'Iloilo - Iloilo International Airport (ILO)', 'Cagayan de Oro - Laguindingan Airport (CGY)', '06:00:00', '07:00:00', 3663.00),
+(180, 'FN180', 'Iloilo - Iloilo International Airport (ILO)', 'Tagbilaran - Bohol Panglao International Airport (TAG)', '06:00:00', '06:25:00', 1543.00),
+(181, 'FN181', 'Iloilo - Iloilo International Airport (ILO)', 'Puerto Princesa City - Puerto Princesa International Airport (PPS)', '06:00:00', '07:10:00', 2541.00),
+(182, 'FN182', 'Iloilo - Iloilo International Airport (ILO)', 'Angeles - Clark International Airport (CRK)', '06:00:00', '07:15:00', 3430.00),
+(184, 'FN184', 'Iloilo - Iloilo International Airport (ILO)', 'Manila - Ninoy Aquino International Airport (MNL)', '10:00:00', '11:10:00', 1759.00),
+(185, 'FN185', 'Iloilo - Iloilo International Airport (ILO)', 'Cebu - Mactan Cebu International Airport (CEB)', '10:00:00', '10:25:00', 1569.00),
+(186, 'FN186', 'Iloilo - Iloilo International Airport (ILO)', 'Davao - Francisco Bangoy International Airport (DVO)', '10:00:00', '11:10:00', 3661.00),
+(187, 'FN187', 'Iloilo - Iloilo International Airport (ILO)', 'Tacloban - Daniel Z Romualdez Airport (TAC)', '10:00:00', '10:30:00', 1635.00),
+(188, 'FN188', 'Iloilo - Iloilo International Airport (ILO)', 'Boracay - Boracay Airport (MPH)', '10:00:00', '10:20:00', 2056.00),
+(189, 'FN189', 'Iloilo - Iloilo International Airport (ILO)', 'Bacolod - Bacolod Silay International Airport (BCD)', '10:00:00', '10:20:00', 1524.00),
+(190, 'FN190', 'Iloilo - Iloilo International Airport (ILO)', 'Cagayan de Oro - Laguindingan Airport (CGY)', '10:00:00', '11:00:00', 3663.00),
+(191, 'FN191', 'Iloilo - Iloilo International Airport (ILO)', 'Tagbilaran - Bohol Panglao International Airport (TAG)', '10:00:00', '10:25:00', 1543.00),
+(192, 'FN192', 'Iloilo - Iloilo International Airport (ILO)', 'Puerto Princesa City - Puerto Princesa International Airport (PPS)', '10:00:00', '11:10:00', 2541.00),
+(193, 'FN193', 'Iloilo - Iloilo International Airport (ILO)', 'Angeles - Clark International Airport (CRK)', '10:00:00', '11:15:00', 3430.00),
+(195, 'FN195', 'Iloilo - Iloilo International Airport (ILO)', 'Manila - Ninoy Aquino International Airport (MNL)', '13:00:00', '14:10:00', 1759.00),
+(196, 'FN196', 'Iloilo - Iloilo International Airport (ILO)', 'Cebu - Mactan Cebu International Airport (CEB)', '13:00:00', '13:25:00', 1569.00),
+(197, 'FN197', 'Iloilo - Iloilo International Airport (ILO)', 'Davao - Francisco Bangoy International Airport (DVO)', '13:00:00', '14:10:00', 3661.00),
+(198, 'FN198', 'Iloilo - Iloilo International Airport (ILO)', 'Tacloban - Daniel Z Romualdez Airport (TAC)', '13:00:00', '13:30:00', 1635.00),
+(199, 'FN199', 'Iloilo - Iloilo International Airport (ILO)', 'Boracay - Boracay Airport (MPH)', '13:00:00', '13:20:00', 2056.00),
+(200, 'FN200', 'Iloilo - Iloilo International Airport (ILO)', 'Bacolod - Bacolod Silay International Airport (BCD)', '13:00:00', '13:20:00', 1524.00),
+(201, 'FN201', 'Iloilo - Iloilo International Airport (ILO)', 'Cagayan de Oro - Laguindingan Airport (CGY)', '13:00:00', '14:00:00', 3663.00),
+(202, 'FN202', 'Iloilo - Iloilo International Airport (ILO)', 'Tagbilaran - Bohol Panglao International Airport (TAG)', '13:00:00', '13:25:00', 1543.00),
+(203, 'FN203', 'Iloilo - Iloilo International Airport (ILO)', 'Puerto Princesa City - Puerto Princesa International Airport (PPS)', '13:00:00', '14:10:00', 2541.00),
+(204, 'FN204', 'Iloilo - Iloilo International Airport (ILO)', 'Angeles - Clark International Airport (CRK)', '13:00:00', '14:15:00', 3430.00),
+(206, 'FN206', 'Iloilo - Iloilo International Airport (ILO)', 'Manila - Ninoy Aquino International Airport (MNL)', '17:00:00', '18:10:00', 1759.00),
+(207, 'FN207', 'Iloilo - Iloilo International Airport (ILO)', 'Cebu - Mactan Cebu International Airport (CEB)', '17:00:00', '17:25:00', 1569.00),
+(208, 'FN208', 'Iloilo - Iloilo International Airport (ILO)', 'Davao - Francisco Bangoy International Airport (DVO)', '17:00:00', '18:10:00', 3661.00),
+(209, 'FN209', 'Iloilo - Iloilo International Airport (ILO)', 'Tacloban - Daniel Z Romualdez Airport (TAC)', '17:00:00', '17:30:00', 1635.00),
+(210, 'FN210', 'Iloilo - Iloilo International Airport (ILO)', 'Boracay - Boracay Airport (MPH)', '17:00:00', '17:20:00', 2056.00),
+(211, 'FN211', 'Iloilo - Iloilo International Airport (ILO)', 'Bacolod - Bacolod Silay International Airport (BCD)', '17:00:00', '17:20:00', 1524.00),
+(212, 'FN212', 'Iloilo - Iloilo International Airport (ILO)', 'Cagayan de Oro - Laguindingan Airport (CGY)', '17:00:00', '18:00:00', 3663.00),
+(213, 'FN213', 'Iloilo - Iloilo International Airport (ILO)', 'Tagbilaran - Bohol Panglao International Airport (TAG)', '17:00:00', '17:25:00', 1543.00),
+(214, 'FN214', 'Iloilo - Iloilo International Airport (ILO)', 'Puerto Princesa City - Puerto Princesa International Airport (PPS)', '17:00:00', '18:10:00', 2541.00),
+(215, 'FN215', 'Iloilo - Iloilo International Airport (ILO)', 'Angeles - Clark International Airport (CRK)', '17:00:00', '18:15:00', 3430.00),
 (217, 'FN217', 'Boracay - Boracay Airport (MPH)', 'Manila - Ninoy Aquino International Airport (MNL)', '00:00:00', '00:00:00', 0.00),
 (218, 'FN218', 'Boracay - Boracay Airport (MPH)', 'Cebu - Mactan Cebu International Airport (CEB)', '00:00:00', '00:00:00', 0.00),
 (219, 'FN219', 'Boracay - Boracay Airport (MPH)', 'Davao - Francisco Bangoy International Airport (DVO)', '00:00:00', '00:00:00', 0.00),
@@ -451,12 +443,12 @@ INSERT INTO `flights` (`id`, `flight_number`, `departure_location`, `arrival_loc
 (347, 'FN347', 'Cagayan de Oro - Laguindingan Airport (CGY)', 'Angeles - Clark International Airport (CRK)', '00:00:00', '00:00:00', 0.00),
 (348, 'FN348', 'Cagayan de Oro - Laguindingan Airport (CGY)', 'Kalibo - Kalibo International Airport (KLO)', '00:00:00', '00:00:00', 0.00),
 (349, 'FN349', 'Tagbilaran - Bohol Panglao International Airport (TAG)', 'Manila - Ninoy Aquino International Airport (MNL)', '00:00:00', '00:00:00', 0.00),
-(350, 'FN350', 'Tagbilaran - Bohol Panglao International Airport (TAG)', 'Cebu - Mactan Cebu International Airport (CEB)', '00:00:00', '00:00:00', 0.00);
-INSERT INTO `flights` (`id`, `flight_number`, `departure_location`, `arrival_location`, `Departure-Time`, `Arrival-Time`, `price`) VALUES
+(350, 'FN350', 'Tagbilaran - Bohol Panglao International Airport (TAG)', 'Cebu - Mactan Cebu International Airport (CEB)', '00:00:00', '00:00:00', 0.00),
 (351, 'FN351', 'Tagbilaran - Bohol Panglao International Airport (TAG)', 'Davao - Francisco Bangoy International Airport (DVO)', '00:00:00', '00:00:00', 0.00),
 (352, 'FN352', 'Tagbilaran - Bohol Panglao International Airport (TAG)', 'Tacloban - Daniel Z Romualdez Airport (TAC)', '00:00:00', '00:00:00', 0.00),
 (353, 'FN353', 'Tagbilaran - Bohol Panglao International Airport (TAG)', 'Iloilo - Iloilo International Airport (ILO)', '00:00:00', '00:00:00', 0.00),
-(354, 'FN354', 'Tagbilaran - Bohol Panglao International Airport (TAG)', 'Boracay - Boracay Airport (MPH)', '00:00:00', '00:00:00', 0.00),
+(354, 'FN354', 'Tagbilaran - Bohol Panglao International Airport (TAG)', 'Boracay - Boracay Airport (MPH)', '00:00:00', '00:00:00', 0.00);
+INSERT INTO `flights` (`id`, `flight_number`, `departure_location`, `arrival_location`, `Departure-Time`, `Arrival-Time`, `price`) VALUES
 (355, 'FN355', 'Tagbilaran - Bohol Panglao International Airport (TAG)', 'Bacolod - Bacolod Silay International Airport (BCD)', '00:00:00', '00:00:00', 0.00),
 (356, 'FN356', 'Tagbilaran - Bohol Panglao International Airport (TAG)', 'Cagayan de Oro - Laguindingan Airport (CGY)', '00:00:00', '00:00:00', 0.00),
 (357, 'FN357', 'Tagbilaran - Bohol Panglao International Airport (TAG)', 'Puerto Princesa City - Puerto Princesa International Airport (PPS)', '00:00:00', '00:00:00', 0.00),
@@ -671,66 +663,6 @@ CREATE TABLE `passengers` (
   `email` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- --------------------------------------------------------
-
---
--- Table structure for table `res_records`
---
-
-CREATE TABLE `res_records` (
-  `res_id` int(11) NOT NULL,
-  `res_fname` varchar(100) NOT NULL,
-  `res_lname` varchar(100) NOT NULL,
-  `res_email` varchar(100) NOT NULL,
-  `res_pass` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `res_records`
---
-
-INSERT INTO `res_records` (`res_id`, `res_fname`, `res_lname`, `res_email`, `res_pass`) VALUES
-(2, 'Earl', 'Sepida', 'earlsepida63@gmail.com', '$2y$10$gvggz01lgcQZ8dK9TABS0e1QISjhtUaE5fI91LUKbK0uepecisbAO'),
-(3, 'Cloyd', 'Labininay ', 'm@gmail.com', '$2y$10$lhi7AUrCxZCuqTaFm78/xOmBxRcoAa6TQEtgr37JVQhQAUtXtJMxO'),
-(4, 'Cloyd', 'Labininay ', 'Q@gmail.com', '$2y$10$T9GLRXkJYN5zKT3ILvBD9edi7qDSMRJ3PJonOUZ5T4.vvNZTvrsmi'),
-(5, 'Cloyd', 'Labininay ', '123@gmail.com', '$2y$10$YCrvpyLUBB0mqChsIP35K.F8AP8nCkF1e2jnF4WGoUqQbQTJ9m5hK');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `sf_records`
---
-
-CREATE TABLE `sf_records` (
-  `sf_id` int(11) NOT NULL,
-  `sf_departure_location` varchar(200) NOT NULL,
-  `sf_arrival_location` varchar(200) NOT NULL,
-  `sf_departure_datetime` datetime NOT NULL,
-  `sf_arrival_datetime` datetime NOT NULL,
-  `sf_price` decimal(10,2) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `sf_records`
---
-
-INSERT INTO `sf_records` (`sf_id`, `sf_departure_location`, `sf_arrival_location`, `sf_departure_datetime`, `sf_arrival_datetime`, `sf_price`) VALUES
-(1, 'Cagayan De Oro', 'Palawan', '2024-04-09 15:00:00', '2024-04-09 19:10:00', 4000.00),
-(2, 'Cagayan De Oro', 'Palawan', '2024-04-09 04:00:00', '2024-04-09 06:00:00', 3500.00),
-(3, 'Cagayan De Oro', 'Palawan', '2024-04-09 10:00:00', '2024-04-09 15:00:00', 5000.00);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `users`
---
-
-CREATE TABLE `users` (
-  `user_id` int(11) NOT NULL,
-  `full_name` varchar(255) NOT NULL,
-  `address` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
 --
 -- Indexes for dumped tables
 --
@@ -774,24 +706,6 @@ ALTER TABLE `passengers`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `res_records`
---
-ALTER TABLE `res_records`
-  ADD PRIMARY KEY (`res_id`);
-
---
--- Indexes for table `sf_records`
---
-ALTER TABLE `sf_records`
-  ADD PRIMARY KEY (`sf_id`);
-
---
--- Indexes for table `users`
---
-ALTER TABLE `users`
-  ADD PRIMARY KEY (`user_id`);
-
---
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -830,24 +744,6 @@ ALTER TABLE `logindata`
 --
 ALTER TABLE `passengers`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `res_records`
---
-ALTER TABLE `res_records`
-  MODIFY `res_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
---
--- AUTO_INCREMENT for table `sf_records`
---
-ALTER TABLE `sf_records`
-  MODIFY `sf_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
--- AUTO_INCREMENT for table `users`
---
-ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- Constraints for dumped tables

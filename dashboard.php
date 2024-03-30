@@ -8,13 +8,13 @@
     <link href="https://cdn.jsdelivr.net/npm/remixicon@3.4.0/fonts/remixicon.css"  rel="stylesheet"
     />
     <link rel="stylesheet" href="./css/dashboard.css" />
-    <link rel="icon" href="/assets/images/favicon.jpg">
+    <link rel="icon" href="./assets/images/favicon.jpg">
     <title>Skyline - Dashboard</title>
   </head>
   <body>
     <header>
       <div class="logo">
-          <img src="/assets/images/logo.jpg" alt="Airline Logo">
+          <img src="./assets/images/logo.jpg" alt="Airline Logo">
           <div class="title">
               <h1>Skyline Airlines Dashboard</h1>
           </div>
@@ -22,7 +22,7 @@
       <nav>
           <ul>
               <li><a href="index.php">Home</a></li>
-              <li><a href=/offers.php">Offers</a></li>
+              <li><a href="offers.php">Offers</a></li>
               <li><a href="flights.php">Flights</a></li>
               <li><a href="contact.php">Contact</a></li> 
               <?php
@@ -32,7 +32,7 @@
                   echo '<div class="dropdown">';
                   echo '<button class="dropbtn">Hello, ' . $_SESSION['username'] . '</button>';
                   echo '<div class="dropdown-content">';
-                  echo '<a href="#">Profile</a>';
+                  echo '<a href="profile.php">Profile</a>';
                   echo '<a href="logout.php" class="logout">Logout</a>';
                   echo '</div>';
                   echo '</div>';
@@ -58,56 +58,56 @@
       <div class="booking__nav"></div>
       <form>
       <div class="form__group">
-                <span><i class="ri-map-pin-line"></i></span>
-                <div class="input__content">
-                    <div class="input__group">
-                        <input type="text" list="locations" id="locationInput" />
-                        <label>Location</label>
-                    </div>
-                    <p>Select a location</p>
-                </div>
-                <datalist id="locations">
-                    <option value="Manila">
-                    <option value="Cebu">
-                    <option value="Boracay">
-                    <option value="Davao ">
-                    <option value="Tacloban ">
-                    <option value="Iloilo ">
-                    <option value="Angeles  ">
-                    <option value="Bacolod ">
-                    <option value="Cagayan ">
-                    <option value="Tagbilaran ">
-                    <option value="Puerto Princesa City">
-                    <option value="Kalibo ">
-                    <!-- Dari pag add pang ilisi lang ang lugar sa taas -->
-                </datalist>
+        <span><i class="ri-map-pin-line"></i></span>
+        <div class="input__content">
+            <div class="input__group">
+                <input type="text" list="locations" id="locationInput" />
+                <label>Location</label>
             </div>
+            <p>Select a location</p>
+        </div>
+        <datalist id="locations">
+            <option value="Manila">
+            <option value="Cebu">
+            <option value="Boracay">
+            <option value="Davao">
+            <option value="Tacloban">
+            <option value="Iloilo">
+            <option value="Angeles">
+            <option value="Bacolod">
+            <option value="Cagayan">
+            <option value="Tagbilaran">
+            <option value="Puerto Princesa City">
+            <option value="Kalibo">
+            <!-- Dari pag add pang ilisi lang ang lugar sa taas -->
+        </datalist>
+    </div>
 
-            <div class="form__group">
-                <span><i class="ri-map-pin-line"></i></span>
-                <div class="input__content">
-                    <div class="input__group">
-                        <input type="text" list="destinations" id="destinationInput" />
-                        <label>Destination</label>
-                    </div>
-                    <p>Select a destination</p>
-                </div>
-                <datalist id="locations">
-                    <option value="Manila">
-                    <option value="Cebu">
-                    <option value="Boracay">
-                    <option value="Davao ">
-                    <option value="Tacloban ">
-                    <option value="Iloilo ">
-                    <option value="Angeles  ">
-                    <option value="Bacolod ">
-                    <option value="Cagayan ">
-                    <option value="Tagbilaran ">
-                    <option value="Puerto Princesa City">
-                    <option value="Kalibo ">
-                    <!-- Dari pag add pang ilisi lang ang lugar sa taas -->
-                </datalist>
+    <div class="form__group">
+        <span><i class="ri-map-pin-line"></i></span>
+        <div class="input__content">
+            <div class="input__group">
+                <input type="text" list="destinations" id="destinationInput"/>
+                <label>Destination</label>
             </div>
+            <p>Select a destination</p>
+        </div>
+        <datalist id="destinations">
+            <option value="Manila">
+            <option value="Cebu">
+            <option value="Boracay">
+            <option value="Davao">
+            <option value="Tacloban">
+            <option value="Iloilo">
+            <option value="Angeles">
+            <option value="Bacolod">
+            <option value="Cagayan">
+            <option value="Tagbilaran">
+            <option value="Puerto Princesa City">
+            <option value="Kalibo">
+            <!-- Dari pag add pang ilisi lang ang lugar sa taas -->
+        </datalist>
+    </div>
 
         <div class="form__group">
                 <span><i class="ri-map-pin-line"></i></span>
