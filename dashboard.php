@@ -1,12 +1,9 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.4.0/fonts/remixicon.css"  rel="stylesheet"
-    />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="./css/dashboard.css" />
     <link rel="icon" href="./assets/images/favicon.jpg">
     <title>Skyline - Dashboard</title>
@@ -23,7 +20,7 @@
           <ul>
               <li><a href="index.php">Home</a></li>
               <li><a href="offers.php">Offers</a></li>
-              <li><a href="flights.php">Flights</a></li>
+              <li><a href="flights.php">Analytics</a></li>
               <li><a href="contact.php">Contact</a></li> 
               <?php
               session_start(); // Start the session
@@ -32,7 +29,7 @@
                   echo '<div class="dropdown">';
                   echo '<button class="dropbtn">Hello, ' . $_SESSION['username'] . '</button>';
                   echo '<div class="dropdown-content">';
-                  echo '<a href="profile.php">Profile</a>';
+                  echo '<a href="#">Profile</a>';
                   echo '<a href="logout.php" class="logout">Logout</a>';
                   echo '</div>';
                   echo '</div>';
@@ -48,25 +45,24 @@
   <main>
     <section class="section__container header__container">
         <h1 class="section__header">Your Trusted<br />Travel Companion</h1>
-        <img src="./assets/images/header.jpg" alt="header" />
+        <img id="searchFlight1" src="./assets/images/header.jpg" alt="header" />
     </section>
-
 
     <section class="section__container booking__container">
     <h2 class="section__header">Search Flight</h2> 
 
       <div class="booking__nav"></div>
       <form>
-      <div class="form__group">
-        <span><i class="ri-map-pin-line"></i></span>
-        <div class="input__content">
-            <div class="input__group">
+          <div class="form__group">
+            <span><i class="fas fa-plane-departure"></i></span>
+            <div class="input__content">
+              <div class="input__group">
                 <input type="text" list="locations" id="locationInput" />
-                <label>Location</label>
+                <label>Departure</label>
+              </div>
+              <p>Select a location</p>
             </div>
-            <p>Select a location</p>
-        </div>
-        <datalist id="locations">
+            <datalist id="locations">
             <option value="Manila">
             <option value="Cebu">
             <option value="Boracay">
@@ -75,7 +71,7 @@
             <option value="Iloilo">
             <option value="Angeles">
             <option value="Bacolod">
-            <option value="Cagayan">
+            <option value="Cagayan de oro">
             <option value="Tagbilaran">
             <option value="Puerto Princesa City">
             <option value="Kalibo">
@@ -84,13 +80,13 @@
     </div>
 
     <div class="form__group">
-        <span><i class="ri-map-pin-line"></i></span>
+        <span><i class="fas fa-plane-arrival"></i></span>
         <div class="input__content">
-            <div class="input__group">
-                <input type="text" list="destinations" id="destinationInput"/>
-                <label>Destination</label>
-            </div>
-            <p>Select a destination</p>
+          <div class="input__group">
+            <input type="text" list="destinations" id="destinationInput"/>
+            <label>Destination</label>
+          </div>
+          <p>Select a destination</p>
         </div>
         <datalist id="destinations">
             <option value="Manila">
@@ -101,7 +97,7 @@
             <option value="Iloilo">
             <option value="Angeles">
             <option value="Bacolod">
-            <option value="Cagayan">
+            <option value="Cagayan de oro">
             <option value="Tagbilaran">
             <option value="Puerto Princesa City">
             <option value="Kalibo">
@@ -109,19 +105,19 @@
         </datalist>
     </div>
 
-        <div class="form__group">
-                <span><i class="ri-map-pin-line"></i></span>
-                <div class="input__content">
-                    <div class="input__group">
-                        <input type="text" id="departureInput" onclick="openDatePicker()" />
-                        <label>Departure</label>
-                    </div>
-                    <p>Select Date</p>
-              </div>
+      <div class="form__group">
+          <span><i class="far fa-calendar-alt"></i></span>
+          <div class="input__content">
+            <div class="input__group">
+            <input type="text" min="<?= date('Y-m-d') ?>" id="departureInput" onclick="openDatePicker()" />
+              <label>Departure Date</label>
+            </div>
+            <p>Select Date</p>
           </div>
+        </div>
 
         <div class="form__group btn__group">
-          <button class="btn"><i class="ri-search-line"></i></button>
+          <button class="btn"><i class="fas fa-search"></i></button>
         </div>
       </form>
     </section>
@@ -162,7 +158,7 @@
           <img src="./assets/images/PLAN 3.jpg" alt="plan" />
         </div>
       </div>
-    </section>
+      </section>
 
     <section class="section__container lounge__container">
       <div class="lounge__image">
@@ -237,7 +233,7 @@
         </div>
         <div class="footer__col">
           <h4>CONTACT</h4>
-          <p><a href="/Airline_Ticket_Reservation_System/pages/pages/contact.html">Support</a></p>
+          <p><a href="Airline_Ticket_Reservation_System/pages/pages/contact.html">Support</a></p>
           <p>Media</p>
           <p>Socials</p>
         </div>

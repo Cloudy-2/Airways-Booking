@@ -1,4 +1,3 @@
-/* Style for the table */
 table {
     border-collapse: collapse;
     width: 100%;
@@ -15,7 +14,6 @@ th, td {
 tr:nth-child(even) {
     background-color: #f2f2f2;
 }
-
 
 /* Button styles */
 .book-now-button,
@@ -53,7 +51,7 @@ td button {
     margin: 0 auto; /* Center the button horizontally */
 }
 
-/*Start of the Header*/
+/* Header styles */
 header {
     font-style: normal;
     display: flex;
@@ -66,20 +64,20 @@ header {
     position: absolute;
     top: 0;
     left: 0;
-  }
-  
-  .logo {
+}
+
+.logo {
     display: flex;
     align-items: center;
     padding-left: 10px;
-  }
-  
-  .logo img {
+}
+
+.logo img {
     height: 50px;
     margin-right: 15px;
-  }
-  
-  .title h1 {
+}
+
+.title h1 {
     font-size: 26px;
     margin: 0;
     color: #fff;
@@ -88,31 +86,31 @@ header {
     width: 300px;
     font-family: 'Poppins', sans-serif; /* Use the Poppins font */
     font-weight: 500; /* Adjust font weight as needed */
-  }
-  
-  nav {
+}
+
+nav {
     max-width: 1400px; /* Adjust the max-width value as needed */
     width: 100%;
     padding: 2.6rem 1.5rem; /* Increase the padding to add more space */
     display: flex;
     align-items: center;
     justify-content: space-between;
-  }
-  
-  nav ul {
+}
+
+nav ul {
     list-style-type: none;
     margin: 0;
     padding: 0;
     font-size: 16px; /* Adjust the font size as needed */
     display: flex;
     margin-left: auto; /* Align the nav ul content to the right */
-  }
-  
-  nav ul li:not(:last-child) {
+}
+
+nav ul li:not(:last-child) {
     margin-right: 5px; /* Add margin between list items */
-  }
-  
-  nav ul li a {
+}
+
+nav ul li a {
     font-size: 20px;
     color: white;
     text-decoration: none;
@@ -120,15 +118,15 @@ header {
     padding: 10px 20px;
     border-radius: 5px;
     transition: background-color 0.3s;
-  }
-  
-  nav ul li a:hover {
+}
+
+nav ul li a:hover {
     background-color: rgba(255, 255, 255, 0.1);
     cursor: pointer;
-  }
-  
-  /* Add this to style the dropdown button */
-  nav .dropdown .dropbtn {
+}
+
+/* Add this to style the dropdown button */
+nav .dropdown .dropbtn {
     color: #fff;
     text-decoration: none;
     font-weight: bold;
@@ -136,17 +134,18 @@ header {
     border-radius: 5px;
     transition: background-color 0.3s;
     cursor: pointer; /* Change cursor to pointer */
-  }
-  
-  nav .dropdown .dropbtn:hover {
+}
+
+nav .dropdown .dropbtn:hover {
     background-color: rgba(255, 255, 255, 0.1);
-  }
-  .dropdown {
+}
+
+.dropdown {
     position: relative;
     display: inline-block;
-  }
-  
-  .dropbtn {
+}
+
+.dropbtn {
     background-color: transparent;
     color: white;
     padding: 10px 20px;
@@ -155,13 +154,13 @@ header {
     cursor: pointer;
     font-family: Arial, sans-serif;
     transition: background-color 0.3s;
-  }
-  
-  .dropbtn:hover {
+}
+
+.dropbtn:hover {
     background-color: rgba(255, 255, 255, 0.1);
-  }
-  
-  .dropdown-content {
+}
+
+.dropdown-content {
     display: none;
     position: absolute;
     background-color: #333; /* Background color of the dropdown */
@@ -173,51 +172,95 @@ header {
     /* Adjust the height as needed */
     max-height: 200px; /* Example height */
     overflow-y: auto; /* Enable vertical scrolling if content exceeds max height */
-  }
-  
-  
-  .dropdown-content a {
+}
+
+.dropdown-content a {
     color: white;
     padding: 10px 0;
     text-decoration: none;
     display: block;
     transition: color 0.3s;
-  }
-  
-  .dropdown-content a:hover {
-    background-color: rgba(255, 255, 255, 0.1);
-  }
-  
-  .dropdown.active .dropdown-content {
-    display: block;
-  }
-  .dropdown-content a.logout {
-    color: red; /* Color for logout link */
-  }
-  /*End of the Header*/
+}
 
-  main {
+.dropdown-content a:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.dropdown.active .dropdown-content {
+    display: block;
+}
+
+.dropdown-content a.logout {
+    color: red; /* Color for logout link */
+}
+
+/*End of the Header*/
+
+main {
     padding: 20px;
     margin-top: 110px; /* Adjust this value to create space between header and main content */
 }
+.booking-details {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.booking-details h2 {
+    width: 100%;
+}
+
+.booking-details p {
+    width: 50%; /* Display each detail in two columns */
+    margin: 0; /* Remove default margin */
+    padding: 10px 20px; /* Add padding */
+    box-sizing: border-box; /* Include padding in width calculation */
+}
+/* Add this CSS to style the form */
+form {
+    margin-top: 20px;
+}
+
+/* Style the select dropdown */
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+select {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    margin-bottom: 15px;
+}
+
+/* Style the submit button */
+input[type="submit"] {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+input[type="submit"]:hover {
+    background-color: #45a049;
+}
+
+
+/* Adjustments for smaller screens */
+@media (max-width: 768px) {
+    .booking-details p {
+        width: 100%; /* Display each detail in a single column on smaller screens */
+    }
+}
+
+
 footer {
     text-align: center;
-}
-.change-flight-button {
-  text-align: center;
-  margin-top: 20px;
-}
-
-.change-flight-link {
-  display: inline-block;
-  padding: 10px 20px;
-  background-color: #007bff; /* Change color as needed */
-  color: #fff;
-  text-decoration: none;
-  border-radius: 5px;
-  transition: background-color 0.3s;
-}
-
-.change-flight-link:hover {
-  background-color: #0056b3; /* Darker shade when hovered */
 }

@@ -1,78 +1,82 @@
+<?php
+session_start();
+include_once './config/database.php';
+
+// Check if the user is logged in as admin
+if (!isset($_SESSION['username']) || $_SESSION['user_type'] !== 'admin') {
+    header("Location: login.php");
+    exit();
+}
+
+// Check if booking ID is provided in the URL
+if (!isset($_GET['booking_id'])) {
+    header("Location: dashboard.php");
+    exit();
+}
+
+// Retrieve booking details from the database
+if ($conn) {
+    $booking_id = $_GET['booking_id'];
+
+    // Retrieve booking details
+    $booking_sql = "SELECT * FROM bookings WHERE booking_id = ?";
+    $booking_stmt = $conn->prepare($booking_sql);
+    $booking_stmt->bind_param("i", $booking_id);
+    $booking_stmt->execute();
+    $booking_result = $booking_stmt->get_result();
+
+    // Retrieve passenger details
+    $passenger_sql = "SELECT * FROM passengers WHERE booking_id = ?";
+    $passenger_stmt = $conn->prepare($passenger_sql);
+    $passenger_stmt->bind_param("i", $booking_id);
+    $passenger_stmt->execute();
+    $passenger_result = $passenger_stmt->get_result();
+} else {
+    echo "Connection failed: " . $conn->connect_error;
+    exit();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Skyline - Admin Dashboard</title>
-    <link rel="icon" href="/assets/images/favicon.jpg">
-    <link rel="stylesheet" href="../css/admin_dasboard.css">
+    <!-- Head content -->
 </head>
 <body>
-<header>
-    <div class="logo">
-        <img src="/assets/images/logo.jpg" alt="Airline Logo">
-        <div class="title">
-            <h1>Skyline Admin Page</h1>
+    <!-- Header content -->
+    <main>
+        <div class="content">
+            <h2>Passenger Details</h2>
+            <h3>Booking ID: <?php echo $booking_id; ?></h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Passenger</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Email</th>
+                        <th>Contact Number</th>
+                        <th>Date of Birth</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                    // Display passenger details
+                    while ($passenger_row = $passenger_result->fetch_assoc()) {
+                        echo "<tr>";
+                        echo "<td>" . $passenger_row['passenger_id'] . "</td>";
+                        echo "<td>" . $passenger_row['first_name'] . "</td>";
+                        echo "<td>" . $passenger_row['last_name'] . "</td>";
+                        echo "<td>" . $passenger_row['email'] . "</td>";
+                        echo "<td>" . $passenger_row['contact_number'] . "</td>";
+                        echo "<td>" . $passenger_row['dob'] . "</td>";
+                        echo "</tr>";
+                    }
+                    ?>
+                </tbody>
+            </table>
         </div>
-    </div>
-    <nav>
-        <ul>
-
-            <li><a href="#">Ongoing Flights</a></li>
-            <li><a href="#">Analytics</a></li>
-            <?php
-            session_start(); // Start the session
-            if(isset($_SESSION['username'])) {
-                // If the user is logged in, display a welcome message which will serve as the dropdown button
-                echo '<div class="dropdown">';
-                echo '<button class="dropbtn">Hello, ' . $_SESSION['username'] . '</button>';
-                echo '<div class="dropdown-content">';
-                echo '<a href="#">Profile</a>';
-                echo '<a href="/logout.php" class="logout">Logout</a>';
-                echo '</div>';
-                echo '</div>';
-            } else {
-                // If the user is not logged in, display a login link
-                echo '<li><a href="/login.php">Login</a></li>';
-            }
-            ?> 
-        </ul>  
-    </nav>
-</header> 
-<main>
-    <div class="content">
-        <!-- Your admin dashboard content goes here -->
-    </div>
-</main>      
-<script>
-// JavaScript for dropdown functionality
-document.addEventListener("DOMContentLoaded", function() {
-    var dropdowns = document.getElementsByClassName("dropdown");
-    for (var i = 0; i < dropdowns.length; i++) {
-        dropdowns[i].addEventListener("click", function() {
-            this.classList.toggle("active");
-            var dropdownContent = this.getElementsByClassName("dropdown-content")[0];
-            if (dropdownContent.style.display === "block") {
-                dropdownContent.style.display = "none";
-            } else {
-                dropdownContent.style.display = "block";
-            }
-        });
-    }
-});
-document.addEventListener("DOMContentLoaded", function() {
-    // Add click event listener to the logout link
-    document.querySelector('a.logout').addEventListener('click', function(event) {
-        // Prevent default link behavior
-        event.preventDefault(); 
-        
-        // Display notification
-        alert("You have been logged out successfully!");
-        
-        // Redirect to logout.php after the alert is shown
-        window.location.href = "/logout.php";
-    });
-});
-</script>
+    </main>
+    <!-- Footer content -->
 </body>
 </html>

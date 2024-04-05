@@ -27,7 +27,7 @@
     <div class="content">
         <h1>Discover Your Dream Vacation</h1>
         <h4>Experience the ultimate getaway with our fantastic airline vacation deals. Booking your dream trip is hassle-free and convenient with us. Whether you're longing for tropical beaches, cultural exploration, or stunning natural landscapes, we've got you covered.</h4>
-        <a href="offers.php" class="button">Book Now</a>
+        <a href="dashboard.php#searchFlight1" class="button">Book Now</a> <!-- Updated anchor link -->
     </div>
 </main>      
 </body>
