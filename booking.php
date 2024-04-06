@@ -48,17 +48,17 @@ if ($result->num_rows > 0) {
 
 <header>
     <div class="logo">
-        <img src="/assets/images/logo.jpg" alt="Airline Logo">
+        <img src="./assets/images/logo.jpg" alt="Airline Logo">
         <div class="title">
             <h1>Trip Summary of <?php echo $flight['flight_number']; ?></h1>
         </div>
     </div>
     <nav>
     <ul>
-        <li><a href="/dashboard.php">Dashboard</a></li>
-        <li><a href="/index.php">Home</a></li>
-        <li><a href="/flights.php">Flights</a></li>
-        <li><a href="/offers.php">Offers</a></li>
+        <li><a href="dashboard.php">Dashboard</a></li>
+        <li><a href="index.php">Home</a></li>
+        <li><a href="flights.php">Flights</a></li>
+        <li><a href="offers.php">Offers</a></li>
         <?php
         // Display username and logout button
         echo '<li class="dropdown">'; // Add the "dropdown" class to the list item
@@ -130,7 +130,7 @@ if ($result->num_rows > 0) {
                 <option value="10">10</option>
                 <!-- Add more options as needed -->
             </select>
-            <input type="submit" href="Payment.php" value="Confirm Booking">
+            <input type="submit" value="Confirm Booking">
         </form>
     </div>
 </main>

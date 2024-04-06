@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -83,7 +84,8 @@
         <span><i class="fas fa-plane-arrival"></i></span>
         <div class="input__content">
           <div class="input__group">
-            <input type="text" list="destinations" id="destinationInput"/>
+          <input type="text" list="destinations" id="destinationInput" value="<?php echo isset($_GET['destination']) ? htmlspecialchars($_GET['destination']) : ''; ?>">
+
             <label>Destination</label>
           </div>
           <p>Select a destination</p>

@@ -33,9 +33,9 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
     </div>
     <nav>
     <ul>
-        <li><a href="/dashboard.php">Dashboard</a></li>
-        <li><a href="/index.php">Home</a></li>
-        <li><a href="/offers.php">Offers</a></li>
+        <li><a href="dashboard.php">Dashboard</a></li>
+        <li><a href="index.php">Home</a></li>
+        <li><a href="offers.php">Offers</a></li>
         <?php
         if(isset($_SESSION['username'])) {
             // If the user is logged in, display a welcome message which will serve as the dropdown button

@@ -4,13 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Skyline - Contact</title>
-    <link rel="icon" href="/assets/images/favicon.jpg">
+    <link rel="icon" href="./assets/images/favicon.jpg">
     <link rel="stylesheet" href="./css/contact.css">
 </head>
 <body>
 <header>
     <div class="logo">
-        <img src="/assets/images/logo.jpg" alt="Airline Logo">
+        <img src="./assets/images/logo.jpg" alt="Airline Logo">
         <div class="title">
             <h1>Skyline Contact</h1>
         </div>
@@ -43,7 +43,7 @@
     <div class="notification" id="notification"></div>
 
     <div class="back-button">
-        <a href="/dashboard.php">Back to dashboard</a>
+        <a href="dashboard.php">Back to dashboard</a>
     </div>
 </div>
 <footer>

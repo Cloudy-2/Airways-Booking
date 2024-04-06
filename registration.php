@@ -16,7 +16,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $errorMessage = "Passwords do not match.";
     } else {
         // Check if email is already taken
-        $stmt = $conn->prepare("SELECT * FROM res_records WHERE res_email = ?");
+        $stmt = $conn->prepare("SELECT * FROM logindata WHERE Email = ?");
         $stmt->bind_param("s", $email);
         $stmt->execute();
         $result = $stmt->get_result();
@@ -28,13 +28,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
             // Prepare and bind the SQL statement
-            $stmt = $conn->prepare("INSERT INTO res_records (res_fname, res_lname, res_email, res_pass) VALUES (?, ?, ?, ?)");
+            $stmt = $conn->prepare("INSERT INTO logindata (firstname, lastname, Email, password) VALUES (?, ?, ?, ?)");
             $stmt->bind_param("ssss", $first_name, $last_name, $email, $hashed_password);
 
             // Execute the statement
             if ($stmt->execute()) {
                 // Registration successful, redirect to login page
-                header("Location: /login.php");
+                header("Location: login.php");
                 exit();
             } else {
                 // Registration failed
@@ -53,7 +53,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Skyline - Registration</title>
-    <link rel="icon" href="/assets/images/favicon.jpg">
+    <link rel="icon" href="./assets/images/favicon.jpg">
     <link rel="stylesheet" href="./css/registration.css">
 </head>
 <body>
