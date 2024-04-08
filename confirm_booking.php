@@ -167,4 +167,4 @@ include_once './config/database.php';
 
 <script src="./js/payment.js"></script>
 </body>
-</html>
+</html> 
