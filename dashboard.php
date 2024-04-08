@@ -64,7 +64,7 @@
               <p>Select a location</p>
             </div>
             <datalist id="locations">
-            <option value="Manila">
+            <option value="Manila"> 
             <option value="Cebu">
             <option value="Boracay">
             <option value="Davao">

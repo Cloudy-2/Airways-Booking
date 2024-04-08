@@ -31,6 +31,9 @@ include_once './config/database.php';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./css/confirm_booking.css">
     <link rel="icon" href="./assets/images/favicon.jpg">
+    <script src=""></script>    
+    <script src=""></script>
+    <script src=""></script>
     <title>Skyline - Confirm Booking</title>
 </head>
 <body>
@@ -101,30 +104,67 @@ include_once './config/database.php';
             <div class="payment-methods">
         <h3>Available Payment Methods</h3>
         <ul>
+        <div id="gcash-popup" class="popup gcash-popup">
+        <span class="close-icon" onclick="togglePopup('gcash-popup')">&times;</span>
+        <div class="gcash-payment">
+            <h1>GCash</h1>
+            <p>Merchant: Airways Flight Booking</p>
+            <p>Amount: <?php echo $total_price; ?></p>
+            <label for="mobile-number">Mobile number</label>
+            <input type="number" id="mobile-number" placeholder="Enter your mobile number">
+            <button id="gcash-pay-button">Login to pay with GCash</button>
+        </div>
+    </div>
+
+    <!-- PayPal pop-up -->
+    <div id="paypal-popup" class="popup paypal-popup">
+        <span class="close-icon" onclick="togglePopup('paypal-popup')">&times;</span>
+        <div class="paypal-login">
+            <h1>PayPal</h1>
+            <p>Email or mobile number</p>
+            <input type="text" id="email-or-mobile" placeholder="Enter your email or mobile number">
+            <p>Password</p>
+            <input type="password" id="1password" placeholder="Enter your password">
+            <button id="paypal-login-button">Log In</button>
+        </div>
+    </div>
+
+    <!-- Sign-in pop-up -->
+    <div id="sign-in-popup" class="popup sign-in-popup">
+        <span class="close-icon" onclick="togglePopup('sign-in-popup')">&times;</span>
+        <div class="sign-in-form">
+            <img src="./assets/images/mastercard.jpg" alt="Credit Card" class="credit-card-image">
+            <h1>Welcome Back!</h1>
+            <p>
+                <label for="username">Username</label>
+                <input type="text" id="username" placeholder="Enter your username">
+            </p>
+            <p>
+                <label for="password">Password</label>
+                <input type="password" id="password" placeholder="Enter your password">
+            </p>
+            <button id="sign-in-button">Sign In</button>
+        </div>
+    </div>
+
+    
+        <ul>
             <li>
-                <input type="radio" id="gcash" name="payment_method" value="gcash">
-                <label for="gcash">GCash</label>
+                <input type="radio" id="gcash-radio" name="payment-method" value="gcash" onclick="togglePopup('gcash-popup')">
+                <label for="gcash-radio">GCash</label>
             </li>
             <li>
-                <input type="radio" id="paypal" name="payment_method" value="paypal">
-                <label for="paypal">PayPal</label>
+                <input type="radio" id="paypal-radio" name="payment-method" value="paypal" onclick="togglePopup('paypal-popup')">
+                <label for="paypal-radio">PayPal</label>
             </li>
             <li>
-                <input type="radio" id="credit_card" name="payment_method" value="credit_card">
-                <label for="credit_card">Credit Card</label>
+                <input type="radio" id="sign-in-radio" name="payment-method" value="mastercard" onclick="togglePopup('sign-in-popup')">
+                <label for="sign-in-radio">Mastercard</label>
             </li>
         </ul>
-
-            <input type="submit"  value="Confirm Booking">
-        </form>
     </div>
-</main> 
+        <input type="submit"  value="Confirm Booking"> </form>
 
-<footer>
-    
-    </div>
-</footer>
-
-
+<script src="./js/payment.js"></script>
 </body>
 </html>
