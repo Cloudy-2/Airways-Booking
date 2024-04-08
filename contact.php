@@ -17,7 +17,6 @@
     </div>
     <nav>
         <ul>
-            <li><a href="/index.php">Home</a></li>
             <li><a href="#">Flights</a></li>
             <li><a href="#">Analytics</a></li>
         </ul>
@@ -43,7 +42,7 @@
     <div class="notification" id="notification"></div>
 
     <div class="back-button">
-        <a href="dashboard.php">Back to dashboard</a>
+        <a href="index.php">Back to dashboard</a>
     </div>
 </div>
 <footer>

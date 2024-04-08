@@ -245,9 +245,6 @@ body {
   padding-left: 30px;
   padding-top: 15px;
 }
-.booking__container {
-  padding: 20px;
-}
 
 .booking__container form {
   margin-top: 4rem;
@@ -270,8 +267,56 @@ body {
 }
 
 .booking__container .input__content {
-  width: 100%;
+  position: relative;
 }
+
+.booking__container label {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--text-dark);
+  pointer-events: none;
+  transition: 0.3s;
+}
+
+.booking__container input {
+  width: 100%;
+  padding: 10px 0;
+  font-size: 1rem;
+  outline: none;
+  border: none;
+  border-bottom: 1px solid var(--primary-color);
+  color: var(--text-dark);
+}
+
+.booking__container input:focus ~ label,
+.booking__container input[data-value] ~ label {
+  font-size: 0.8rem;
+  top: 0;
+}
+/* Style the labels when the class is added */
+.input__content.label-on-top label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: translateY(-50%);
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--text-dark);
+  pointer-events: none;
+  transition: 0.3s;
+}
+
+/* Adjust the position of input labels */
+.input__content.label-on-top input:focus ~ label,
+.input__content.label-on-top input[data-value] ~ label {
+  font-size: 0.8rem;
+  top: 0;
+}
+
 
 .booking__container .form__group {
   display: flex;
@@ -655,80 +700,3 @@ body {
     text-align: center;
   }
 }
-.sign-in-popup {
-  display: none; /* Hide pop-up container by default */
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 9999;
-  background-color: rgba(255, 255, 255, 0.9);
-  border-radius: 5px;
-  padding: 30px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-}
-
-/* Close icon styles */
-.close-icon {
-  position: absolute;
-  top: 5px;
-  right: 5px;
-  font-size: 20px;
-  cursor: pointer;
-  color: #888; /* Close icon color */
-}
-
-/* Close icon hover styles */
-.close-icon:hover {
-  color: #000; /* Change close icon color on hover */
-}
-
-body {
-  font-family: Arial, sans-serif;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  min-height: 100vh;
-  margin: 0;
-  padding: 0;
-  background-color: #f0f0f0;
-}
-.sign-in-form {
-  text-align: center;
-  background-color: #fff;
-  border-radius: 5px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  padding: 30px;
-  width: 300px;
-}
-h1 {
-  margin-top: 0;
-}
-input[type="text"], input[type="password"] {
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 10px;
-  border-radius: 5px;
-  border: 1px solid #ccc;
-}
-input[type="checkbox"] {
-  margin-right: 10px;
-}
-button {
-  background-color: #16a085;
-  color: #fff;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-button:hover {
-  background-color: #1abc9c;
-}
-.credit-card-image {
-  width: 100px;
-  margin-top: 20px;
-}
-
-

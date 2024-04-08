@@ -33,8 +33,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
     </div>
     <nav>
     <ul>
-        <li><a href="dashboard.php">Dashboard</a></li>
-        <li><a href="index.php">Home</a></li>
+        <li><a href="index.php">Dashboard</a></li>
         <li><a href="offers.php">Offers</a></li>
         <?php
         if(isset($_SESSION['username'])) {
@@ -105,12 +104,23 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
     }
     ?>
 <div class="change-flight-button">
-    <a href="dashboard.php" class="change-flight-link">Change Flight</a>
+    <a href="index.php" class="change-flight-link">Change Flight</a>
 </div>
 </main>
 
 <footer>
     <p>&copy; <?php echo date("Y"); ?> Skyline Airways PH</p>
 </footer>
+<script>
+
+bookNowButtons.forEach(button => {
+    button.addEventListener('click', function() {;
+      destinationInput.value = destination;
+      label.classList.add('label-on-top');
+      window.location.href = `index.php?destination=${destination}#searchFlight1`;
+    });
+  });
+  
+  </script>
 </body>
 </html>

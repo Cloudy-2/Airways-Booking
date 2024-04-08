@@ -49,7 +49,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $regular_stored_password = $regular_row['password'];
             if (password_verify($password, $regular_stored_password)) {
                 $_SESSION['username'] = $username;
-                header("Location: dashboard.php");
+                header("Location: index.php");
                 exit();
             } else {
                 $errorMessage = "Invalid password. Please try again.";

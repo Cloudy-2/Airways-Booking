@@ -19,7 +19,7 @@ if ($is_admin) {
     header("Location: login.php");
 } else {
     // Redirect regular users to index.php
-    header("Location: dashboard.php");
+    header("Location: index.php");
 }
 
 exit();

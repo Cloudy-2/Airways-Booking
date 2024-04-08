@@ -15,6 +15,7 @@ document.getElementById('gcash-pay-button').addEventListener('click', function()
     } else {
         alert('Please enter a valid 11-digit mobile number.');
     }
+    togglePopup('gcash-popup'); // Close GCash popup after processing
 });
 
 // Event listener for PayPal login button click
@@ -27,6 +28,7 @@ document.getElementById('paypal-login-button').addEventListener('click', functio
     } else {
         alert('Please enter both your email or mobile number and password.');
     }
+    togglePopup('paypal-popup'); // Close PayPal popup after processing
 });
 
 // Event listener for sign-in button click
@@ -39,4 +41,5 @@ document.getElementById('sign-in-button').addEventListener('click', function() {
     } else {
         alert('Please enter both your username and password.');
     }
+    togglePopup('sign-in-popup'); // Close Sign-in popup after processing
 });

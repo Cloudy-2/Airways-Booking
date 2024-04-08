@@ -55,8 +55,7 @@ if ($result->num_rows > 0) {
     </div>
     <nav>
     <ul>
-        <li><a href="dashboard.php">Dashboard</a></li>
-        <li><a href="index.php">Home</a></li>
+        <li><a href="index.php">Dashboard</a></li>
         <li><a href="flights.php">Flights</a></li>
         <li><a href="offers.php">Offers</a></li>
         <?php
@@ -134,7 +133,6 @@ if ($result->num_rows > 0) {
         </form>
     </div>
 </main>
-
 
 <footer>
     <p>&copy; <?php echo date("Y"); ?> Skyline Airways PH</p>

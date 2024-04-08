@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
         destinationInput.dispatchEvent(inputEvent);
 
-        window.location.href = `dashboard.php?destination=${destination}#searchFlight1`;
+        window.location.href = `index.php?destination=${destination}#searchFlight1`;
       });
     });
 
@@ -49,5 +49,5 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 function redirectToIndex(destination) {
-  window.location.href = `dashboard.php?destination=${destination}#searchFlight1`;
+  window.location.href = `index.php?destination=${destination}#searchFlight1`;
 }
