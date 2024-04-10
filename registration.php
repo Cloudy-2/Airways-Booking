@@ -69,7 +69,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <?php if(isset($errorMessage)): ?>
                 <p style="color: red;"><?php echo $errorMessage; ?></p>
             <?php endif; ?>
-            <p style="margin-top: 10px;"><a href="/login.php">Back to login</a>.</p>
+            <p style="margin-top: 10px;"><a href="login.php">Back to login</a>.</p>
         </form>
     </div>
     <script src="./js/registration.js"></script>

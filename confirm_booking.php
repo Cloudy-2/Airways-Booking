@@ -20,7 +20,6 @@ $passenger_count = $_POST['passengers'];
 $ticket_price = $_POST['price'];
 $total_price = $ticket_price * $passenger_count;
 
-
 include_once './config/database.php';
 ?>
 
@@ -29,11 +28,9 @@ include_once './config/database.php';
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./css/confirm_booking.css">
-    <link rel="icon" href="./assets/images/favicon.jpg">
-    <script src=""></script>    
-    <script src=""></script>
-    <script src=""></script>
+    <link rel="icon" href="../assets/images/favicon.jpg">
     <title>Skyline - Confirm Booking</title>
 </head>
 <body>
@@ -42,129 +39,159 @@ include_once './config/database.php';
     <div class="logo">
         <img src="./assets/images/logo.jpg" alt="Airline Logo">
         <div class="title">
-            <h1>Skyline - Confirm Booking</h1>
+            <h1>Skyline Confirm Booking</h1>
         </div>
     </div>
     <nav>
-    <ul>
-        <li><a href="dashboard.php">Dashboard</a></li>
-        <li><a href="index.php">Home</a></li>
-        <li><a href="flights.php">Flights</a></li>
-        <li><a href="offers.php">Offers</a></li>
-        <?php
-       
-        echo '<li class="dropdown">'; 
-        echo '<a class="dropbtn">Hello, ' . $_SESSION['username'] . '</a>'; 
-        echo '<div class="dropdown-content">';
-        echo '<a href="#">Profile</a>';
-        echo '<a href="logout.php" class="logout">Logout</a>';
-        echo '</div>';
-        echo '</li>';
-        ?>
-    </ul>  
-</nav>
+        <ul>
+            <li><a href="index.php">Dashboard</a></li>
+            <li><a href="flights.php">Flights</a></li>
+            <li><a href="offers.php">Offers</a></li>
+            <?php
+                echo '<li class="dropdown">'; 
+                echo '<a class="dropbtn">Hello, ' . $_SESSION['username'] . '</a>'; 
+                echo '<div class="dropdown-content">';
+                echo '<a href="#">Profile</a>';
+                echo '<a href="logout.php" class="logout">Logout</a>';
+                echo '</div>';
+                echo '</li>';
+            ?>
+        </ul>  
+    </nav>
 </header> 
 
 <main>
+    <div class="passenger-title-container">
+        <h2 class="passenger_title">Passenger Details</h2>
+    </div>
     <div class="passenger-details">
-        <h2 style="padding-left: 620px;">Passenger Details</h2>
         <form action="payment.php" method="POST">
-        <?php
-            // Loop to generate form fields based on the number of passengers
-            for ($i = 1; $i <= $passenger_count; $i++) {
-                echo '<div class="passenger-info">';
-                echo '<h3>Passenger ' . $i . '</h3>';
-                echo '<label for="first_name_' . $i . '">First Name:</label>';
-                echo '<input type="text" id="first_name_' . $i . '" name="first_name_' . $i . '" required>';
-                echo '<label for="last_name_' . $i . '">Last Name:</label>';
-                echo '<input type="text" id="last_name_' . $i . '" name="last_name_' . $i . '" required>';
-                
-                if ($i === 1) {
-                    echo '<label for="email_' . $i . '">Email:</label>';
-                    echo '<input type="email" id="email_' . $i . '" name="email_' . $i . '" required>';
+            <?php
+                for ($i = 1; $i <= $passenger_count; $i++) {
+                    echo '<div class="passenger-info">';
+                    echo '<h3>Passenger ' . $i . '</h3>';
+                    echo '<label for="first_name_' . $i . '">First Name:</label>';
+                    echo '<input type="text" id="first_name_' . $i . '" name="first_name_' . $i . '" required>';
+                    echo '<label for="last_name_' . $i . '">Last Name:</label>';
+                    echo '<input type="text" id="last_name_' . $i . '" name="last_name_' . $i . '" required>';
+                    
+                    if ($i === 1) {
+                        echo '<label for="email_' . $i . '">Email:</label>';
+                        echo '<input type="email" id="email_' . $i . '" name="email_' . $i . '" required>';
+                        echo '<label for="contact_number_' . $i . '">Contact Number:</label>';
+                        echo '<input type="text" id="contact_number_' . $i . '" name="contact_number_' . $i . '" required>';
+                    }
+                    
+                    echo '<label for="dob_' . $i . '">Date of Birth:</label>';
+                    echo '<input type="date" id="dob_' . $i . '" name="dob_' . $i . '" required>';
+                    
+                    echo '</div>';
                 }
-                if ($i === 1) {
-                    echo '<label for="contact_number_' . $i . '">Contact Number:</label>';
-                    echo '<input type="text" id="contact_number_' . $i . '" name="contact_number_' . $i . '" required>';
-                }
-                echo '<label for="dob_' . $i . '">Date of Birth:</label>';
-                echo '<input type="date" id="dob_' . $i . '" name="dob_' . $i . '" required>';
-                
-                echo '</div>';
-            }
             ?>
-
-            <!-- Display total price -->
             <div class="total-price">
                 <h3>Total Price: ₱<?php echo $total_price; ?></h3>
             </div>
-
-            <!-- Pass the ticket price to the next page -->
             <input type="hidden" name="ticket_price" value="<?php echo $ticket_price; ?>">
             <div class="payment-methods">
-        <h3>Available Payment Methods</h3>
-        <ul>
-        <div id="gcash-popup" class="popup gcash-popup">
-        <span class="close-icon" onclick="togglePopup('gcash-popup')">&times;</span>
-        <div class="gcash-payment">
-            <h1>GCash</h1>
+                <h3>Available Payment Methods</h3>
+                <ul>
+                    <li>
+                        <input type="radio" id="gcash-radio" name="payment-method" value="Gcash" onclick="togglePopup('gcash-popup')">
+                        <label for="gcash-radio">GCash</label>
+                    </li>
+                    <li>
+                        <input type="radio" id="paypal-radio" name="payment-method" value="Paypal" onclick="togglePopup('paypal-popup')">
+                        <label for="paypal-radio">PayPal</label>
+                    </li>
+                    <li>
+                        <input type="radio" id="mastercard-radio" name="payment-method" value="Mastercard" onclick="togglePopup('mastercard-popup')">
+                        <label for="mastercard-radio">Mastercard</label>
+                    </li>
+                </ul>
+            </div>
+            <div class="submit-button">
+                <button id="confirmBooking">Confirm Booking</button>
+            </div>
+        </form>
+    </div>
+</main>
+
+<!-- GCash pop-up -->
+<div id="gcash-popup" class="popup">
+    <span class="close-icon" onclick="closePopupAndUnselectRadio('gcash-popup', 'gcash-radio')">&times;</span>
+    <div class="popup-content">
+        <div class="payment-method">
+            <img src="./assets/images/gcash" alt="GCash Logo" class="payment-logo">
+            <h1>GCash Payment</h1>
             <p>Merchant: Airways Flight Booking</p>
             <p>Amount: <?php echo $total_price; ?></p>
-            <label for="mobile-number">Mobile number</label>
-            <input type="number" id="mobile-number" placeholder="Enter your mobile number">
-            <button id="gcash-pay-button">Login to pay with GCash</button>
+            <label for="gcash-mobile-number">Mobile number</label>
+            <input type="number" id="gcash-mobile-number" placeholder="Enter your mobile number" required>
+            <label for="gcash-password">Password</label>
+            <input type="password" id="gcash-password" placeholder="Enter your GCash password" required>
+            <button onclick="validateAndLogin('gcash-mobile-number', 'gcash-password', 'gcash-popup')">Login to pay with GCash</button>
         </div>
     </div>
+</div>
 
-    <!-- PayPal pop-up -->
-    <div id="paypal-popup" class="popup paypal-popup">
-        <span class="close-icon" onclick="togglePopup('paypal-popup')">&times;</span>
-        <div class="paypal-login">
-            <h1>PayPal</h1>
+<!-- PayPal pop-up -->
+<div id="paypal-popup" class="popup">
+    <span class="close-icon" onclick="closePopupAndUnselectRadio('paypal-popup', 'paypal-radio')">&times;</span>
+    <div class="popup-content">
+        <div class="payment-method">
+            <img src="./assets/images/paypal" alt="PayPal Logo" class="payment-logo">
+            <h1>PayPal Payment</h1>
             <p>Email or mobile number</p>
-            <input type="text" id="email-or-mobile" placeholder="Enter your email or mobile number">
+            <input type="text" id="paypal-email-or-mobile" placeholder="Enter your email or mobile number" required>
             <p>Password</p>
-            <input type="password" id="1password" placeholder="Enter your password">
-            <button id="paypal-login-button">Log In</button>
+            <input type="password" id="paypal-password" placeholder="Enter your password" required>
+            <button onclick="validateAndLogin('paypal-email-or-mobile', 'paypal-password', 'paypal-popup')">Log In</button>
         </div>
     </div>
+</div>
 
-    <!-- Sign-in pop-up -->
-    <div id="sign-in-popup" class="popup sign-in-popup">
-        <span class="close-icon" onclick="togglePopup('sign-in-popup')">&times;</span>
-        <div class="sign-in-form">
-            <img src="./assets/images/mastercard.jpg" alt="Credit Card" class="credit-card-image">
-            <h1>Welcome Back!</h1>
-            <p>
-                <label for="username">Username</label>
-                <input type="text" id="username" placeholder="Enter your username">
-            </p>
-            <p>
-                <label for="password">Password</label>
-                <input type="password" id="password" placeholder="Enter your password">
-            </p>
-            <button id="sign-in-button">Sign In</button>
+<!-- Mastercard pop-up -->
+<div id="mastercard-popup" class="popup">
+    <span class="close-icon" onclick="closePopupAndUnselectRadio('mastercard-popup', 'mastercard-radio')">&times;</span>
+    <div class="popup-content">
+        <div class="payment-method">
+            <img src="./assets/images/mastercard.jpg" alt="Mastercard Logo" class="payment-logo">
+            <h1>Mastercard Payment</h1>
+            <p>Enter your Mastercard credentials</p>
+            <input type="text" id="mastercard-username" placeholder="Username" required>
+            <input type="password" id="mastercard-password" placeholder="Password" required>
+            <button onclick="validateAndLogin('mastercard-username', 'mastercard-password', 'mastercard-popup')">Log In</button>
         </div>
     </div>
+</div>
 
-    
-        <ul>
-            <li>
-                <input type="radio" id="gcash-radio" name="payment-method" value="gcash" onclick="togglePopup('gcash-popup')">
-                <label for="gcash-radio">GCash</label>
-            </li>
-            <li>
-                <input type="radio" id="paypal-radio" name="payment-method" value="paypal" onclick="togglePopup('paypal-popup')">
-                <label for="paypal-radio">PayPal</label>
-            </li>
-            <li>
-                <input type="radio" id="sign-in-radio" name="payment-method" value="mastercard" onclick="togglePopup('sign-in-popup')">
-                <label for="sign-in-radio">Mastercard</label>
-            </li>
-        </ul>
-    </div>
-        <input type="submit"  value="Confirm Booking"> </form>
 
-<script src="./js/payment.js"></script>
+<script src="./js/confirrm_booking.js"></script>
+
+<script>
+
+    // Event listener for confirming the booking
+document.getElementById("confirmBooking").addEventListener("click", function() {
+    var totalPrice = <?php echo $total_price; ?>;
+    var selectedPayment = document.querySelector('input[name="payment-method"]:checked');
+    if (selectedPayment) {
+        var paymentMethod = selectedPayment.value;
+        alert("Ticket successfully purchased!\nTotal Amount: ₱" + totalPrice + "\nPayment Method: " + paymentMethod + "\nTicket paid successfully. Thank you for choosing Skyline Airways.");
+    } else {
+        alert("Please select a payment method.");
+    }
+});
+
+</script>
+
 </body>
-</html> 
+</html>
+
+
+
+
+
+
+
+
+

@@ -21,27 +21,38 @@ document.addEventListener("DOMContentLoaded", function () {
 
   const inputFields = document.querySelectorAll(".input__content input");
 
-  // Function to add focus class to label when input is focused
-  function handleFocus() {
-      const parent = this.parentElement.parentElement;
-      parent.classList.add("focus");
-  }
+// Function to add focus class to label when input is focused
+function handleFocus() {
+    const parent = this.parentElement.parentElement;
+    parent.classList.add("focus");
+}
 
-  // Function to add data class to label when input has data
-  function handleInput() {
-      const parent = this.parentElement.parentElement;
-      if (this.value !== "") {
-          parent.classList.add("data");
-      } else {
-          parent.classList.remove("data");
-      }
-  }
+// Function to add data class to label when input has data
+function handleInput() {
+    const parent = this.parentElement.parentElement;
+    if (this.value !== "") {
+        parent.classList.add("data");
+    } else {
+        parent.classList.remove("data");
+    }
+}
 
-  // Attach focus and input event listeners to input fields
-  inputFields.forEach(inputField => {
-      inputField.addEventListener("focus", handleFocus);
-      inputField.addEventListener("input", handleInput);
-  });
+// Check input fields on page load and add data class to labels if they have values
+window.addEventListener("DOMContentLoaded", () => {
+    inputFields.forEach(inputField => {
+        if (inputField.value !== "") {
+            const parent = inputField.parentElement.parentElement;
+            parent.classList.add("data");
+        }
+    });
+});
+
+// Attach focus and input event listeners to input fields
+inputFields.forEach(inputField => {
+    inputField.addEventListener("focus", handleFocus);
+    inputField.addEventListener("input", handleInput);
+});
+
 
   const bookingForm = document.querySelector(".booking__container form");
 

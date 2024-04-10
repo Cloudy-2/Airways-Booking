@@ -52,7 +52,7 @@ try {
     $stmt->close();
 
     // Redirect to a success page after successful insertion
-    header("Location: dashboard.php");
+    header("Location: index.php");
     exit();
 } catch (Exception $e) {
     echo 'Error: ' . $e->getMessage();

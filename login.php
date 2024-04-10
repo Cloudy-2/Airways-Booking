@@ -67,6 +67,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
 <title>Skyline - Login</title>
 <link rel="icon" href="./assets/images/favicon.jpg">
 <link rel="stylesheet" href="./css/login.css">
@@ -81,8 +82,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </div>
     <nav>
         <ul>
-            <li><a href="dashboard.php">Dashboard</a></li>
-            <li><a href="index.php">Home</a></li>
+            <li><a href="index.php">Dashboard</a></li>>
             <li><a href="#">Flights</a></li>
             <li><a href="#">Analytics</a></li>
             <?php
