@@ -1,7 +1,7 @@
 <?php
 include_once 'config/database.php';
 
-$errorMessage = ''; // Initialize error message variable
+$errorMessage = '';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Retrieve form data
@@ -53,7 +53,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Skyline - Registration</title>
-    <link rel="icon" href="./assets/images/favicon.jpg">
+    <link rel="icon" href="./assets/images/icon.jpg">
     <link rel="stylesheet" href="./css/registration.css">
 </head>
 <body>

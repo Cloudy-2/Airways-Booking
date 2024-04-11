@@ -30,7 +30,7 @@ include_once './config/database.php';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./css/confirm_booking.css">
-    <link rel="icon" href="../assets/images/favicon.jpg">
+    <link rel="icon" href="../assets/images/icon.jpg">
     <title>Skyline - Confirm Booking</title>
 </head>
 <body>
@@ -112,7 +112,7 @@ include_once './config/database.php';
             <div class="submit-button">
                 <button id="confirmBooking">Confirm Booking</button>
             </div>
-        </form>
+        </form> 
     </div>
 </main>
 
@@ -164,7 +164,6 @@ include_once './config/database.php';
         </div>
     </div>
 </div>
-
 
 <script src="./js/confirrm_booking.js"></script>
 

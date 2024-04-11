@@ -1,5 +1,5 @@
 <?php
-session_start(); // Start the session
+session_start();
 
 include_once './config/database.php';
 
@@ -20,7 +20,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./css/flights.css">
-    <link rel="icon" href="./assets/images/favicon.jpg">
+    <link rel="icon" href="./assets/images/icon.jpg">
     <title>Skyline - Flight Search Results</title>
 </head>
 <body>
@@ -38,16 +38,15 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
         <li><a href="offers.php">Offers</a></li>
         <?php
         if(isset($_SESSION['username'])) {
-            // If the user is logged in, display a welcome message which will serve as the dropdown button
-            echo '<li class="dropdown">'; // Add the "dropdown" class to the list item
-            echo '<a class="dropbtn">Hello, ' . $_SESSION['username'] . '</a>'; // Change button to anchor tag
+            // If the user is logged in, display a welcome message
+            echo '<li class="dropdown">';
+            echo '<a class="dropbtn">Hello, ' . $_SESSION['username'] . '</a>';
             echo '<div class="dropdown-content">';
             echo '<a href="#">Profile</a>';
             echo '<a href="logout.php" class="logout">Logout</a>';
             echo '</div>';
             echo '</li>';
         } else {
-            // If the user is not logged in, display a login link
             echo '<li><a href="login.php">Login</a></li>';
         }
         ?>
@@ -71,7 +70,6 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
             $result = $conn->query($sql);
 
             if ($result->num_rows > 0) {
-                // Output table header
                 echo "<table>";
                 echo "<tr><th>Flight Number</th><th>Departure</th><th>Departure Date</th><th>Departure-Time</th><th>Arrival</th><th>Arrival Date</th><th>Arrival-Time</th><th>Price</th><th>Book</th></tr>";
 
@@ -134,15 +132,19 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
 
 <script>
 
-bookNowButtons.forEach(button => {
-    button.addEventListener('click', function() {;
-      destinationInput.value = destination;
-      label.classList.add('label-on-top');
-      window.location.href = `index.php?destination=${destination}#searchFlight1`;
+document.addEventListener('DOMContentLoaded', function () {
+    // Select all elements with the 'book-now-button' class
+    var bookNowButtons = document.querySelectorAll('.book-now-button');
+
+    bookNowButtons.forEach(button => {
+        button.addEventListener('click', function(event) {
+
+            console.log(this.textContent);
+        });
     });
-  });
+});
   
   </script>
 
 </body>
-</html>
+</html> 

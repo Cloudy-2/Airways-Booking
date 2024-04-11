@@ -10,7 +10,7 @@ $destination = isset($_GET['destination']) ? htmlspecialchars($_GET['destination
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./css/dashboard.css" />
-    <link rel="icon" href="./assets/images/favicon.jpg">
+    <link rel="icon" href="./assets/images/icon.jpg">
     <title>Skyline - Dashboard</title>
   </head>
   <body>
@@ -40,7 +40,6 @@ $destination = isset($_GET['destination']) ? htmlspecialchars($_GET['destination
                   echo '</div>';
                   echo '</div>';
               } else {
-                  // If the user is not logged in, display a login link
                   echo '<li><a href="login.php">Login</a></li>';
               }
               ?>

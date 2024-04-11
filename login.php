@@ -1,5 +1,5 @@
 <?php
-session_start(); // Start session at the beginning of the script
+session_start();
 
 // Check if the user is already logged in
 if(isset($_SESSION['username'])) {
@@ -34,7 +34,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             header("Location: admin.php");
             exit();
         } else {
-            // Incorrect password
             $errorMessage = "Invalid password. Please try again.";
         }
     } else {
@@ -69,7 +68,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
 <title>Skyline - Login</title>
-<link rel="icon" href="./assets/images/favicon.jpg">
+<link rel="icon" href="./assets/images/icon.jpg">
 <link rel="stylesheet" href="./css/login.css">
 </head>
 <body>
