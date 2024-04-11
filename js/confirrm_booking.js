@@ -64,3 +64,4 @@ function enableRadioButtons() {
     togglePopup(popupId);
     document.getElementById(radioId).checked = false;
 }
+
