@@ -1,18 +1,21 @@
 <?php
-session_start();
+session_start(); // Start the session
 
 // Check if the user is logged in
 if (!isset($_SESSION['username'])) {
+    // Redirect the user to the login page if not logged in
     header("Location: login.php");
-    exit();
+    exit(); // Stop further execution
 }
 
 // Check if the flight ID is provided
 if (!isset($_GET['flight_id'])) {
+    // Redirect the user back to the search results page if flight ID is not provided
     header("Location: flights.php");
-    exit();
+    exit(); // Stop further execution
 }
 
+// Include necessary files
 include_once './config/database.php';
 
 // Retrieve flight ID from the URL
@@ -26,6 +29,7 @@ $result = $conn->query($sql);
 if ($result->num_rows > 0) {
     $flight = $result->fetch_assoc();
 } else {
+    // Redirect the user back to the search results page if the flight does not exist
     header("Location: flights.php");
     exit(); // Stop further execution
 }
@@ -38,7 +42,7 @@ if ($result->num_rows > 0) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./css/booking.css">
-    <link rel="icon" href="./assets/images/icon.jpg">
+    <link rel="icon" href="./assets/images/favicon.jpg">
     <title>Skyine - Flight <?php echo $flight['flight_number']; ?></title>
 </head>
 <body>
@@ -47,7 +51,7 @@ if ($result->num_rows > 0) {
     <div class="logo">
         <img src="./assets/images/logo.jpg" alt="Airline Logo">
         <div class="title">
-            <h1>Trip Summary of <?php echo $flight['flight_number']; ?></h1>
+            <h1>Trip Summary of Flight - #<?php echo $flight['flight_number']; ?></h1>
         </div>
     </div>
     <nav>
@@ -57,8 +61,8 @@ if ($result->num_rows > 0) {
         <li><a href="offers.php">Offers</a></li>
         <?php
         // Display username and logout button
-        echo '<li class="dropdown">';
-        echo '<a class="dropbtn">Hello, ' . $_SESSION['username'] . '</a>';
+        echo '<li class="dropdown">'; // Add the "dropdown" class to the list item
+        echo '<a class="dropbtn">Hello, ' . $_SESSION['username'] . '</a>'; // Change button to anchor tag
         echo '<div class="dropdown-content">';
         echo '<a href="#">Profile</a>';
         echo '<a href="logout.php" class="logout">Logout</a>';
@@ -110,21 +114,18 @@ if ($result->num_rows > 0) {
                 <td><?php echo $_SESSION['username']; ?></td>
             </tr>
         </table>
-        <form action="confirm_booking.php" method="POST">
+        <form action="confirm_booking.php" method="POST" id="bookingForm" onsubmit="return validateForm()">
         <input type="hidden" name="price" value="<?php echo $flight['price']; ?>">
+            <!-- Your form content -->
             <label for="passengers">Number of Passengers:</label>
             <select id="passengers" name="passengers">
+                <option value="">Select</option>
                 <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
                 <option value="4">4</option>
                 <option value="5">5</option>
-                <option value="6">6</option>
-                <option value="7">7</option>
-                <option value="8">8</option>
-                <option value="9">9</option>
-                <option value="10">10</option>
-            
+                <!-- Add more options as needed -->
             </select>
             <input type="submit" value="Confirm Booking">
         </form>
@@ -134,5 +135,17 @@ if ($result->num_rows > 0) {
 <footer>
     <p>&copy; <?php echo date("Y"); ?> Skyline Airways PH</p>
 </footer>
+
+<script>
+    function validateForm() {
+        var passengers = document.getElementById("passengers").value;
+        if (passengers === "") {
+            alert("Please select the number of passengers.");
+            return false;
+        }
+        return true;
+    }
+</script>
+
 </body>
 </html>

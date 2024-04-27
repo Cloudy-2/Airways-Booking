@@ -8,7 +8,7 @@ table {
 th, td {
     border: 1px solid #dddddd;
     text-align: left;
-    padding: 15px; /* Increase padding to increase spacing */
+    padding: 20px; /* Increase padding to increase spacing */
     font-size: 16px; /* Increase font size */
 }
 
@@ -198,22 +198,19 @@ nav .dropdown .dropbtn:hover {
 /* End of Header Styles */
 
 main {
-    
+    padding: 20px;
     margin-top: 110px; /* Adjust this value to create space between header and main content */
 }
 /* Footer styles */
 footer {
   background-color: #333;
   color: #fff;
+  padding: 5px 0px;
   text-align: center;
-  position: relative; /* Fix the footer position */
+  position: fixed; /* Fix the footer position */
   bottom: 0; /* Place the footer at the bottom of the screen */
   width: 100%; /* Make the footer span the full width */
-  position: fixed;
-  left: 0;
-  right: 0;
-  height: 160px;
-  margin-top: 20px;
+  
 }
 
 .payment-methods {

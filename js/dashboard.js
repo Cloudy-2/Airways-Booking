@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", function () {
   
     // Add submit event listener to subscribe form
     subscribeForm.addEventListener("submit", function (event) {
-        event.preventDefault();
+        event.preventDefault(); // Prevent default form submission behavior
   
         const userEmailInput = subscribeForm.querySelector("input[type='text']");
         const userEmail = userEmailInput.value.trim();
@@ -11,11 +11,11 @@ document.addEventListener("DOMContentLoaded", function () {
         if (userEmail === "") {
             // If no data entered, display error message
             alert("Please enter your email to subscribe.");
-            userEmailInput.focus();
+            userEmailInput.focus(); // Set focus on the email input field
         } else {
             // If email is entered, proceed with subscription
             alert(`Thank you for subscribing! You will receive latest news at ${userEmail}.`);
-            subscribeForm.reset();
+            subscribeForm.reset(); // Reset the form after submission
         }
     });
   
@@ -58,7 +58,7 @@ document.addEventListener("DOMContentLoaded", function () {
   
     // Add submit event listener to booking form
     bookingForm.addEventListener("submit", function (event) {
-        event.preventDefault();
+        event.preventDefault(); // Prevent default form submission behavior
   
         const locationInput = document.getElementById("locationInput").value.trim();
         const destinationInput = document.getElementById("destinationInput").value.trim();
@@ -68,6 +68,7 @@ document.addEventListener("DOMContentLoaded", function () {
         if (locationInput === "" || destinationInput === "" || departureInput === "") {
             alert("Please fill out all fields in the form.");
         } else {
+            // Proceed to the flight page with the search parameters
             window.location.href = `flights.php?locationInput=${locationInput}&destinationInput=${destinationInput}&departureInput=${departureInput}`;
         }
     });

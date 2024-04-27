@@ -16,9 +16,12 @@ if (!isset($_POST['passengers'])) {
 
 // Retrieve number of passengers from the form
 $passenger_count = $_POST['passengers'];
-
 $ticket_price = $_POST['price'];
-$total_price = $ticket_price * $passenger_count;
+$price = $ticket_price * $passenger_count;
+
+// Initialize total price
+$total_price = 0;
+
 
 include_once './config/database.php';
 ?>
@@ -30,7 +33,7 @@ include_once './config/database.php';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./css/confirm_booking.css">
-    <link rel="icon" href="../assets/images/icon.jpg">
+    <link rel="icon" href="../assets/images/favicon.jpg">
     <title>Skyline - Confirm Booking</title>
 </head>
 <body>
@@ -60,38 +63,93 @@ include_once './config/database.php';
     </nav>
 </header> 
 
-<main>
+<main class="<?php echo $main_class; ?>">
     <div class="passenger-title-container">
         <h2 class="passenger_title">Passenger Details</h2>
     </div>
     <div class="passenger-details">
-        <form action="payment.php" method="POST">
-            <?php
-                for ($i = 1; $i <= $passenger_count; $i++) {
-                    echo '<div class="passenger-info">';
-                    echo '<h3>Passenger ' . $i . '</h3>';
-                    echo '<label for="first_name_' . $i . '">First Name:</label>';
-                    echo '<input type="text" id="first_name_' . $i . '" name="first_name_' . $i . '" required>';
-                    echo '<label for="last_name_' . $i . '">Last Name:</label>';
-                    echo '<input type="text" id="last_name_' . $i . '" name="last_name_' . $i . '" required>';
-                    
-                    if ($i === 1) {
-                        echo '<label for="email_' . $i . '">Email:</label>';
-                        echo '<input type="email" id="email_' . $i . '" name="email_' . $i . '" required>';
-                        echo '<label for="contact_number_' . $i . '">Contact Number:</label>';
-                        echo '<input type="text" id="contact_number_' . $i . '" name="contact_number_' . $i . '" required>';
-                    }
-                    
-                    echo '<label for="dob_' . $i . '">Date of Birth:</label>';
-                    echo '<input type="date" id="dob_' . $i . '" name="dob_' . $i . '" required>';
-                    
-                    echo '</div>';
-                }
-            ?>
-            <div class="total-price">
-                <h3>Total Price: ₱<?php echo $total_price; ?></h3>
-            </div>
-            <input type="hidden" name="ticket_price" value="<?php echo $ticket_price; ?>">
+    <form action="insertdata.php" method= "POST">
+    <!-- Passenger Details -->
+    <?php
+    // Loop through each passenger
+    for ($i = 1; $i <= $passenger_count; $i++) {
+        // Passenger details inputs
+        echo '<div class="passenger-info">';
+        echo '<h3>Passenger ' . $i . '</h3>';
+        echo '<label for="first_name_' . $i . '">First Name:</label>';
+        echo '<input type="text" id="first_name_' . $i . '" name="first_name_' . $i . '" required>';
+        echo '<label for="last_name_' . $i . '">Last Name:</label>';
+        echo '<input type="text" id="last_name_' . $i . '" name="last_name_' . $i . '" required>';
+
+
+            echo '<label for="email_' . $i . '">Email:</label>';
+            echo '<input type="email" id="email_' . $i . '" name="email_' . $i . '" required>';
+            echo '<label for="contact_number_' . $i . '">Contact Number:</label>';
+            echo '<input type="text" id="contact_number_' . $i . '" name="contact_number_' . $i . '" required>';
+        
+
+        echo '<label for="dob_' . $i . '">Date of Birth:</label>';
+        echo '<input type="date" id="dob_' . $i . '" name="dob_' . $i . '" required>';
+
+        // Seat Selection for each passenger
+        echo '<div class="flight-seats">';
+        echo '<label for="seat_' . $i . '">Select Seat:</label>';
+        echo '<select id="seat_' . $i . '" name="seat_' . $i . '">';
+        echo '<option value="window">Window Seat</option>';
+        echo '<option value="aisle">Aisle Seat</option>';
+        echo '<option value="middle">Middle Seat</option>';
+        echo '</select>';
+        echo '</div>';
+
+        // Accommodation Selection for each passenger
+        echo '<div class="flight-accommodations">';
+        echo '<label for="accommodation_' . $i . '">Select Accommodation:</label>';
+        echo '<select id="accommodation_' . $i . '" name="accommodation_' . $i . '" onchange="calculateTotalPrice()">';
+        echo '<option value="economy">Economy Class</option>';
+        echo '<option value="business">Business Class</option>';
+        echo '<option value="first">First Class</option>';
+        echo '</select>';
+        echo '</div>';
+    }
+    ?>
+
+    <!-- Total Price -->
+<div class="total-price" id="total_price">
+    <h3>Total Price: ₱<?php echo $price; ?></h3>
+</div>
+<input type="hidden" id="total_cost" name="total_cost" value="<?php echo $price; ?>">
+
+
+</form>
+
+<script>
+    // Function to calculate total price based on accommodation selection
+    function calculateTotalPrice() {
+        var totalCost = 0;
+        <?php
+        // Calculate total cost based on accommodation selection using PHP
+        for ($i = 1; $i <= $passenger_count; $i++) {
+            echo 'var selectedAccommodation = document.getElementById("accommodation_' . $i . '").value;';
+            echo 'var originalPrice = ' . $ticket_price . ';';
+            echo 'if (selectedAccommodation === "economy") {';
+            echo 'totalCost += originalPrice;';
+            echo '} else if (selectedAccommodation === "business") {';
+            echo 'totalCost += originalPrice * 1.5;';
+            echo '} else if (selectedAccommodation === "first") {';
+            echo 'totalCost += originalPrice * 2;';
+            echo '}';
+        }
+        ?>
+
+        document.getElementById("total_price").innerHTML = '<h3>Total Price: ₱' + totalCost + '</h3>';
+    }
+</script>
+
+      
+       
+
+            
+            <!-- Payment Methods -->
             <div class="payment-methods">
                 <h3>Available Payment Methods</h3>
                 <ul>
@@ -109,17 +167,20 @@ include_once './config/database.php';
                     </li>
                 </ul>
             </div>
+
+            <!-- Submit Button -->
             <div class="submit-button">
                 <button id="confirmBooking">Confirm Booking</button>
             </div>
-        </form> 
+        </form>
     </div>
 </main>
 
+
 <!-- GCash pop-up -->
 <div id="gcash-popup" class="popup">
-    <span class="close-icon" onclick="closePopupAndUnselectRadio('gcash-popup', 'gcash-radio')">&times;</span>
     <div class="popup-content">
+        <span class="close-icon" onclick="closePopupAndUnselectRadio('gcash-popup', 'gcash-radio')">&times;</span>
         <div class="payment-method">
             <img src="./assets/images/gcash" alt="GCash Logo" class="payment-logo">
             <h1>GCash Payment</h1>
@@ -127,17 +188,17 @@ include_once './config/database.php';
             <p>Amount: <?php echo $total_price; ?></p>
             <label for="gcash-mobile-number">Mobile number</label>
             <input type="number" id="gcash-mobile-number" placeholder="Enter your mobile number" required>
-            <label for="gcash-password">Password</label>
-            <input type="password" id="gcash-password" placeholder="Enter your GCash password" required>
-            <button onclick="validateAndLogin('gcash-mobile-number', 'gcash-password', 'gcash-popup')">Login to pay with GCash</button>
+            <label for="gcash-password">OTP</label>
+            <input type="password" id="gcash-password" placeholder="Enter your GCash OTP" required>
+            <button onclick="validateAndLogin('gcash-mobile-number', 'gcash-password', 'gcash-popup')">PROCEED</button>
         </div>
     </div>
 </div>
 
 <!-- PayPal pop-up -->
 <div id="paypal-popup" class="popup">
-    <span class="close-icon" onclick="closePopupAndUnselectRadio('paypal-popup', 'paypal-radio')">&times;</span>
     <div class="popup-content">
+        <span class="close-icon" onclick="closePopupAndUnselectRadio('paypal-popup', 'paypal-radio')">&times;</span>
         <div class="payment-method">
             <img src="./assets/images/paypal" alt="PayPal Logo" class="payment-logo">
             <h1>PayPal Payment</h1>
@@ -152,8 +213,8 @@ include_once './config/database.php';
 
 <!-- Mastercard pop-up -->
 <div id="mastercard-popup" class="popup">
-    <span class="close-icon" onclick="closePopupAndUnselectRadio('mastercard-popup', 'mastercard-radio')">&times;</span>
     <div class="popup-content">
+        <span class="close-icon" onclick="closePopupAndUnselectRadio('mastercard-popup', 'mastercard-radio')">&times;</span>
         <div class="payment-method">
             <img src="./assets/images/mastercard.jpg" alt="Mastercard Logo" class="payment-logo">
             <h1>Mastercard Payment</h1>
@@ -165,32 +226,24 @@ include_once './config/database.php';
     </div>
 </div>
 
-<script src="./js/confirrm_booking.js"></script>
+
+<script src="./js/confirm_booking.js"></script>
 
 <script>
 
     // Event listener for confirming the booking
-document.getElementById("confirmBooking").addEventListener("click", function() {
-    var totalPrice = <?php echo $total_price; ?>;
-    var selectedPayment = document.querySelector('input[name="payment-method"]:checked');
-    if (selectedPayment) {
-        var paymentMethod = selectedPayment.value;
-        alert("Ticket successfully purchased!\nTotal Amount: ₱" + totalPrice + "\nPayment Method: " + paymentMethod + "\nTicket paid successfully. Thank you for choosing Skyline Airways.");
-    } else {
-        alert("Please select a payment method.");
-    }
-});
+ document.getElementById("confirmBooking").addEventListener("click", function() {
+        var totalPrice = <?php echo $price; ?>;
+        var selectedPayment = document.querySelector('input[name="payment-method"]:checked');
+        if (selectedPayment) {
+            var paymentMethod = selectedPayment.value;
+            alert("Ticket successfully purchased!\nTotal Amount: ₱" + totalPrice + "\nPayment Method: " + paymentMethod + "\nThank you for choosing Skyline Airways, have a great day ahead..");
+        } else {
+            alert("Please select a payment method.");
+        }
+    });
 
 </script>
-
+</main>
 </body>
 </html>
-
-
-
-
-
-
-
-
-

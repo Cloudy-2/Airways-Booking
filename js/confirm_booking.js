@@ -1,5 +1,5 @@
-  // Function to toggle pop-up visibility
-  function togglePopup(popupId) {
+// Function to toggle pop-up visibility
+function togglePopup(popupId) {
     var popup = document.getElementById(popupId);
     if (popup.style.display === "none" || popup.style.display === "") {
         popup.style.display = "block";
@@ -59,9 +59,23 @@ function enableRadioButtons() {
         radioButtons[i].disabled = false;
     }
 }
-  // Function to close pop-up and unselect radio button
-  function closePopupAndUnselectRadio(popupId, radioId) {
+
+// Function to close pop-up and unselect radio button
+function closePopupAndUnselectRadio(popupId, radioId) {
     togglePopup(popupId);
     document.getElementById(radioId).checked = false;
 }
+
+// Add event listener to close icon
+var closeIcons = document.querySelectorAll('.close-icon');
+closeIcons.forEach(function(closeIcon) {
+    closeIcon.addEventListener('click', function() {
+        var popupParent = this.parentElement;
+        var popupId = popupParent.getAttribute('id');
+        if (popupId) {
+            var radioId = popupId.split('-')[0] + '-radio';
+            closePopupAndUnselectRadio(popupId, radioId);
+        }
+    });
+});
 

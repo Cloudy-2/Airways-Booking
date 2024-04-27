@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 06, 2024 at 03:29 PM
+-- Generation Time: Apr 27, 2024 at 02:04 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -45,36 +45,6 @@ INSERT INTO `admins` (`id`, `username`, `password`, `email`, `created_at`) VALUE
 -- --------------------------------------------------------
 
 --
--- Table structure for table `airport`
---
-
-CREATE TABLE `airport` (
-  `Id` int(50) NOT NULL,
-  `Departure` varchar(255) DEFAULT NULL,
-  `Arrival` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `airport`
---
-
-INSERT INTO `airport` (`Id`, `Departure`, `Arrival`) VALUES
-(232, 'Manila - MNL - Ninoy Aquino International Airport.', 'Manila - MNL - Ninoy Aquino International Airport.'),
-(233, 'Cebu- CEB - Mactan Cebu International Airport.', 'Cebu- CEB - Mactan Cebu International Airport.'),
-(234, 'Davao - DVO - Francisco Bangoy International Airport.', 'Davao - DVO - Francisco Bangoy International Airport.'),
-(235, 'Tacloban -TAC - Daniel Z Romualdez Airport.', 'Tacloban -TAC - Daniel Z Romualdez Airport.'),
-(236, 'Iloilo - ILO - Iloilo International Airport.', 'Iloilo - ILO - Iloilo International Airport.'),
-(237, 'Boracay - MPH - Boracay Airport.', 'Boracay - MPH - Boracay Airport.'),
-(238, 'Bacolod - BCD - Bacolod Silay International Airport.', 'Bacolod - BCD - Bacolod Silay International Airport.'),
-(239, 'Cagayan de Oro- CGY - Laguindingan Airport.', 'Cagayan de Oro- CGY - Laguindingan Airport.'),
-(240, 'Tagbilaran - TAG - Bohol Panglao International Airport.', 'Tagbilaran - TAG - Bohol Panglao International Airport.'),
-(241, 'Puerto Princesa City- PPS - Puerto Princesa International Airport.', 'Puerto Princesa City- PPS - Puerto Princesa International Airport.'),
-(242, 'Angeles - CRK - Clark International Airport.', 'Angeles - CRK - Clark International Airport.'),
-(243, 'Kalibo - KLO - Kalibo International Airport.', 'Kalibo - KLO - Kalibo International Airport.');
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `bookings`
 --
 
@@ -85,18 +55,6 @@ CREATE TABLE `bookings` (
   `arrival_date` date DEFAULT NULL,
   `total_price` decimal(10,2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `bookings`
---
-
-INSERT INTO `bookings` (`booking_id`, `flight_id`, `departure_date`, `arrival_date`, `total_price`) VALUES
-(1, NULL, NULL, NULL, 3617.00),
-(2, NULL, NULL, NULL, 3617.00),
-(3, NULL, NULL, NULL, 3617.00),
-(4, NULL, NULL, NULL, 3617.00),
-(5, NULL, NULL, NULL, 4643.00),
-(6, NULL, NULL, NULL, 2985.00);
 
 -- --------------------------------------------------------
 
@@ -612,50 +570,79 @@ INSERT INTO `flights` (`id`, `flight_number`, `departure_location`, `arrival_loc
 -- --------------------------------------------------------
 
 --
--- Table structure for table `logindata`
+-- Table structure for table `main_passengers`
 --
 
-CREATE TABLE `logindata` (
-  `Id` int(100) NOT NULL,
-  `firstname` varchar(30) NOT NULL,
-  `lastname` varchar(30) NOT NULL,
-  `password` varchar(1000) NOT NULL,
-  `Email` varchar(50) NOT NULL
+CREATE TABLE `main_passengers` (
+  `MainPassenger` int(10) NOT NULL,
+  `first_name` varchar(255) DEFAULT NULL,
+  `last_name` varchar(255) DEFAULT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `contact_number` varchar(20) DEFAULT NULL,
+  `dob` date DEFAULT NULL,
+  `seat` varchar(20) DEFAULT NULL,
+  `accommodation` varchar(20) DEFAULT NULL,
+  `total_price` float NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `logindata`
+-- Dumping data for table `main_passengers`
 --
 
-INSERT INTO `logindata` (`Id`, `firstname`, `lastname`, `password`, `Email`) VALUES
-(29, 'Cloyd', 'Labininay ', '$2y$10$hgBxUQPOqWYY2kNWDGucGuqLeuL05hUfEBg3C7knEKbebuFW1/Rrm', 's@gmail.com'),
-(39, 'z', 'y', 'z@gmail.com', '$2y$10$0FWzNMoVvhuMgszyvUNK0.FWofOexkkCrKtMIguXC9.'),
-(40, 'z', 'c', '$2y$10$4hpF4RdrbkdfQbmYtvJ62.Odf7MhIcfx.F3Wk8YGKq2vKtWm9mBym', 'c@gmail.com');
+INSERT INTO `main_passengers` (`MainPassenger`, `first_name`, `last_name`, `email`, `contact_number`, `dob`, `seat`, `accommodation`, `total_price`) VALUES
+(12, 'cloyd', 'labininay', 's@gmail.com', '09123456789', '2024-04-27', 'window', 'business', 3617),
+(13, 'cloyd', 'labininay', 's@gmail.com', '09123456789', '2024-04-27', 'window', 'economy', 8964);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `passengers`
+-- Table structure for table `other_passengers`
 --
 
-CREATE TABLE `passengers` (
-  `passenger_id` int(11) NOT NULL,
-  `booking_id` int(11) DEFAULT NULL,
-  `first_name` varchar(50) DEFAULT NULL,
-  `last_name` varchar(50) DEFAULT NULL,
-  `email` varchar(100) DEFAULT NULL,
+CREATE TABLE `other_passengers` (
+  `id` int(11) NOT NULL,
+  `MainPassenger` int(10) NOT NULL,
+  `first_name` varchar(255) DEFAULT NULL,
+  `last_name` varchar(255) DEFAULT NULL,
+  `email` varchar(255) DEFAULT NULL,
   `contact_number` varchar(20) DEFAULT NULL,
-  `dob` date DEFAULT NULL
+  `dob` date DEFAULT NULL,
+  `seat` varchar(10) DEFAULT NULL,
+  `accommodation` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `passengers`
+-- Dumping data for table `other_passengers`
 --
 
-INSERT INTO `passengers` (`passenger_id`, `booking_id`, `first_name`, `last_name`, `email`, `contact_number`, `dob`) VALUES
-(1, 4, NULL, NULL, NULL, NULL, NULL),
-(2, 5, NULL, NULL, NULL, NULL, NULL),
-(3, 6, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `other_passengers` (`id`, `MainPassenger`, `first_name`, `last_name`, `email`, `contact_number`, `dob`, `seat`, `accommodation`) VALUES
+(8, 13, 'sad', 'das', 'c@gmail.com', '1231231231', '2024-04-27', 'window', 'economy'),
+(9, 13, 'asda', 'asdaw', 's@gmail.com', '1231231231', '2024-04-27', 'middle', 'economy');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user`
+--
+
+CREATE TABLE `user` (
+  `Login_Id` int(10) NOT NULL,
+  `firstname` varchar(30) NOT NULL,
+  `lastname` varchar(30) NOT NULL,
+  `password` varchar(1000) NOT NULL,
+  `Email` varchar(50) NOT NULL,
+  `id_upload` varchar(300) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `user`
+--
+
+INSERT INTO `user` (`Login_Id`, `firstname`, `lastname`, `password`, `Email`, `id_upload`) VALUES
+(29, 'Cloyd', 'Labininay ', '$2y$10$hgBxUQPOqWYY2kNWDGucGuqLeuL05hUfEBg3C7knEKbebuFW1/Rrm', 's@gmail.com', ''),
+(43, 'Earl', 'Sepida', '$2y$10$obxiXiO70fmLmQGNManD7uPDpX5f42cPpv8R75W.cjz1T8ah6NwqG', 'earlsepida63@gmail.com', ''),
+(44, 'Cloyd', 'Labininay ', '$2y$10$AxQ1B1hZFlaMFEodopjPNOX7WDyuqAk5VYcXQOYTFWZByREdHaSOy', 'cloyd@gmail.com', ''),
+(45, 'Cloyd', 'Labininay ', '$2y$10$Qfp.uWI0.fk3iinTrpsXJunsE/WsFNz7jq6lwpqRl.9yeiuxxU8BC', 'c@gmail.com', 'Screenshot 2023-12-27 232338.png');
 
 --
 -- Indexes for dumped tables
@@ -666,12 +653,6 @@ INSERT INTO `passengers` (`passenger_id`, `booking_id`, `first_name`, `last_name
 --
 ALTER TABLE `admins`
   ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `airport`
---
-ALTER TABLE `airport`
-  ADD UNIQUE KEY `PK` (`Id`);
 
 --
 -- Indexes for table `bookings`
@@ -686,17 +667,23 @@ ALTER TABLE `flights`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `logindata`
+-- Indexes for table `main_passengers`
 --
-ALTER TABLE `logindata`
-  ADD PRIMARY KEY (`Id`);
+ALTER TABLE `main_passengers`
+  ADD PRIMARY KEY (`MainPassenger`);
 
 --
--- Indexes for table `passengers`
+-- Indexes for table `other_passengers`
 --
-ALTER TABLE `passengers`
-  ADD PRIMARY KEY (`passenger_id`),
-  ADD KEY `booking_id` (`booking_id`);
+ALTER TABLE `other_passengers`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `MainPassenger` (`MainPassenger`);
+
+--
+-- Indexes for table `user`
+--
+ALTER TABLE `user`
+  ADD PRIMARY KEY (`Login_Id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -707,12 +694,6 @@ ALTER TABLE `passengers`
 --
 ALTER TABLE `admins`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- AUTO_INCREMENT for table `airport`
---
-ALTER TABLE `airport`
-  MODIFY `Id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=244;
 
 --
 -- AUTO_INCREMENT for table `bookings`
@@ -727,26 +708,32 @@ ALTER TABLE `flights`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=525;
 
 --
--- AUTO_INCREMENT for table `logindata`
+-- AUTO_INCREMENT for table `main_passengers`
 --
-ALTER TABLE `logindata`
-  MODIFY `Id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+ALTER TABLE `main_passengers`
+  MODIFY `MainPassenger` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
--- AUTO_INCREMENT for table `passengers`
+-- AUTO_INCREMENT for table `other_passengers`
 --
-ALTER TABLE `passengers`
-  MODIFY `passenger_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+ALTER TABLE `other_passengers`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT for table `user`
+--
+ALTER TABLE `user`
+  MODIFY `Login_Id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
 
 --
 -- Constraints for dumped tables
 --
 
 --
--- Constraints for table `passengers`
+-- Constraints for table `other_passengers`
 --
-ALTER TABLE `passengers`
-  ADD CONSTRAINT `passengers_ibfk_1` FOREIGN KEY (`booking_id`) REFERENCES `bookings` (`booking_id`) ON DELETE CASCADE;
+ALTER TABLE `other_passengers`
+  ADD CONSTRAINT `other_passengers_ibfk_1` FOREIGN KEY (`MainPassenger`) REFERENCES `main_passengers` (`MainPassenger`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

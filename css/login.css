@@ -171,16 +171,6 @@ nav .dropdown .dropbtn:hover {
 }
 /* End of Header Styles */
 
-footer {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    color: #fff;
-    padding: 20px;
-    text-align: center;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3s);
-    background-color: rgba(255, 255, 255, 0);
-}
 .login-container h2 {
     margin-bottom: 20px;
     text-align: center;
@@ -256,4 +246,14 @@ select#user_type:focus {
 .notification.show {
   display: block; /* Show when added 'show' class */
 }
-
+footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  color: #fff;
+  padding: 20px;
+  text-align: center;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 2;
+}
