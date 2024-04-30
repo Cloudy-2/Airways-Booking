@@ -1,5 +1,5 @@
 body {
-    background-image: url("/assets/images/registration.jpg");
+    background-image: url("../assets/images/registration.jpg");
     font-family: Arial, sans-serif;
     background-color: #f0f0f0;
     background-size: cover; 
@@ -171,37 +171,84 @@ main {
 
 .registration-container {
     position: fixed;
-    top: 50%; /* Place it at the vertical center */
-    left: 50%; /* Place it at the horizontal center */
-    transform: translate(-50%, -50%); /* Center the form horizontally and vertically */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     background-color: rgba(255, 255, 255, 0.8);
     border-radius: 10px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
     padding: 40px;
-    width: 350px;
+    width: 890px; /* Increased width to accommodate three columns */
     text-align: center;
+    height: 550px;
     z-index: 1;
 }
 
-
 .registration-container h2 {
-    margin-bottom: 20px;
+    margin-bottom: 25px;
+    margin-top: 5px;
+  
 }
 
+/* Set up three-column layout */
+.registration-container .form-row {
+    display: flex;
+    flex-wrap: wrap; /* Allow wrapping */
+    justify-content: space-between; /* Spread items evenly */
+}
+
+.registration-container .form-column {
+    flex-basis: calc(33.33% - 10px); /* Set column width */
+    margin-bottom: 20px; /* Adjust spacing between columns */
+}
+
+/* Label styles */
+label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+    margin-top: 10px;
+    text-align: left;
+    margin-left: 5px;
+}
+.form-column label1 {
+    margin-top: 10px;
+    display: block; /* Ensure each label is on a new line */
+    font-weight: bold; /* Make the text bold */
+    margin-bottom: 5px; /* Add some space below each label */
+    text-align: left;
+    margin-left: 15px;
+ 
+}
+
+.form-column select {
+    width: 100%; /* Ensure the select elements take up the full width */
+    padding: 8px; /* Add padding to the selects */
+    border: 1px solid #ccc; /* Add a border */
+    border-radius: 5px; /* Add some border radius for rounded corners */
+    margin-top: 5px; /* Add space above each select */
+}
+
+
+/* Input styles */
 .registration-container input[type="text"],
 .registration-container input[type="email"],
 .registration-container input[type="password"],
 .registration-container input[type="file"],
-.registration-container input[type="submit"] {
-    width: calc(100% - 20px);
+.registration-container input[type="submit"],
+.registration-container select {
+    width: 90%; /* Adjusted width to fit three columns */
     padding: 10px;
     margin-bottom: 20px;
     border: 1px solid #ccc;
     border-radius: 5px;
+    margin-bottom: 5px;
+    margin-top: 5px;
 }
 
+/* Submit button styles */
 .registration-container input[type="submit"] {
-    width: 100%;
+    width: 50%;
     padding: 10px;
     background-color: #007bff;
     color: #fff;
@@ -209,12 +256,14 @@ main {
     border-radius: 30px;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    margin-top: 40px;
 }
 
 .registration-container input[type="submit"]:hover {
     background-color: green;
 }
 
+/* File input button styles */
 .registration-container input[type="file"]::-webkit-file-upload-button {
     padding: 10px 15px;
     background-color: #007bff;
@@ -228,6 +277,18 @@ main {
 .registration-container input[type="file"]::-webkit-file-upload-button:hover {
     background-color: green;
 }
+
+/* Optional: Add additional styling for the container divs */
+.col-md-12 {
+    margin-bottom: 5px; /* Adjust spacing between rows */
+}
+
+/* Option styles */
+select option {
+    background-color: #fff; /* Background color */
+    color: #333; /* Text color */
+}
+
 
 /* Style for the success notification */
 #notification {

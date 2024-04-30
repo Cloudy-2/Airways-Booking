@@ -1,72 +1,3 @@
-<?php
-include_once 'config/database.php';
-
-$errorMessage = ''; // Initialize error message variable
-$successMessage = ''; // Initialize success message variable
-
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Retrieve form data
-    $first_name = $_POST['first_name'];
-    $last_name = $_POST['last_name'];
-    $email = $_POST['email'];
-    $password = $_POST['password'];
-    $confirm_password = $_POST['confirm_password'];
-
-    $upload_dir = 'uploads/';
-
-    // Check if the directory exists, and create it if not
-    if (!is_dir($upload_dir)) {
-        mkdir($upload_dir, 0755, true); // Create the directory with full permissions
-    }
-
-    // Retrieve file data
-    $id_upload_name = $_FILES['id_upload']['name'];
-    $id_upload_tmp_name = $_FILES['id_upload']['tmp_name'];
-    $id_upload_error = $_FILES['id_upload']['error'];
-
-    // Check if password and confirm password match
-    if ($password !== $confirm_password) {
-        $errorMessage = "Passwords do not match.";
-    } elseif ($id_upload_error !== UPLOAD_ERR_OK) {
-        $errorMessage = "Error uploading ID.";
-    } else {
-        // Prepare the statement
-        $stmt = $conn->prepare("INSERT INTO user (firstname, lastname, Email, password, id_upload) VALUES (?, ?, ?, ?, ?)");
-        $stmt->bind_param("sssss", $first_name, $last_name, $email, $hashed_password, $id_upload_name);
-
-        // Hash the password before storing it
-        $hashed_password = password_hash($password, PASSWORD_DEFAULT);
-
-        // Move uploaded file to desired location
-        $upload_dir = 'uploads/'; // Specify your upload directory
-        $id_upload_path = $upload_dir . basename($id_upload_name);
-
-        if (!move_uploaded_file($id_upload_tmp_name, $id_upload_path)) {
-            $errorMessage = "Error moving uploaded file.";
-        } else {
-            // Check if email is already taken
-            $check_stmt = $conn->prepare("SELECT * FROM user WHERE Email = ?");
-            $check_stmt->bind_param("s", $email);
-            $check_stmt->execute();
-            $check_result = $check_stmt->get_result();
-
-            if ($check_result->num_rows > 0) {
-                $errorMessage = "Email already exists.";
-            } else {
-                // Execute the statement
-                if ($stmt->execute()) {
-                    // Registration successful
-                    $successMessage = "Registration successful! You've been successfully registered.";
-                } else {
-                    // Registration failed
-                    $errorMessage = "Error: " . $stmt->error;
-                }
-            }
-        }
-    }
-}
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -94,37 +25,150 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </header>
 <body>
 <main>
-    <div class="registration-container">
-        <h2 style="text-align: left;">Registration</h2>
-
-        <form id="registrationForm" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" enctype="multipart/form-data" onsubmit="return submitForm()">
-
-            
+<div class="registration-container">
+    <h2 style="text-align: left;">Registration</h2>
+    <form id="registrationForm" method="post" action="regFunction.php" enctype="multipart/form-data" onsubmit="return submitForm()">
+    <div class="form-row">
+        <!-- First column -->
+        <div class="form-column">
+            <label>First Name</label>
             <input type="text" name="first_name" placeholder="First Name" required><br>
-            <input type="text" name="last_name" placeholder="Last Name" required><br>
-            <input type="email" name="email" placeholder="Email Address" required><br>
-            <input type="password" name="password" id="password" placeholder="Password" required><br>
-            <input type="password" name="confirm_password" id="confirm_password" placeholder="Confirm Password" required><br>
-            <input type="file" name="id_upload" id="fileInput" accept="image/*" required onchange="previewImage(event)"><br>
-            <img id="imagePreview" src="#" alt="Image Preview" style="max-width: 100%; display: none;"><br>
-
-            <input type="submit" value="Register" onclick="return validatePassword()"><br> 
             
-            <!-- Error message -->
-            <?php if(isset($errorMessage)): ?>
-                <p style="color: red;"><?php echo $errorMessage; ?></p>
-            <?php endif; ?>
-                    
-            <!-- Success notification -->
-            <?php if(!empty($successMessage)): ?>
-                <div id="notification" style="display: block;">
-                    <p style="color: green;"><?php echo $successMessage; ?></p>
-                </div>
-            <?php endif; ?>
+            <label>Last Name</label>
+            <input type="text" name="last_name" placeholder="Last Name" required><br>
+            
+            <label>Email</label>
+            <input type="email" name="email" placeholder="Email Address" required><br>
+            
+            <label>Password</label>
+            <input type="password" name="password" id="password" placeholder="Password" required><br>
+            
+            <label>Confirm Password</label>
+            <input type="password" name="confirm_password" id="confirm_password" placeholder="Confirm Password" required><br>
+        </div><hr>
 
-        </form>
+        <!-- Second column -->
+        <div class="form-column">
+        <?php
+                        include './config/database.php';
+                        ?>
+                        <div class="col-md-12">
+                        
+                        </div>
+                        <div class="col-md-12">
+                            <label>Region : <b class="text-danger">*</b></label>
+                            <select name="inp_region" id="inp_region" onchange="display_province(this.value)" required
+                                class="form-control mt-2">
+                                <option value="" disabled selected>-- SELECT REGION --</option>
 
-    </div>
+                                <?php
+                                $sql = "SELECT * FROM ph_region";
+                                $result = $conn->query($sql);
+
+                                if ($result->num_rows > 0) {
+                                    while ($row = $result->fetch_assoc()) {
+                                        ?>
+                                        <option value="<?= $row['regCode'] ?>"><?= $row['regDesc'] ?></option>
+                                        <?php
+                                    }
+                                } else {
+                                    echo "0 results";
+                                }
+
+                                $conn->close();
+                                ?>
+                            </select>
+                        </div>
+
+            <label1>Province : <b class="text-danger">*</b></label1>
+            <select name="inp_province" id="inp_province" onchange="display_citymun(this.value)" required class="form-control mt-2">
+                <option value="" disabled selected>-- SELECT PROVINCE --</option>
+                <!-- PHP code for provinces -->
+            </select>
+
+            <label1>City / Municipality : <b class="text-danger">*</b></label1>
+            <select name="inp_citymun" id="inp_citymun" onchange="display_brgy(this.value)" required class="form-control mt-2">
+                <option value="" disabled selected>-- SELECT CITY / MUNICIPALITY --</option>
+                <!-- PHP code for cities/municipalities -->
+            </select>
+            <label1>Barangay : <b class="text-danger">*</b></label1>
+            <select name="inp_brgy" id="inp_brgy" required class="form-control mt-2">
+                <option value="" disabled selected>-- SELECT BARANGAY --</option>
+                <!-- PHP code for barangays -->
+            </select>
+            
+        </div><hr>
+        <!-- Third column -->
+        <div class="form-column">
+            
+            <label>Input ID</label>
+            <input type="file" name="id_upload" id="fileInput" accept="image/*" required onchange="previewImage(event)"><br>
+            <img id="imagePreview" src="#" alt="Image Preview" style="width: 290px; height: 290px; display: none;"><br>
+        </div>
+    </div><hr>
+
+    <input type="submit" value="Register" onclick="return validatePassword()"><br> 
+
+    <!-- Error message -->
+    <?php if(isset($errorMessage)): ?>
+        <p style="color: red;"><?php echo $errorMessage; ?></p>
+    <?php endif; ?>
+            
+    <!-- Success notification -->
+    <?php if(!empty($successMessage)): ?>
+        <div id="notification" style="display: block;">
+            <p style="color: green;"><?php echo $successMessage; ?></p>
+        </div>
+    <?php endif; ?>
+</form>
+</div>
+<script>
+function display_province(regCode) {
+    $.ajax({
+        url: './Models/ph_address.php',
+        type: 'POST',
+        data: {
+            'type': 'region',
+            'post_code': regCode
+        },
+        success: function (response) {
+            $('#inp_province').html(response);
+        }
+    });
+
+}
+
+function display_citymun(provCode) {
+    $.ajax({
+        url: './Models/ph_address.php',
+        type: 'POST',
+        data: {
+            'type': 'province',
+            'post_code': provCode
+        },
+        success: function (response) {
+            $('#inp_citymun').html(response);
+        }
+    });
+
+}
+
+function display_brgy(citymunCode) {
+    $.ajax({
+        url: './Models/ph_address.php',
+        type: 'POST',
+        data: {
+            'type': 'citymun',
+            'post_code': citymunCode
+        },
+        success: function (response) {
+            $('#inp_brgy').html(response);
+        }
+    });
+
+}
+</script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <script src="./js/registration.js"></script>
 </main>
