@@ -5,7 +5,8 @@ session_start();
 include_once './config/database.php';
 
 // Retrieve the total price from the form data
-$total_price_main = $_POST["total_cost"]; // Assuming the name attribute of the input field is "total_cost"
+$total_price_main = $_POST["total_cost"];
+
 
 $passenger_count = 5;
 
