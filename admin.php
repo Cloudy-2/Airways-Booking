@@ -41,9 +41,9 @@
 </header> 
 <main>
 <style>
-       
         main {
             width: 80%;
+            margin: auto; /* Center the main content */
         }
 
         table {
@@ -89,8 +89,35 @@
 </head>
 <body>
 <header>
-    <!-- Header content -->
-</header>
+    <div class="logo">
+        <img src="./assets/images/logo.jpg" alt="Airline Logo">
+        <div class="title">
+            <h1>Skyline Admin Page</h1>
+        </div>
+    </div>
+    <nav>
+        <ul>
+            <li><a href="#">Ongoing Flights</a></li>
+            <li><a href="#">Analytics</a></li>
+            <?php
+            session_start(); // Start the session
+            if(isset($_SESSION['username'])) {
+                // If the user is logged in, display a welcome message which will serve as the dropdown button
+                echo '<div class="dropdown">';
+                echo '<button class="dropbtn">Hello, ' . $_SESSION['username'] . '</button>';
+                echo '<div class="dropdown-content">';
+                echo '<a href="#">Profile</a>';
+                echo '<a href="logout.php" class="logout">Logout</a>';
+                echo '</div>';
+                echo '</div>';
+            } else {
+                // If the user is not logged in, display a login link
+                echo '<li><a href="login.php">Login</a></li>';
+            }
+            ?> 
+        </ul>  
+    </nav>
+</header> 
 <main>
     <?php
     include './config/database.php';
@@ -121,9 +148,10 @@
 
         echo "<h3>Other Passengers Data</h3>";
         echo "<table>";
-        echo "<tr><th>First Name</th><th>Last Name</th><th>Email</th><th>Action</th></tr>";
+        echo "<tr><th>Main Passenger</th><th>First Name</th><th>Last Name</th><th>Email</th><th>Action</th></tr>";
         while ($row = $result_other_passengers->fetch_assoc()) {
             echo "<tr>";
+            echo "<td>" . $row['MainPassenger'] . "</td>";
             echo "<td>" . $row['first_name'] . "</td>";
             echo "<td>" . $row['last_name'] . "</td>";
             echo "<td>" . $row['email'] . "</td>";
