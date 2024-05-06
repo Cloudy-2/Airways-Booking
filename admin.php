@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="./css/admin_dasboard.css">
 </head>
 <body>
-<header>
+<header class="header1">
     <div class="logo">
         <img src="./assets/images/logo.jpg" alt="Airline Logo">
         <div class="title">
@@ -19,7 +19,8 @@
     <nav>
         <ul>
             <li><a href="#">Ongoing Flights</a></li>
-            <li><a href="#">Analytics</a></li>
+            <li><a href="#">Feedback</a></li>
+            <li><a href="#">User</a></li>
             <?php
             session_start(); // Start the session
             if(isset($_SESSION['username'])) {
@@ -27,7 +28,6 @@
                 echo '<div class="dropdown">';
                 echo '<button class="dropbtn">Hello, ' . $_SESSION['username'] . '</button>';
                 echo '<div class="dropdown-content">';
-                echo '<a href="#">Profile</a>';
                 echo '<a href="logout.php" class="logout">Logout</a>';
                 echo '</div>';
                 echo '</div>';
@@ -39,86 +39,14 @@
         </ul>  
     </nav>
 </header> 
+
 <main>
-<style>
-        main {
-            width: 80%;
-            margin: auto; /* Center the main content */
-        }
 
-        table {
-            border-collapse: collapse;
-            width: 100%;
-        }
-
-        th, td {
-            border: 1px solid #ddd;
-            padding: 8px;
-            text-align: left;
-        }
-
-        th {
-            background-color: #f2f2f2;
-        }
-
-        tr:hover {
-            background-color: #f5f5f5;
-        }
-
-        .btn {
-            background-color: #4CAF50;
-            color: white;
-            padding: 8px 12px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-
-        .btn:hover {
-            background-color: #45a049;
-        }
-
-        .delete-btn {
-            background-color: #f44336;
-        }
-
-        .delete-btn:hover {
-            background-color: #da190b;
-        }
-    </style>
-</head>
-<body>
-<header>
-    <div class="logo">
-        <img src="./assets/images/logo.jpg" alt="Airline Logo">
-        <div class="title">
-            <h1>Skyline Admin Page</h1>
-        </div>
-    </div>
-    <nav>
-        <ul>
-            <li><a href="#">Ongoing Flights</a></li>
-            <li><a href="#">Analytics</a></li>
-            <?php
-            session_start(); // Start the session
-            if(isset($_SESSION['username'])) {
-                // If the user is logged in, display a welcome message which will serve as the dropdown button
-                echo '<div class="dropdown">';
-                echo '<button class="dropbtn">Hello, ' . $_SESSION['username'] . '</button>';
-                echo '<div class="dropdown-content">';
-                echo '<a href="#">Profile</a>';
-                echo '<a href="logout.php" class="logout">Logout</a>';
-                echo '</div>';
-                echo '</div>';
-            } else {
-                // If the user is not logged in, display a login link
-                echo '<li><a href="login.php">Login</a></li>';
-            }
-            ?> 
-        </ul>  
-    </nav>
-</header> 
-<main>
+<div class="analytics">
+<h1 class="h1-anal">ANALYTICS</h1>
+</div>
+<div class="main-container">
+    
     <?php
     include './config/database.php';
 
@@ -127,44 +55,64 @@
     $stmt_get_main_passenger->execute();
     $result_main_passenger = $stmt_get_main_passenger->get_result();
 
-    echo "<h2>Main Passenger Data</h2>";
-    echo "<table>";
-    echo "<tr><th>First Name</th><th>Last Name</th><th>Email</th><th>Action</th></tr>";
-    while ($main_passenger_data = $result_main_passenger->fetch_assoc()) {
-        echo "<tr>";
-        echo "<td>" . $main_passenger_data['first_name'] . "</td>";
-        echo "<td>" . $main_passenger_data['last_name'] . "</td>";
-        echo "<td>" . $main_passenger_data['email'] . "</td>";
-        echo "<td><button class='btn update-btn'>Update</button>";
-        echo "<button class='btn delete-btn'>Delete</button></td>";
-        echo "</tr>";
-
-        // Retrieve and display other passengers' data for this main passenger
-        $main_passenger_id = $main_passenger_data['MainPassenger'];
-        $stmt_get_other_passengers = $conn->prepare("SELECT * FROM Other_passengers WHERE MainPassenger = ?");
-        $stmt_get_other_passengers->bind_param("i", $main_passenger_id);
-        $stmt_get_other_passengers->execute();
-        $result_other_passengers = $stmt_get_other_passengers->get_result();
-
-        echo "<h3>Other Passengers Data</h3>";
+    echo "<h2>Main Passenger Data</h2>"; // Title for main passenger data
+    
+    // Check if there are no main passengers
+    if ($result_main_passenger->num_rows === 0) {
+        echo "<p>No booked Customer</p>";
+    } else {
         echo "<table>";
-        echo "<tr><th>Main Passenger</th><th>First Name</th><th>Last Name</th><th>Email</th><th>Action</th></tr>";
+        echo "<tr><th>Main Passenger ID</th><th>First Name</th><th>Last Name</th><th>Email</th><th>Contact Number</th><th>Seat</th><th>Accommodation</th><th>Total Price</th><th>Action</th></tr>";
+        while ($main_passenger_data = $result_main_passenger->fetch_assoc()) {
+            echo "<tr>";
+            echo "<td>" . $main_passenger_data['MainPassenger'] . "</td>";
+            echo "<td>" . $main_passenger_data['first_name'] . "</td>";
+            echo "<td>" . $main_passenger_data['last_name'] . "</td>";
+            echo "<td>" . $main_passenger_data['email'] . "</td>";
+            echo "<td>" . $main_passenger_data['contact_number'] . "</td>";
+            echo "<td>" . $main_passenger_data['seat'] . "</td>";
+            echo "<td>" . $main_passenger_data['accommodation'] . "</td>";
+            echo "<td>₱ " . $main_passenger_data['total_price'] . "</td>";
+            echo "<td class='btn-td'><button class='btn update-btn'>Update</button> <button class='btn view-btn'>View</button>";
+            echo "<button class='btn delete-btn'>Delete</button></td>";
+            echo "</tr>";
+        }
+        echo "</table>";
+    }
+
+    // Retrieve and display other passengers' data
+    $stmt_get_other_passengers = $conn->prepare("SELECT * FROM other_passengers");
+    $stmt_get_other_passengers->execute();
+    $result_other_passengers = $stmt_get_other_passengers->get_result();
+
+    echo "<h2>Other Passengers Data</h2>"; // Title for other passengers data
+    
+    // Check if there are no other passengers
+    if ($result_other_passengers->num_rows === 0) {
+        echo "<p>No booked Customer</p>";
+    } else {
+        echo "<table>";
+        echo "<tr><th>Main Passenger ID</th><th>First Name</th><th>Last Name</th><th>Email</th><th>Contact Number</th><th>Seat</th><th>Accommodation</th><th>Action</th></tr>";
         while ($row = $result_other_passengers->fetch_assoc()) {
             echo "<tr>";
             echo "<td>" . $row['MainPassenger'] . "</td>";
             echo "<td>" . $row['first_name'] . "</td>";
             echo "<td>" . $row['last_name'] . "</td>";
             echo "<td>" . $row['email'] . "</td>";
-            echo "<td><button class='btn update-btn'>Update</button>";
+            echo "<td>" . $row['contact_number'] . "</td>";
+            echo "<td>" . $row['seat'] . "</td>";
+            echo "<td>" . $row['accommodation'] . "</td>";
+            
+            echo "<td><button class='btn update-btn'>Update</button> <button class='btn view-btn'>View</button>";
             echo "<button class='btn delete-btn'>Delete</button></td>";
             echo "</tr>";
         }
         echo "</table>";
     }
-    echo "</table>";
     ?>
-   
-</main>      
+</div>
+
+</main>
 <script src="./js/adminfunct.js"></script>
 </body>
 </html>
