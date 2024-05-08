@@ -78,4 +78,43 @@ closeIcons.forEach(function(closeIcon) {
         }
     });
 });
+ // Function to calculate total price based on accommodation selection for each passenger
+ function calculateTotalPrice(passengerIndex) {
+    var selectedAccommodation = document.getElementById("accommodation_" + passengerIndex).value;
+    var originalPrice = parseFloat(document.getElementById("mainticket1").value); // Using the base ticket price from the hidden input
+
+    // Calculate ticket price for the selected accommodation
+    var ticketPrice = originalPrice; // Default to base price
+    if (selectedAccommodation === "business") {
+        ticketPrice *= 1.5; // Business class multiplier
+    } else if (selectedAccommodation === "first") {
+        ticketPrice *= 2; // First class multiplier
+    }
+
+    // Check passenger age for discount
+    var dob = new Date(document.getElementById("dob_" + passengerIndex).value);
+    var today = new Date();
+    var age = today.getFullYear() - dob.getFullYear();
+    if (today.getMonth() < dob.getMonth() || (today.getMonth() === dob.getMonth() && today.getDate() < dob.getDate())) {
+        age--;
+    }
+
+    // Apply discount for passengers aged 60 or above
+    if (age >= 60) {
+        ticketPrice *= 0.9; // 10% discount
+        document.getElementById("discount_indicator_" + passengerIndex).style.display = "inline"; // Show discount indicator
+    } else {
+        document.getElementById("discount_indicator_" + passengerIndex).style.display = "none"; // Hide discount indicator
+    }
+
+    // Update the displayed ticket price for the passenger
+    document.getElementById("displayed_ticket_price_" + passengerIndex).textContent = ticketPrice.toFixed(2);
+
+    // Update the hidden input field for ticket price
+    document.getElementById("hidden_ticket_price_" + passengerIndex).value = ticketPrice.toFixed(2);
+
+    // Update the overall price
+    updateOverallPrice();
+}
+
 
