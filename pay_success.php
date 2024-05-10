@@ -222,13 +222,13 @@ nav .dropdown .dropbtn:hover {
 
 
     <main>
-    <div onclick="window.location.href = 'index.php';" class="container">
-    <h3 class="container-heading">Payment Successful!</h3>
-    <img class="container-image" src="./assets/images/chek.gif" alt="Payment Successful">
-    <h3 class="container-welcome">Thank you for choosing us</h3>
-    <p class="container-text">An automated payment receipt will be sent to your registered email.</p>
-</div>
-
+        <div onclick="index.php" class="container"> 
+            <h3 class="container-heading">Payment Successful!</h3>
+            <img class="container-image" src="/assets/images/chek.gif" alt="Payment Successful">
+            <h3 class="container-welcome">Thank you for choosing us</h3>
+            <p class="container-text">An automated payment receipt will be sent to your registered email.</p>
+            <button href="/index.php">Back to Dashboard</button>
+        </div>
     </main>
     
 </body>

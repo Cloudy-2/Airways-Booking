@@ -35,6 +35,16 @@
                 // If the user is not logged in, display a login link
                 echo '<li><a href="login.php">Login</a></li>';
             }
+            function checkLoggedIn() {
+                if (!isset($_SESSION['username'])) {
+                    header("Location: login.php"); // Redirect to the login page
+                    exit(); // Stop script execution
+                }
+            }
+            
+            // Call this function at the beginning of any page where you want to restrict access
+            checkLoggedIn();
+            ?>
             ?> 
         </ul>  
     </nav>
@@ -43,7 +53,7 @@
 <main>
 
 <div class="analytics">
-    <img class="anal-logo" src="./assets/images/data-analytics.png" alt="">
+    <img class="anal-logo" src="/assets/images/data-analytics.png" alt="">
     <h1 class="h1-anal">ANALYTICS</h1>
 </div>
 <div>
@@ -105,7 +115,7 @@
     <div class="flex-analy">
         <div class="analy1">
             <div class="in1">
-                <img style="width: 100px; height: 100px;" src="./assets/images/profit.png" alt="">
+                <img style="width: 100px; height: 100px;" src="/assets/images/profit.png" alt="">
             </div>
             <div class="amount">
                 <p>TOTAL AMOUNT</p>
@@ -114,7 +124,7 @@
         </div>
         <div class="analy2">
             <div class="in2">
-                <img style="width: 100px; height: 100px;" src="./assets/images/multiple-users-silhouette.png" alt="">
+                <img style="width: 100px; height: 100px;" src="/assets/images/multiple-users-silhouette.png" alt="">
             </div>
             <div class="total">
                 <p>TOTAL USERS</p>
@@ -123,7 +133,7 @@
         </div>
         <div class="analy3">
             <div class="in3">
-                <img style="width: 100px; height: 100px;" src="./assets/images/chat.png" alt="">
+                <img style="width: 100px; height: 100px;" src="/assets/images/chat.png" alt="">
             </div>
             <div class="comments">
                 <p>TOTAL COMMENTS</p>
@@ -152,7 +162,7 @@
         echo "<tr><th>Main Passenger ID</th><th>First Name</th><th>Last Name</th><th>Email</th><th>Contact Number</th><th>Seat</th><th>Accommodation</th><th>Total Price</th><th>Action</th></tr>";
         while ($main_passenger_data = $result_main_passenger->fetch_assoc()) {
             echo "<tr>";
-            echo "<td>" . $main_passenger_data['id'] . "</td>";
+            echo "<td>" . $main_passenger_data['MainPassenger'] . "</td>";
             echo "<td>" . $main_passenger_data['first_name'] . "</td>";
             echo "<td>" . $main_passenger_data['last_name'] . "</td>";
             echo "<td>" . $main_passenger_data['email'] . "</td>";
@@ -182,7 +192,7 @@
         echo "<tr><th>Main Passenger ID</th><th>First Name</th><th>Last Name</th><th>Email</th><th>Contact Number</th><th>Seat</th><th>Accommodation</th><th>Action</th></tr>";
         while ($row = $result_other_passengers->fetch_assoc()) {
             echo "<tr>";
-            echo "<td>" . $row['id'] . "</td>";
+            echo "<td>" . $row['MainPassenger'] . "</td>";
             echo "<td>" . $row['first_name'] . "</td>";
             echo "<td>" . $row['last_name'] . "</td>";
             echo "<td>" . $row['email'] . "</td>";

@@ -27,23 +27,6 @@ body {
     height: 100%;
     z-index: -1; /* Place the pseudo-element behind other content */
   }
-
-.container {
-    max-width: 600px;
-    background-color: #ffffff;
-    padding: 50px;
-    border-radius: 15px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-}
-
-.profile-info {
-    margin-bottom: 30px;
-}
-
-.profile-info p {
-    margin: 5px 0;
-}
-
 .button-container {
     text-align: center;
     margin-top: 20px;
@@ -142,152 +125,95 @@ nav ul li a:hover {
     color: yellow; /* Bright color on hover */
     transform: translateZ(5px); /* Move menu item forward on hover */
 }
-
-/* End of Header Styles */
-
-/* Centering the main content */
-.profile-picture-container {
-    display: flex;
-    flex: 1fr;
-    z-index: 999;
-    max-width: 200px; /* Set maximum width */
-    max-height: 200px; /* Set maximum height */
-}
-
-.profile-picture {
-    max-width: 100%; /* Ensure image fits within container */
-    max-height: 100%; /* Ensure image fits within container */
-    object-fit: contain; /* Maintain aspect ratio */
-    margin-left: 160px;
-    margin-top: -10px;
-
-}
-.flaticon-icon {
-    width: 40px; /* Adjust the width as needed */
-    height: auto; /* Maintain aspect ratio */
-    margin-right: 10px;
-}
-.container h1 {
-    text-align: 10px;
-    margin-left: 30px;
-
-}
-.strong_font {
-    margin-right: 10px;
-}
-main {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
 .container {
-    max-width: 800px;
-    width: 100%;
-    background-color: #ffffff;
-    padding-right: 300px;
-    border-radius: 15px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-    margin: 0 auto;
-    display: flex; /* Added */
-    justify-content: space-between; /* Added */
-    align-items: flex-start; /* Added */
-    animation-name: fadeToLeft; /* Add animation name */
-    animation-duration: 1s; /* Add animation duration */
-}
-
-@keyframes fadeToLeft {
-    from {
-        opacity: 0;
-        transform: translateX(400px); /* Start from the right */
-    }
-    to {
-        opacity: 1;
-        transform: translateX(0); /* Move to the left */
-    }
+    margin-top: 50px;
+  max-width: 600px;
+  border: 1px  solid black; /* Set border style and width */
+  padding: 20px;
+  border-radius: 10px;
+  background-color: #ccc;
 }
 
 
-.profile-info-right {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+h2 {
+  text-align: left;
+  margin-top: 10px;
 
 }
-.edit-profile-button {
-    margin-top: 260px;
-    margin-left: 250px;
-    font-size: 16px;
-    padding: 12px 24px;
-    background-color: #e3ebe4;
-    color: black;
-    font-weight: bold;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    position: absolute;
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
 }
 
-.edit-profile-button:hover {
-    background-color: #46b86c; /* Darken color on hover */
+.ID {
+  grid-column: 1 / span 2;
+  margin-top: 20px;
 }
 
-.profile-picture-label {
-    font-size: 22px;
-    font-weight: bold;
-    text-align: center;
-    margin-top: 10px;
+label {
+  font-weight: bold;
 }
 
-.profile-info p {
-    margin: 10px 0;
-    font-size: 20px;
-    margin: 1.7rem 2rem;
+input[type="text"],
+input[type="date"],
+input[type="email"] {
+  width: calc(100% - 10px);
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
 }
 
-.button-container {
-    text-align: center;
+input[type="image"] {
+  width: 50%;
+  border-radius: 5px;
+}
+
+.secondcolumn label {
+  width: 100px;
+}
+
+.secondcolumn input[type="text"] {
+  width: calc(85% - 100);
+}
+.edit-container {
+    display: none;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    padding: 20px;
     margin-top: 20px;
 }
 
-/* Modal styles */
-.modal {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 999999; /* Sit on top */
-    left: 0;
-    top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-  }
-  
-  .modal-content {
-    background-color: #fefefe;
-    margin: 15% auto; /* 15% from the top and centered */
-    padding: 20px;
-    border: 1px solid #888;
-    width: 80%; /* Could be more or less, depending on screen size */
-    border-radius: 10px; /* Rounded corners */
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2); /* Add shadow */
-  }
-  
-  /* Close button */
-  .close {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-    transition: color 0.3s ease; /* Add transition effect */
-  }
-  
-  .close:hover,
-  .close:focus {
-    color: #555; /* Darken color on hover/focus */
-    text-decoration: none;
+.edit-container h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.edit-container label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+.edit-container input[type="text"],
+.edit-container input[type="email"],
+.edit-container select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.edit-container button[type="submit"] {
+    background-color: #4caf50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
     cursor: pointer;
-  }
-  
+}
+
+.edit-container button[type="submit"]:hover {
+    background-color: #45a049;
+}
