@@ -7,8 +7,10 @@
     <title>Skyline - Admin Dashboard</title>
     <link rel="icon" href="./assets/images/favicon.jpg">
     <link rel="stylesheet" href="./css/admin_dasboard.css">
+    <link href="./assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    
 </head>
-<body>
+<body style="background-color: #b9b4b4;">
 <header class="header1">
     <div class="logo">
         <img src="./assets/images/logo.jpg" alt="Airline Logo">
@@ -22,29 +24,28 @@
             <li><a href="./admin_ui/admin_contact.php">Contact</a></li>
             <li><a href="./admin_ui/admin_user.php">User</a></li>
             <?php
-            session_start(); // Start the session
-            if(isset($_SESSION['username'])) {
-                // If the user is logged in, display a welcome message which will serve as the dropdown button
-                echo '<div class="dropdown">';
-                echo '<button class="dropbtn">Hello, ' . $_SESSION['username'] . '</button>';
-                echo '<div class="dropdown-content">';
-                echo '<a href="logout.php" class="logout">Logout</a>';
-                echo '</div>';
-                echo '</div>';
-            } else {
-                // If the user is not logged in, display a login link
-                echo '<li><a href="login.php">Login</a></li>';
-            }
-            function checkLoggedIn() {
-                if (!isset($_SESSION['username'])) {
-                    header("Location: login.php"); // Redirect to the login page
-                    exit(); // Stop script execution
-                }
-            }
-            
-            // Call this function at the beginning of any page where you want to restrict access
-            checkLoggedIn();
-            ?>
+                   session_start();
+                   // Start the session
+                  if(isset($_SESSION['username'])) {
+                      if ($_SESSION['username'] === 'Skylineairways@gmail.com') {
+                      // If the user is logged in, display a welcome message which will serve as the dropdown button
+                      echo '<div class="dropdown">';
+                      echo '<button class="dropbtn">Hello, ' . $_SESSION['username'] . '</button>';
+                      echo '<div class="dropdown-content">';
+                      echo '<a href="logout.php" class="logout">Logout</a>';
+                      echo '</div>';
+                      echo '</div>';
+                  } else {
+                      // If the user is not an admin, redirect to the index page
+                      header("Location: index.php");
+                      exit(); // Stop script execution
+                  }
+              } else {
+                  // If the user is not logged in, redirect to the login page
+                  header("Location: login.php");
+                  exit(); // Stop script execution
+              }    
+      
             ?> 
         </ul>  
     </nav>
@@ -53,7 +54,7 @@
 <main>
 
 <div class="analytics">
-    <img class="anal-logo" src="/assets/images/data-analytics.png" alt="">
+    <img class="anal-logo" src="./assets/images/data-analytics.png" alt="">
     <h1 class="h1-anal">ANALYTICS</h1>
 </div>
 <div>
@@ -107,7 +108,7 @@
         } else {
             // Handle the case where the query fails by setting total comments to 0
             $total_comments = 0;
-}
+                }
 
     
 ?>
@@ -115,16 +116,16 @@
     <div class="flex-analy">
         <div class="analy1">
             <div class="in1">
-                <img style="width: 100px; height: 100px;" src="/assets/images/profit.png" alt="">
+                <img style="width: 100px; height: 100px;" src="./assets/images/profit.png" alt="">
             </div>
             <div class="amount">
-                <p>TOTAL AMOUNT</p>
+                <p>TOTAL SALES</p>
                 <h1><?php echo '₱' . number_format($total_amount, 0, '.', ','); ?></h1>
             </div>
         </div>
         <div class="analy2">
             <div class="in2">
-                <img style="width: 100px; height: 100px;" src="/assets/images/multiple-users-silhouette.png" alt="">
+                <img style="width: 100px; height: 100px;" src="./assets/images/multiple-users-silhouette.png" alt="">
             </div>
             <div class="total">
                 <p>TOTAL USERS</p>
@@ -133,15 +134,17 @@
         </div>
         <div class="analy3">
             <div class="in3">
-                <img style="width: 100px; height: 100px;" src="/assets/images/chat.png" alt="">
+                <img style="width: 100px; height: 100px;" src="./assets/images/chat.png" alt="">
             </div>
             <div class="comments">
-                <p>TOTAL COMMENTS</p>
-                <h1><?php echo $total_comments; ?></h1>
+                <p>TOTAL MESSAGES</p>
+                <h1><?php echo number_format( $total_comments, 0, '.', ',');?></h1>
             </div>
         </div>
     </div>
 </div>
+
+
 <div class="main-container">
     
     <?php
@@ -152,29 +155,62 @@
     $stmt_get_main_passenger->execute();
     $result_main_passenger = $stmt_get_main_passenger->get_result();
 
-    echo "<h2>Main Passenger Data</h2>"; // Title for main passenger data
+    ?>
     
+    <?php
     // Check if there are no main passengers
     if ($result_main_passenger->num_rows === 0) {
-        echo "<p>No booked Customer</p>";
+    ?>
+        <p>No booked Customer</p>
+    <?php
     } else {
-        echo "<table>";
-        echo "<tr><th>Main Passenger ID</th><th>First Name</th><th>Last Name</th><th>Email</th><th>Contact Number</th><th>Seat</th><th>Accommodation</th><th>Total Price</th><th>Action</th></tr>";
-        while ($main_passenger_data = $result_main_passenger->fetch_assoc()) {
-            echo "<tr>";
-            echo "<td>" . $main_passenger_data['MainPassenger'] . "</td>";
-            echo "<td>" . $main_passenger_data['first_name'] . "</td>";
-            echo "<td>" . $main_passenger_data['last_name'] . "</td>";
-            echo "<td>" . $main_passenger_data['email'] . "</td>";
-            echo "<td>" . $main_passenger_data['contact_number'] . "</td>";
-            echo "<td>" . $main_passenger_data['seat'] . "</td>";
-            echo "<td>" . $main_passenger_data['accommodation'] . "</td>";
-            echo "<td>₱ " . $main_passenger_data['total_price'] . "</td>";
-            echo "<td class='btn-td'><button class='btn update-btn'>Update</button> <button class='btn view-btn'>View</button>";
-            echo "<button class='btn delete-btn'>Delete</button></td>";
-            echo "</tr>";
-        }
-        echo "</table>";
+    ?>
+    <div class="card-header mt-4"><h2 class="mainpass">Main Passenger Data</h2></div>
+    <div class="card-body">
+        <table class="table table-bordered table-hover custom-table">
+            <tr>
+                <th>Main Passenger ID</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Email</th>
+                <th>Contact Number</th>
+                <th>Seat</th>
+                <th>Accommodation</th>
+                <th>Total Price</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+            <?php
+            while ($main_passenger_data = $result_main_passenger->fetch_assoc()) {
+            ?>
+                <tr>
+                    <td><?= $main_passenger_data['MainPassenger'] ?></td>
+                    <td><?= $main_passenger_data['first_name'] ?></td>
+                    <td><?= $main_passenger_data['last_name'] ?></td>
+                    <td><?= $main_passenger_data['email'] ?></td>
+                    <td><?= $main_passenger_data['contact_number'] ?></td>
+                    <td><?= $main_passenger_data['seat'] ?></td>
+                    <td><?= $main_passenger_data['accommodation'] ?></td>
+                    <td>₱ <?= $main_passenger_data['total_price'] ?></td>
+                    <td><?= $main_passenger_data['Status'] ?></td>
+                    <td class="btn-td">
+                    <form method="post" action="./update_status.php">
+    <!-- Hidden input field to pass the Main Passenger ID -->
+    <input type="hidden" name="main_passenger_id" value="<?= $main_passenger_data['MainPassenger'] ?>">
+    <button type="submit" class="btn btn-outline-success" name="main_confirm-btn">Confirm</button>
+    <button type="submit" class="btn btn-outline-danger" name="main_decline-btn">Decline</button>
+</form>
+    <!-- Additional buttons for view and delete -->
+    <button class="btn btn-outline-primary view-btn" data-main-passenger="<?= htmlspecialchars(json_encode($main_passenger_data), ENT_QUOTES, 'UTF-8') ?>">View</button>
+</td>
+
+                </tr>
+            <?php
+            }
+            ?>
+        </table>
+    </div>
+    <?php
     }
 
     // Retrieve and display other passengers' data
@@ -182,34 +218,94 @@
     $stmt_get_other_passengers->execute();
     $result_other_passengers = $stmt_get_other_passengers->get_result();
 
-    echo "<h2>Other Passengers Data</h2>"; // Title for other passengers data
-    
+    ?>
+    <?php
     // Check if there are no other passengers
     if ($result_other_passengers->num_rows === 0) {
-        echo "<p>No booked Customer</p>";
+    ?>
+        <p>No booked Customer</p>
+    <?php
     } else {
-        echo "<table>";
-        echo "<tr><th>Main Passenger ID</th><th>First Name</th><th>Last Name</th><th>Email</th><th>Contact Number</th><th>Seat</th><th>Accommodation</th><th>Action</th></tr>";
-        while ($row = $result_other_passengers->fetch_assoc()) {
-            echo "<tr>";
-            echo "<td>" . $row['MainPassenger'] . "</td>";
-            echo "<td>" . $row['first_name'] . "</td>";
-            echo "<td>" . $row['last_name'] . "</td>";
-            echo "<td>" . $row['email'] . "</td>";
-            echo "<td>" . $row['contact_number'] . "</td>";
-            echo "<td>" . $row['seat'] . "</td>";
-            echo "<td>" . $row['accommodation'] . "</td>";
-            
-            echo "<td><button class='btn update-btn'>Update</button> <button class='btn view-btn'>View</button>";
-            echo "<button class='btn delete-btn'>Delete</button></td>";
-            echo "</tr>";
-        }
-        echo "</table>";
+    ?>
+    <div class="card-header"><h2 class="otherpass">Other Passenger Data</h2></div>
+    <div class="card-body">
+        <table class="table table-bordered table-hover">
+            <tr>
+                <th>Other Passenger ID</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Email</th>
+                <th>Contact Number</th>
+                <th>Seat</th>
+                <th>Accommodation</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+            <?php
+            while ($row = $result_other_passengers->fetch_assoc()) {
+                $row['id'];
+                $other_passengerId = $row['id'];
+            ?>
+                <tr>
+                    <td><?= $row['id'] ?></td>
+                    <td><?= $row['first_name'] ?></td>
+                    <td><?= $row['last_name'] ?></td>
+                    <td><?= $row['email'] ?></td>
+                    <td><?= $row['contact_number'] ?></td>
+                    <td><?= $row['seat'] ?></td>
+                    <td><?= $row['accommodation'] ?></td>
+                    <td><?= $row['Status'] ?></td>
+                    <td class="btn-td">
+    <form method="post" action="./update_status.php">
+        <!-- Hidden input field to pass the Other Passenger ID -->
+        <input type="hidden" name="other_passenger_id" value="<?=  $other_passengerId ?>">
+        <button type="submit" class="btn btn-outline-success" name="other_confirm-btn">Confirm</button>
+        <button type="submit" class="btn btn-outline-danger" name="other_decline-btn">Decline</button>
+    </form>
+    <!-- Additional buttons for view and delete -->
+    <button class="btn btn-outline-primary view-btn" data-main-passenger="<?= htmlspecialchars(json_encode($row), ENT_QUOTES, 'UTF-8') ?>">View</button>
+</td>
+                </tr>
+            <?php
+            }
+            ?>
+        </table>
+    </div>
+    <div class="card-footer">
+        <p >
+            <center style="font-size: 20px; font-weight:bold; ">Skyline Airways &reg;</center>
+        </p>
+    </div>
+    <?php
     }
     ?>
-</div>
+    <tbody id="result">
+    </tbody>
 
+    <!-- Modal Structure -->
+    <div class="modal fade" id="view-details">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">Booking Details</h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <!-- Modal body -->
+                <div class="modal-body" id="modal-body"></div>
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 </main>
+
 <script src="./js/adminfunct.js"></script>
+<script src="./assets/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+crossorigin="anonymous"></script>
 </body>
 </html>

@@ -1,80 +1,79 @@
 <?php
 session_start();
 
+// Include the database connection
+include_once './config/database.php';
+
 // Check if the form is submitted
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Include database connection
-    include_once './config/database.php';
+if(isset($_POST['Flight_Number'])) {
+    // Retrieve the Flight Number value from the form
+    $flightNumber = $_POST['Flight_Number'];
+}
 
-    // Retrieve total price from the form
- 
+$passenger_count = 15;
+$error_message = "Input Data Doesn't Match to Your Login Data.";
 
-    // Insert main passenger
-    $stmt_main_passenger = $conn->prepare("INSERT INTO main_passengers (first_name, last_name, email, contact_number, dob, seat, accommodation, ticket_price, total_price) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
-    $stmt_main_passenger->bind_param("sssssssdd", $first_name_main, $last_name_main, $email_main, $contact_number_main, $dob_main, $seat_main, $accommodation_main, $ticket_price_main, $total_price_main);
+// Prepare and bind parameters for the main passenger insertion
+$stmt_main_passenger = $conn->prepare("INSERT INTO main_passengers (Flight_ID, first_name, last_name, email, contact_number, dob, seat, accommodation, ticket_price, total_price, Status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+$stmt_main_passenger->bind_param("ssssssssdds", $flight_id, $first_name_main, $last_name_main, $email_main, $contact_number_main, $dob_main, $seat_main, $accommodation_main, $main_ticket_price, $total_price_main, $status);
 
-    // Retrieve main passenger details from $_POST array
-    $first_name_main = $_POST['first_name_1'] ?? null;
-    $last_name_main = $_POST['last_name_1'] ?? null;
-    $email_main = $_POST['email_1'] ?? null;
-    $contact_number_main = $_POST['contact_number_1'] ?? null;
-    $dob_main = $_POST['dob_1'] ?? null;
-    $seat_main = $_POST['seat_1'] ?? null;
-    $accommodation_main = $_POST['accommodation_1'] ?? null;
-    $ticket_price_main = $_POST['displayed_ticket_price_1'] ?? null;
-    $total_price_main = $_POST['ticket_price_1'] ?? null;
+// Retrieve data from $_POST array for the main passenger
+$flight_id = $flightNumber;
+$first_name_main = $_POST['first_name_1'];
+$last_name_main = $_POST['last_name_1'];
+$email_main = $_POST['email_1'];
+$contact_number_main = $_POST['contact_number_1'];
+$dob_main = $_POST['dob_1'];
+$seat_main = $_POST['seat_1'];
+$main_ticket_price = $_POST['hidden_ticket_price_1']; // Retrieve updated ticket price from the form
+$accommodation_main = $_POST['accommodation_1'];
+$total_price_main = $_POST["total_price"];
+$status = 'Pending';
 
-    // Execute the main passenger insertion
-    if (!$stmt_main_passenger->execute()) {
-        // Handle insertion error
-        echo "Error inserting main passenger: " . $stmt_main_passenger->error;
-        exit();
-    }
+// Execute the statement for the main passenger
+if ($stmt_main_passenger->execute() === TRUE) {
+    // Get the ID of the main passenger
+    $main_passenger_id = $stmt_main_passenger->insert_id;
 
-    // Get the ID of the main passenger inserted
-    $main_passenger_id = $conn->insert_id;
+// Insert other passengers
+for ($i = 2; $i <= $passenger_count; $i++) {
+    if (isset($_POST['first_name_' . $i])) {
+        // Retrieve data from $_POST array for other passengers
+        $flight_id = $flightNumber;
+        $first_name = $_POST['first_name_' . $i];
+        $last_name = $_POST['last_name_' . $i];
+        $email = $_POST['email_' . $i];
+        $contact_number = $_POST['contact_number_' . $i];
+        $dob = $_POST['dob_' . $i];
+        $seat = $_POST['seat_' . $i];
+        $ticket_price = $_POST['hidden_ticket_price_' . $i]; // Retrieve updated ticket price from the form
+        $accommodation = $_POST['accommodation_' . $i];
+        $status = 'Pending';
 
-    // Close main passenger statement
-    $stmt_main_passenger->close();
+        // Prepare SQL statement for other passengers
+        $stmt_other_passenger = $conn->prepare("INSERT INTO Other_passengers (Flight_ID, MainPassenger, first_name, last_name, email, contact_number, dob, seat, accommodation, ticket_price, Status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+        $stmt_other_passenger->bind_param("sisssssssds", $flight_id, $main_passenger_id, $first_name, $last_name, $email, $contact_number, $dob, $seat, $accommodation, $ticket_price, $status);
 
-    // Insert other passengers if there are more than 1 passenger
-    if ($passenger_count > 1) {
-        for ($i = 2; $i <= $passenger_count; $i++) {
-            // Retrieve passenger details from $_POST array
-            $first_name = $_POST['first_name_' . $i] ?? null;
-            $last_name = $_POST['last_name_' . $i] ?? null;
-            $email = $_POST['email_' . $i] ?? null;
-            $contact_number = $_POST['contact_number_' . $i] ?? null;
-            $dob = $_POST['dob_' . $i] ?? null;
-            $seat = $_POST['seat_' . $i] ?? null;
-            $accommodation = $_POST['accommodation_' . $i] ?? null;
-            $ticket_price = $_POST['ticket_price_' . $i] ?? null; // Assuming you have a hidden input field in the form to capture the ticket price
-
-            // Prepare SQL statement for other passengers
-            $stmt_other_passenger = $conn->prepare("INSERT INTO other_passengers (main_passenger_id, first_name, last_name, email, contact_number, dob, seat, accommodation, ticket_price) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
-            $stmt_other_passenger->bind_param("isssssssd", $main_passenger_id, $first_name, $last_name, $email, $contact_number, $dob, $seat, $accommodation, $ticket_price);
-
-            // Execute the statement
-            if (!$stmt_other_passenger->execute()) {
-                // Handle insertion error
-                echo "Error inserting other passenger: " . $stmt_other_passenger->error;
-                exit();
-            }
-
-            // Close other passenger statement
-            $stmt_other_passenger->close();
+        // Execute the statement for other passengers
+        if ($stmt_other_passenger->execute() !== TRUE) {
+            echo "Error: " . $stmt_other_passenger->error;
+            // Rollback the transaction if an error occurs
+            $conn->rollback();
+            exit; // Exit the script if an error occurs
         }
     }
-
-    // Close database <connection></connection>
-    $conn->close();
-
-    // Redirect to a thank you page or wherever you want
-    header("Location: pay_success.php");
-    exit();
-} else {
-
-    header("Location: confirm_booking.php");
-    exit();
 }
-?>
+echo "Passenger details inserted successfully.";
+header("Location: pay_success.php");
+} else {
+echo "Error: " . $stmt_main_passenger->error;
+}
+
+// Close statements
+$stmt_main_passenger->close();
+if (isset($stmt_other_passenger)) {
+$stmt_other_passenger->close();
+}
+
+// Close connection
+$conn->close();
