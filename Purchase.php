@@ -44,6 +44,7 @@ if ($result_main->num_rows > 0) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Booking Status</title>
+    <link href="./assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <style>
         table {
             width: 100%;
@@ -71,7 +72,6 @@ if(empty($main_passenger_data)) {
     echo "<div class='container'><p>No main passenger bookings found</p></div>";
 } else {
 ?>
-
 <div class="container">
     <h3>Main Passenger</h3>
     <table>
@@ -81,6 +81,7 @@ if(empty($main_passenger_data)) {
             <th>First Name</th>
             <th>Last Name</th>
             <th>Status</th>
+            <th>Action</th> <!-- Added Action column -->
         </tr>
         <?php
         // Display main passenger data
@@ -91,6 +92,7 @@ if(empty($main_passenger_data)) {
             echo "<td>" . $main_passenger["first_name"] . "</td>";
             echo "<td>" . $main_passenger["last_name"] . "</td>";
             echo "<td>" . $main_passenger["Status"] . "</td>";
+            echo "<td><button class='btn btn-outline-primary view-btn' data-mainpassenger='" . $main_passenger["MainPassenger"] . "'>View Details</button></td>"; // Updated button with data attribute
             echo "</tr>";
         }
         ?>
@@ -127,6 +129,62 @@ if(empty($main_passenger_data)) {
         ?>
     </table>
 </div>
+
+<div class="modal fade" id="view-details">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Booking Details</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <!-- Modal body -->
+            <div class="modal-body" id="modal-body"></div>
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="./assets/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+crossorigin="anonymous"></script>
+<script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+<script>
+$(document).ready(function(){
+    $('.view-btn').click(function(){
+        var mainPassenger = $(this).closest('tr').find('td:eq(0)').text();
+        var flightID = $(this).closest('tr').find('td:eq(1)').text();
+        var firstName = $(this).closest('tr').find('td:eq(2)').text();
+        var lastName = $(this).closest('tr').find('td:eq(3)').text();
+        var status = $(this).closest('tr').find('td:eq(4)').text();
+
+        // Populate modal with data
+        $('#modal-body').html("<p>Main Passenger: " + mainPassenger + "</p>"
+                            + "<p>Flight ID: " + flightID + "</p>"
+                            + "<p>First Name: " + firstName + "</p>"
+                            + "<p>Last Name: " + lastName + "</p>"
+                            + "<p>Status: " + status + "</p>"
+                            + "<button class='btn btn-success download-btn'>Download Details</button>");
+
+        $('#view-details').modal('show');
+    });
+
+    // Download Details button click event
+    $(document).on('click', '.download-btn', function(){
+        // Convert details to image and download
+        var details = $('#modal-body').html();
+        html2canvas(document.querySelector("#modal-body")).then(canvas => {
+            var link = document.createElement('a');
+            link.download = 'booking_details.png';
+            link.href = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
+            link.click();
+        });
+    });
+});
+</script>
 
 </body>
 </html>
