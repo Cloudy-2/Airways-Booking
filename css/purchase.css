@@ -11,7 +11,51 @@
         th {
             background-color: #f2f2f2;
         }
+        p {
+           
+            padding-left: 10px;
+            
+        }
         .container {
             margin-bottom: 20px;
         }
- 
+
+        .modal-body {
+            background-color: rgb(114, 90, 252);
+            background-image: url(../assets/images/rectangle-3@2x.png);
+            background-size: 500px;
+            background-repeat: no-repeat;
+            background-position: center;
+            border: none;
+            
+        }
+.in-header {
+    display: flex; 
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    border: none;
+}
+.in-body {
+    background-color: rgba(242, 242, 242, 0.75);
+    border-radius: 20px;
+}
+.in-footer {
+    background-color: rgba(242, 242, 242, 0.75);
+    border-radius: 20px;
+}
+.h1-pp {
+    display: inline-block;
+    color: white;
+    
+    
+}
+.row {
+    margin-bottom: -5px;
+}
+.logo-pp {
+            border-radius: 50px;
+            display: inline-block;
+            height: 100px;
+            width: 100px;
+        }

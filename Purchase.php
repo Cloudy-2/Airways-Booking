@@ -45,6 +45,7 @@ if ($result_main->num_rows > 0) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Booking Status</title>
     <link href="./assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="./css/purchase.css">
     <style>
         table {
             width: 100%;
@@ -141,42 +142,46 @@ if(empty($main_passenger_data)) {
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
             <!-- Modal body -->
-            <div class="modal-body" id="modal-body">
-                <div>
-                    <img src="./assets/images/logo.jpg" alt="">
-                </div>
-                <div>
-
+            <div class="modal-body" id="modal-body" style="display: flex; flex-direction: column;">
                 
-                    <div class="row">
-                        <div class="col-md-12">
-                            <p><strong>Main Passenger:</strong> <span id="mainPassenger"></span></p>
+                    <div class="in-header">
+                        <img class="logo-pp" src="./assets/images/ellipse-1@2x.png" alt="">
+                        <h5 class="h1-pp">SKYLINE AIRWAYS&reg;</h5>
+                        <div class="row hed1">
+                            <div  class="col-md-12">
+                                <p style="background-color: #f2f2f2; border-radius: 10px;" ><strong>Flight ID:</strong> <span id="flightID"></span></p>
+                            </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <p><strong>Flight ID:</strong> <span id="flightID"></span></p>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <p><strong>First Name:</strong> <span id="firstName"></span></p>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <p><strong>Last Name:</strong> <span id="lastName"></span></p>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <p><strong>Status:</strong> <span id="status"></span></p>
-                        </div>
-                    </div>
-                </div>
-                <div>
 
-                </div>
+                <hr style="background-color: white; height: 3px;">
+                    <div class="in-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <p><strong>Main Passenger:</strong> <span id="mainPassenger"></span></p>
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-12">
+                                <p><strong>First Name:</strong> <span id="firstName"></span></p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <p><strong>Last Name:</strong> <span id="lastName"></span></p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <p><strong>Status:</strong> <span id="status"></span></p>
+                            </div>
+                        </div>
+                    </div>
+                <hr style="background-color: white; height: 3px;">
+                    <div  class="in-footer">
+                        <p class="wag" style="font-size: 50px;">TRIP SUMMARY HERE!</p>
+                    </div>
             </div>
 
 
