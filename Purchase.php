@@ -126,32 +126,42 @@ if(empty($main_passenger_data)) {
             </div>
             <!-- Modal body -->
             <div class="modal-body" id="modal-body">
-    <div class="row">
-        <div class="col-md-12">
-            <p><strong>Main Passenger:</strong> <span id="mainPassenger"></span></p>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <p><strong>Flight ID:</strong> <span id="flightID"></span></p>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <p><strong>First Name:</strong> <span id="firstName"></span></p>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <p><strong>Last Name:</strong> <span id="lastName"></span></p>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <p><strong>Status:</strong> <span id="status"></span></p>
-        </div>
-    </div>
-</div>
+                <div>
+                    <img src="./assets/images/logo.jpg" alt="">
+                </div>
+                <div>
+
+                
+                    <div class="row">
+                        <div class="col-md-12">
+                            <p><strong>Main Passenger:</strong> <span id="mainPassenger"></span></p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <p><strong>Flight ID:</strong> <span id="flightID"></span></p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <p><strong>First Name:</strong> <span id="firstName"></span></p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <p><strong>Last Name:</strong> <span id="lastName"></span></p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <p><strong>Status:</strong> <span id="status"></span></p>
+                        </div>
+                    </div>
+                </div>
+                <div>
+
+                </div>
+            </div>
 
 
             <!-- Modal footer -->
