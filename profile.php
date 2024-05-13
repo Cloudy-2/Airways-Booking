@@ -180,7 +180,7 @@ $brgyDesc = getBrgyDesc($brgyCode);
             </select><br>
             <label for="EditStatus">Status:</label>
             <select name="EditStatus" id="EditStatus" class="line-input" required>
-            <option value="">Select Status</option>
+            <option value=""disabled selected>Select Status</option>
             <?php
             $statuses = array("Married", "Single", "Divorced", "Widowed", "Separated", "In a relationship", "It's Complicated");
             foreach ($statuses as $option) {
@@ -194,7 +194,7 @@ $brgyDesc = getBrgyDesc($brgyCode);
             <input type="text" name="EditPhonenumber" id="EditPhonenumber"><br>
             <label for="EditNationality">Nationality</label>
             <select name="EditNationality" id="EditNationality">
-                <option value="">Select Nationality</option>
+                <option value=""disabled selected>Select Nationality</option>
                 <?php
                 $nationalities = array("Filipino", "Filipino-American", "Filipino-British", "Filipino-Canadian", "Dual Citizen (Filipino and another nationality)", "Other");
                 foreach ($nationalities as $option) {

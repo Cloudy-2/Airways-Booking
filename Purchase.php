@@ -49,6 +49,7 @@ if ($result_main->num_rows > 0) {
         table {
             width: 100%;
             border-collapse: collapse;
+            background-image: src="
         }
         th, td {
             padding: 8px;
