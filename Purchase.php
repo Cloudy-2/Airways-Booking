@@ -45,23 +45,7 @@ if ($result_main->num_rows > 0) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Booking Status</title>
     <link href="./assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-        th, td {
-            padding: 8px;
-            text-align: left;
-            border-bottom: 1px solid #ddd;
-        }
-        th {
-            background-color: #f2f2f2;
-        }
-        .container {
-            margin-bottom: 20px;
-        }
-    </style>
+    <link rel="stylesheet" href="./css/purchase.css">
 </head>
 <body>
 
@@ -110,6 +94,7 @@ if(empty($main_passenger_data)) {
             <th>First Name</th>
             <th>Last Name</th>
             <th>Status</th>
+            <th>Action</th> <!-- Added Action column -->
         </tr>
         <?php
         // Display other passenger data
@@ -121,10 +106,11 @@ if(empty($main_passenger_data)) {
                 echo "<td>" . $other_passenger["first_name"] . "</td>";
                 echo "<td>" . $other_passenger["last_name"] . "</td>";
                 echo "<td>" . $other_passenger["Status"] . "</td>";
+                echo "<td><button class='btn btn-outline-primary view-btn' data-mainpassenger='" . $other_passenger["MainPassenger"] . "'>View Details</button></td>"; // Updated button with data attribute
                 echo "</tr>";
             }
         } else {
-            echo "<tr><td colspan='5'>No other passenger bookings found</td></tr>";
+            echo "<tr><td colspan='6'>No other passenger bookings found</td></tr>";
         }
         ?>
     </table>
@@ -139,10 +125,39 @@ if(empty($main_passenger_data)) {
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
             <!-- Modal body -->
-            <div class="modal-body" id="modal-body"></div>
+            <div class="modal-body" id="modal-body">
+    <div class="row">
+        <div class="col-md-12">
+            <p><strong>Main Passenger:</strong> <span id="mainPassenger"></span></p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <p><strong>Flight ID:</strong> <span id="flightID"></span></p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <p><strong>First Name:</strong> <span id="firstName"></span></p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <p><strong>Last Name:</strong> <span id="lastName"></span></p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <p><strong>Status:</strong> <span id="status"></span></p>
+        </div>
+    </div>
+</div>
+
+
             <!-- Modal footer -->
             <div class="modal-footer">
                 <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                <button class='btn btn-success download-btn'>Download as Ticket</button>
             </div>
         </div>
     </div>
@@ -155,36 +170,37 @@ crossorigin="anonymous"></script>
 <script>
 $(document).ready(function(){
     $('.view-btn').click(function(){
-        var mainPassenger = $(this).closest('tr').find('td:eq(0)').text();
+        var mainPassenger = $(this).data('mainpassenger');
         var flightID = $(this).closest('tr').find('td:eq(1)').text();
         var firstName = $(this).closest('tr').find('td:eq(2)').text();
         var lastName = $(this).closest('tr').find('td:eq(3)').text();
         var status = $(this).closest('tr').find('td:eq(4)').text();
 
         // Populate modal with data
-        $('#modal-body').html("<p>Main Passenger: " + mainPassenger + "</p>"
-                            + "<p>Flight ID: " + flightID + "</p>"
-                            + "<p>First Name: " + firstName + "</p>"
-                            + "<p>Last Name: " + lastName + "</p>"
-                            + "<p>Status: " + status + "</p>"
-                            + "<button class='btn btn-success download-btn'>Download Details</button>");
+        $('#mainPassenger').text(mainPassenger);
+        $('#flightID').text(flightID);
+        $('#firstName').text(firstName);
+        $('#lastName').text(lastName);
+        $('#status').text(status);
 
         $('#view-details').modal('show');
     });
 
-    // Download Details button click event
+    // Download Ticket button click event
     $(document).on('click', '.download-btn', function(){
-        // Convert details to image and download
-        var details = $('#modal-body').html();
+        // Convert ticket details to image and download
+        var ticketDetails = $('#modal-body').html();
         html2canvas(document.querySelector("#modal-body")).then(canvas => {
             var link = document.createElement('a');
-            link.download = 'booking_details.png';
+            link.download = 'ticket.png';
             link.href = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
             link.click();
         });
     });
 });
+
 </script>
+
 
 </body>
 </html>
