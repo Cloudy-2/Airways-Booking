@@ -45,7 +45,23 @@ if ($result_main->num_rows > 0) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Booking Status</title>
     <link href="./assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="./css/purchase.css">
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .container {
+            margin-bottom: 20px;
+        }
+    </style>
 </head>
 <body>
 

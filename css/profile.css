@@ -127,16 +127,17 @@ nav ul li a:hover {
     transform: translateZ(5px); /* Move menu item forward on hover */
 }
 .container {
-  position: relative;
-  margin-right: 1050px;
-  margin-top: 90px;
+  margin-right: 100px;
+  margin-top: 110px;
+  margin-bottom: 20px;
   max-width: 750px;
   border: 1px solid black; /* Set border style and width */
   padding: 20px;
   border-radius: 10px;
   background-color: #ccc;
-  animation: animateLeft 1.1s ease-in-out; /* Updated animation properties */
 }
+  /*animation: animateLeft 1.1s ease-in-out; Updated animation properties 
+
 
 @keyframes animateLeft {
   0% {
@@ -145,7 +146,7 @@ nav ul li a:hover {
   100% {
       transform: translateX(0);
   }
-}
+} */
 
 .container label {
   font-weight: bold;
@@ -230,8 +231,8 @@ select:focus {
 
 #editProfileBtn {
   position: absolute;
-  bottom: 20px;
-  right: 25px;
+  bottom: 40px;
+  left: 1070px;
   padding: 10px 20px;
   background-color: #007bff;
   color: #fff;
