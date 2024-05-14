@@ -106,47 +106,57 @@ $conn->close();
 </header> 
 
 <main>
+    <form id="bookingForm">
     <div class="booking-details">
         <h2>Trip Summary of Flight - #<?php echo $flight['flight_number']; ?></h2>
         <table class="tbl_booking">
             <tr>
                 <td><strong>Flight Number:</strong></td>
                 <td><?php echo $flight['flight_number']; ?></td>
+                <input type="hidden" name="Flight Number" value="<?php echo $flight['flight_number'];?>">
             </tr>
             <tr>
                 <td><strong>Departure:</strong></td>
                 <td><?php echo $flight['departure_location']; ?></td>
+                <input type="hidden" name="Departure" value="<?php echo $flight['departure_location'];?>">
             </tr>
             <tr>
                 <td><strong>Departure Date:</strong></td>
                 <td><?php echo $_GET['departure_date']; ?></td>
+                <input type="hidden" name="Departure Date" value="<?php echo $_GET['departure_date'];?>">
             </tr>
             <tr>
                 <td><strong>Departure Time:</strong></td>
                 <td><?php echo $flight['Departure-Time']; ?></td>
+                <input type="hidden" name="Departure Time" value="<?php echo $flight['Departure-Time'];?>">
             </tr>
             <tr>
                 <td><strong>Arrival:</strong></td>
                 <td><?php echo $flight['arrival_location']; ?></td>
+                <input type="hidden" name="Arrival" value="<?php echo $flight['arrival_location'];?>">
             </tr>
             <tr>
                 <td><strong>Arrival Date:</strong></td>
                 <td><?php echo $_GET['arrival_date']; ?></td>
+                <input type="hidden" name="Arrival Date" value="<?php echo $_GET['arrival_date'];?>">
             </tr>
             <tr>
                 <td><strong>Arrival Time:</strong></td>
                 <td><?php echo $flight['Arrival-Time']; ?></td>
+                <input type="hidden" name="Arrival Time" value="<?php echo $flight['Arrival-Time'];?>">
             </tr>
             <tr>
                 <td><strong>Price:</strong></td>
                 <td>₱<?php echo $flight['price']; ?></td>
+                <input type="hidden" name="Price" value="<?php echo $flight['price']; ?>">
             </tr>
             <tr>
                 <td><strong>Passenger Email:</strong></td>
                 <td><?php echo $_SESSION['username']; ?></td>
+                <input type="hidden" name="Passenger Email" value="<?php echo $_SESSION['username']; ?>">
             </tr>
         </table>
-        <form action="confirm_booking.php" method="POST" id="bookingForm" onsubmit="return validateForm()">
+        
         <input type="hidden" name="price" value="<?php echo $flight['price']; ?>">
         <input type="hidden" name="Flight Number" value="<?php echo $flight['flight_number']; ?>">
             <!-- Your form content -->
@@ -170,7 +180,7 @@ $conn->close();
                 <option value="15">15</option>
                 <!-- Add more options as needed -->
             </select>
-            <input type="submit" value="Confirm Booking">
+            <input type="submit" value="Confirm Booking" onclick="performActions()">
         </form>
     </div>
 </main>
@@ -184,7 +194,28 @@ $conn->close();
         }
         return true;
     }
-</script>
+    function performActions() {
+        // Perform action 1
+        action1();
 
+        // Perform action 2
+        action2();
+    }
+
+    function action1() {
+        // Perform action 1
+        document.getElementById("bookingForm").action = "confirm_booking.php";
+        document.getElementById("bookingForm").method = "POST";
+        document.getElementById("bookingForm").submit();
+    }
+
+    function action2() {
+        // Perform action 2
+        document.getElementById("bookingForm").action = "TripSum.php";
+        document.getElementById("bookingForm").method = "POST";
+        document.getElementById("bookingForm").submit();
+    }
+
+</script>
 </body>
 </html>

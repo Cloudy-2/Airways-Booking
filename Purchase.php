@@ -180,7 +180,46 @@ if(empty($main_passenger_data)) {
                     </div>
                 <hr style="background-color: white; height: 3px;">
                     <div  class="in-footer">
-                        <p class="wag" style="font-size: 50px;">TRIP SUMMARY HERE!</p>
+                       <div class="booking-details">
+       
+        <table class="tbl_booking">
+            <tr>
+                <td><strong>Flight Number:</strong></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td><strong>Departure:</strong></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td><strong>Departure Date:</strong></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td><strong>Departure Time:</strong></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td><strong>Arrival:</strong></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td><strong>Arrival Date:</strong></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td><strong>Arrival Time:</strong></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td><strong>Price:</strong></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td><strong>Passenger Email:</strong></td>
+                <td></td>
+            </tr>
+        </table>
                     </div>
             </div>
 
