@@ -36,38 +36,44 @@ if ($result_main->num_rows > 0) {
         }
     }
 }
+$sql = "SELECT * FROM tripsum WHERE trip_email= '$email'";
+            $result = $conn->query($sql);
+        
+            if ($result && $result->num_rows > 0) {
+                $row = $result->fetch_assoc();
+            }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Booking Status</title>
+    <title>Skyline - Booking Status</title>
     <link href="./assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="icon" href="./assets/images/favicon.jpg">
     <link rel="stylesheet" href="./css/purchase.css">
-    <style>
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-        th, td {
-            padding: 8px;
-            text-align: left;
-            border-bottom: 1px solid #ddd;
-        }
-        th {
-            background-color: #f2f2f2;
-        }
-        .container {
-            margin-bottom: 20px;
-        }
-    </style>
 </head>
+
+<header>
+    <div class="logo">
+        <img src="./assets/images/logo.jpg" alt="Airline Logo">
+        <div class="title">
+            <h1>Skyline Booking Status</h1>
+        </div>
+    </div>
+    <nav>
+        <ul>
+            <li><a href="./index.php">Dashboard</a></li>
+            <li><a href="./flights.php">Flights</a></li>
+            <li><a href="./contact.php">Contact</a></li>
+            <li><a href="./profile.php">Profile</a></li>
+        </ul>
+    </nav>
+</header>
+
 <body>
-
-<h2>Booking Status</h2>
-
 <?php
 if(empty($main_passenger_data)) {
     echo "<div class='container'><p>No main passenger bookings found</p></div>";
@@ -180,7 +186,44 @@ if(empty($main_passenger_data)) {
                     </div>
                 <hr style="background-color: white; height: 3px;">
                     <div  class="in-footer">
-                        <p class="wag" style="font-size: 50px;">TRIP SUMMARY HERE!</p>
+                    <table class="tbl_booking">
+                    <tr>
+                <td><strong>Flight Number:</strong></td>
+                <td><?php echo $row["trip_fno"]; ?></td>
+            </tr>
+            <tr>
+                <td><strong>Departure:</strong></td>
+                <td><?php echo $row["trip_dep"]; ?></td>
+            </tr>
+            <tr>
+                <td><strong>Departure Date:</strong></td>
+                <td><?php echo $row["trip_depdate"]; ?></td>
+            </tr>
+            <tr>
+                <td><strong>Departure Time:</strong></td>
+                <td><?php echo $row["trip_deptime"]; ?></td>
+            </tr>
+            <tr>
+                <td><strong>Arrival:</strong></td>
+                <td><?php echo $row["trip_arrival"]; ?></td>
+            </tr>
+            <tr>
+                <td><strong>Arrival Date:</strong></td>
+                <td><?php echo $row["trip_ardate"]; ?></td>
+            </tr>
+            <tr>
+                <td><strong>Arrival Time:</strong></td>
+                <td><?php echo $row["trip_artime"]; ?></td>
+            </tr>
+            <tr>
+                <td><strong>Price:</strong></td>
+                <td><?php echo $row["trip_price"]; ?></td>
+            </tr>
+            <tr>
+                <td><strong>Passenger Email:</strong></td>
+                <td><?php echo $row["trip_email"]; ?></td>
+            </tr>
+        </table>
                     </div>
             </div>
 

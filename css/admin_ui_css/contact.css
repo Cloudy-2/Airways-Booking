@@ -176,3 +176,18 @@ body{
   .dropdown-content a.logout {
     color: red; /* Color for logout link */
   }
+  .analytics-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Adjust as needed */
+}
+
+/* Your existing CSS styles for .anal-logo and .h1-anal */
+.anal-logo {
+    /* Your styles */
+}
+
+.h1-anal {
+    /* Your styles */
+}

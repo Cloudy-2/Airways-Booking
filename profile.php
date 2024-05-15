@@ -137,20 +137,20 @@ $brgyDesc = getBrgyDesc($brgyCode);
         <label for="Phonenumber">Phone Number: <b id="phoneAsterisk" style="display: none;" class="required">*</b></label>
             <input type="text" name="Phonenumber" id="Phonenumber" value="<?php echo $row['phone']; ?>" readonly placeholder="Edit Profile to Enter Phone Number">
             <b id="phoneAsterisk" style="display: none;" class="required">*</b>
-        <label for="email">Email:</label>
-        <input type="email" name="email" id="email" value="<?php echo $row['reg_email']; ?>" readonly>
+            <label for="email">Email:</label>
+            <input type="email" name="email" id="email" value="<?php echo $row['reg_email']; ?>" readonly autocomplete="email">
       </div>
       <div class="secondcolumn">
       <label for="Nationality">Nationality: <b id="nationalityAsterisk" style="display: none;" class="required">*</b></label>
             <input type="text" name="Nationality" id="Nationality" value="<?php echo $row['nationality']; ?>" readonly placeholder="Edit Profile to Select Nationality">
             <b id="nationalityAsterisk" style="display: none;" class="required">*</b>
-        <label for="Region">Region</label>
-        <input type="text" name="Region" id="Region" value="<?php echo $regionDesc ?>" readonly><br>
-        <label for="Province">Province</label>
+        <label for="Region">Region:</label>
+        <input type="text" name="Region" id="Region" value="<?php echo $regionDesc ?>" readonly autocomplete="Region"><br>
+        <label for="Province">Province:</label>
         <input type="text" name="Province" id="Province" value="<?php echo $provinceDesc ?>" readonly><br>
-        <label for="Citymun">City/Municipality</label>
+        <label for="Citymun">City/Municipality:</label>
         <input type="text" name="Citymun" id="Citymun" value="<?php echo $citymunDesc ?>" readonly><br>
-        <label for="Brgy">Barangay</label>
+        <label for="Brgy">Barangay:</label>
         <input type="text" name="Brgy" id="Brgy" value="<?php echo $brgyDesc ?>" readonly>
         <button type="button" id="editProfileBtn">Edit Profile</button>
       </div>
@@ -165,13 +165,13 @@ $brgyDesc = getBrgyDesc($brgyCode);
         <form id="editForm" action="update.php" method="POST">
             <!-- Editable inputs for profile information -->
             <label for="EditFirstname">First Name:</label>
-            <input type="text" name="EditFirstname" id="EditFirstname"><br>
+            <input type="text" name="EditFirstname" id="EditFirstname" value="<?php echo $row['reg_firstname']?>"><br>
             <label for="EditLastname">Last Name:</label>
-            <input type="text" name="EditLastname" id="EditLastname"><br>
-            <label for="EditBDate">Birth Date</label>
-            <input type="date" name="EditBDate" id="EditBDate"><br>
+            <input type="text" name="EditLastname" id="EditLastname" value="<?php echo $row['reg_lastname']?>"><br>
+            <label for="EditBDate">Birth Date:</label>
+            <input type="date" name="EditBDate" id="EditBDate" value="<?php echo $row['dob']; ?>"><br>
             <label for="EditAge">Age:</label>
-            <input type="text" name="EditAge" id="EditAge"><br>
+            <input type="text" name="EditAge" id="EditAge" value="<?php echo $row['age']; ?>"><br>
             <label for="EditGender">Gender:</label>
             <select name="EditGender" id="EditGender" class="line-input" required>
             <option value="">Select Gender</option>
@@ -191,8 +191,8 @@ $brgyDesc = getBrgyDesc($brgyCode);
             ?>
             </select><br>
             <label for="EditPhonenumber">Phone Number:</label>
-            <input type="text" name="EditPhonenumber" id="EditPhonenumber"><br>
-            <label for="EditNationality">Nationality</label>
+            <input type="text" name="EditPhonenumber" id="EditPhonenumber" value="<?php echo $row['phone']; ?>"><br>
+            <label for="EditNationality">Nationality:</label>
             <select name="EditNationality" id="EditNationality">
                 <option value=""disabled selected>Select Nationality</option>
                 <?php

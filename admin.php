@@ -94,7 +94,7 @@
         $total_users = 0;
     }
 
-    $query = "SELECT COUNT(contact_id) AS total_comments FROM contact_information";
+    $query = "SELECT COUNT(contact_id) AS total_comments FROM admin_contact";
 
         // Execute the query
         $result = mysqli_query($conn, $query);
@@ -110,7 +110,6 @@
             $total_comments = 0;
                 }
 
-    
 ?>
 
     <div class="flex-analy">
@@ -170,6 +169,7 @@
         <table class="table table-bordered table-hover custom-table">
             <tr>
                 <th>Main Passenger ID</th>
+                <th>Flight Number</th>
                 <th>First Name</th>
                 <th>Last Name</th>
                 <th>Email</th>
@@ -178,6 +178,7 @@
                 <th>Accommodation</th>
                 <th>Total Price</th>
                 <th>Status</th>
+                <th>Seat#</th>
                 <th>Action</th>
             </tr>
             <?php
@@ -185,6 +186,7 @@
             ?>
                 <tr>
                     <td><?= $main_passenger_data['MainPassenger'] ?></td>
+                    <td><?= $main_passenger_data['Flight_ID'] ?></td>
                     <td><?= $main_passenger_data['first_name'] ?></td>
                     <td><?= $main_passenger_data['last_name'] ?></td>
                     <td><?= $main_passenger_data['email'] ?></td>
@@ -193,17 +195,60 @@
                     <td><?= $main_passenger_data['accommodation'] ?></td>
                     <td>₱ <?= $main_passenger_data['total_price'] ?></td>
                     <td><?= $main_passenger_data['Status'] ?></td>
+                    <td><?= $main_passenger_data['Seat_Number'] ?></td>
                     <td class="btn-td">
-                    <form method="post" action="./update_status.php">
-    <!-- Hidden input field to pass the Main Passenger ID -->
-    <input type="hidden" name="main_passenger_id" value="<?= $main_passenger_data['MainPassenger'] ?>">
-    <button type="submit" class="btn btn-outline-success" name="main_confirm-btn">Confirm</button>
-    <button type="submit" class="btn btn-outline-danger" name="main_decline-btn">Decline</button>
-</form>
-    <!-- Additional buttons for view and delete -->
-    <button class="btn btn-outline-primary view-btn" data-main-passenger="<?= htmlspecialchars(json_encode($main_passenger_data), ENT_QUOTES, 'UTF-8') ?>">View</button>
-</td>
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#seatSelectionModal<?= $main_passenger_data['MainPassenger'] ?>">UPDATE</button>
+                    <form id="viewForm" method="POST" style="display: none;" action="userinfo.php">
+                    <input type="hidden" id="emailInput" name="email" value="">
+                    </form>
+                    <button class="btn btn-outline-primary view-btn" onclick="submitEmailForm(this)" data-main-passenger="<?= htmlspecialchars(json_encode($row), ENT_QUOTES, 'UTF-8') ?>">View</button>
 
+                    <form method="post" action="UpdateBooking.php">
+                    <div class="modal fade" id="seatSelectionModal<?= $main_passenger_data['MainPassenger'] ?>" tabindex="-1" aria-labelledby="seatSelectionModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="seatSelectionModalLabel">Select Your Seat</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <!-- Airplane seat map -->
+                    <div class="seat-map mb-3">
+                        <!-- Add your seat map image or seat layout here -->
+                        <img src="./assets/images/seatmap.png" alt="Airplane Seat Map" class="img-fluid" style="width:100%">
+                    </div>
+                    <!-- Dropdown select for seat number -->
+                    <div class="mb-3">
+                    <label for="SeatSelect" class="form-label">Select Seat Number</label>
+<select class="form-select" id="SeatSelect" name="SeatSelect">
+    <!-- Add your seat numbers here -->
+    <option value='' disabled selected>Select Seat</option>
+    <?php 
+    $sections = ['A', 'B', 'C', 'D'];
+    foreach ($sections as $section) {
+        for ($i = 1; $i <= 15; $i++) {
+            $seatNumber = $section . $i ;
+            echo "<option value='$seatNumber'>$seatNumber</option>";
+        }
+    }
+    ?>
+</select>
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <!-- Hidden input field to pass the Main Passenger ID -->
+                    <input type="hidden" name="SeatSelected" value="<?php $seatNumber ?>">
+                    <input type="hidden" name="main_passenger_id" value="<?= $main_passenger_data['MainPassenger'] ?>">
+                    <button type="submit" class="btn btn-outline-success" name="main_confirm-btn">Confirm</button>
+                    <button type="submit" class="btn btn-outline-danger" name="main_decline-btn">Decline</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+                    </td>
                 </tr>
             <?php
             }
@@ -232,6 +277,7 @@
         <table class="table table-bordered table-hover">
             <tr>
                 <th>Other Passenger ID</th>
+                <th>Flight Number</th>
                 <th>First Name</th>
                 <th>Last Name</th>
                 <th>Email</th>
@@ -239,6 +285,7 @@
                 <th>Seat</th>
                 <th>Accommodation</th>
                 <th>Status</th>
+                <th>Seat#</th>
                 <th>Action</th>
             </tr>
             <?php
@@ -248,6 +295,7 @@
             ?>
                 <tr>
                     <td><?= $row['id'] ?></td>
+                    <td><?= $row['Flight_ID'] ?></td>
                     <td><?= $row['first_name'] ?></td>
                     <td><?= $row['last_name'] ?></td>
                     <td><?= $row['email'] ?></td>
@@ -255,15 +303,56 @@
                     <td><?= $row['seat'] ?></td>
                     <td><?= $row['accommodation'] ?></td>
                     <td><?= $row['Status'] ?></td>
+                    <td><?= $row['Seat_Number'] ?></td>
                     <td class="btn-td">
-    <form method="post" action="./update_status.php">
-        <!-- Hidden input field to pass the Other Passenger ID -->
-        <input type="hidden" name="other_passenger_id" value="<?=  $other_passengerId ?>">
-        <button type="submit" class="btn btn-outline-success" name="other_confirm-btn">Confirm</button>
-        <button type="submit" class="btn btn-outline-danger" name="other_decline-btn">Decline</button>
-    </form>
-    <!-- Additional buttons for view and delete -->
-    <button class="btn btn-outline-primary view-btn" data-main-passenger="<?= htmlspecialchars(json_encode($row), ENT_QUOTES, 'UTF-8') ?>">View</button>
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#OtherseatSelectionModal<?= $other_passengerId ?>">UPDATE</button>
+                    <form id="viewForm" method="POST" style="display: none;" action="userinfo.php">
+                    <input type="hidden" id="emailInput" name="email" value="">
+                    </form>
+                    <button class="btn btn-outline-primary view-btn" onclick="submitEmailForm(this)" data-main-passenger="<?= htmlspecialchars(json_encode($row), ENT_QUOTES, 'UTF-8') ?>">View</button>
+    <form method="post" action="UpdateBooking.php">
+    <div class="modal fade" id="OtherseatSelectionModal<?= $other_passengerId ?>" tabindex="-1" aria-labelledby="OtherseatSelectionModal" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="OtherseatSelectionModal">Select Your Seat</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <!-- Airplane seat map -->
+                    <div class="seat-map mb-3">
+                        <!-- Add your seat map image or seat layout here -->
+                        <img src="./assets/images/seatmap.png" alt="Airplane Seat Map" class="img-fluid">
+                    </div>
+                    <!-- Dropdown select for seat number -->
+                    <div class="mb-3">
+                    <label for="Other_SeatSelect" class="form-label">Select Seat Number</label>
+                        <select class="form-select" id="Other_SeatSelect" name="Other_SeatSelect">
+                                     <!-- Add your seat numbers here -->
+                         <option value='' disabled selected>Select Seat</option>
+                                     <?php 
+                                         $sections = ['A', 'B', 'C', 'D'];
+                                        foreach ($sections as $section) {
+                                            for ($i = 1; $i <= 15; $i++) {
+                                                $seatNumber = $section . $i ;
+                                         echo "<option value='$seatNumber'>$seatNumber</option>";
+                                        }
+                                     }
+                                 ?>
+                            </select>
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <!-- Hidden input field to pass the Main Passenger ID -->
+                    <input type="hidden" name="other_passenger_id" value="<?=  $other_passengerId ?>">
+                    <button type="submit" class="btn btn-outline-success" name="other_confirm-btn">Confirm</button>
+                    <button type="submit" class="btn btn-outline-danger" name="other_decline-btn">Decline</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
 </td>
                 </tr>
             <?php
@@ -281,24 +370,6 @@
     ?>
     <tbody id="result">
     </tbody>
-
-    <!-- Modal Structure -->
-    <div class="modal fade" id="view-details">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <!-- Modal Header -->
-                <div class="modal-header">
-                    <h4 class="modal-title">Booking Details</h4>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                </div>
-                <!-- Modal body -->
-                <div class="modal-body" id="modal-body"></div>
-                <!-- Modal footer -->
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-                </div>
-            </div>
-        </div>
     </div>
 </div>
 </main>

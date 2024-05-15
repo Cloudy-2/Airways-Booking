@@ -7,7 +7,7 @@
     <title>Flights</title>
     <link rel="stylesheet" href="../css/admin_ui_css/flight.css">
     <link rel="icon" href="../assets/images/favicon.jpg">
-    <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css" >
+    <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css">
 </head>
 <body style="background-color: #b9b4b4;">
 <header class="header1">
@@ -53,7 +53,52 @@
         <img class="anal-logo" src="../assets/images/travel.png" alt="">
         <h1 class="h1-anal">FLIGHTS</h1>
     </div>
+    <div class="container">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Flight ID</th>
+                    <th>Flight Number</th>
+                    <th>Departure Airport</th>
+                    <th>Arrival Airport</th>
+                    <th>Departure Time</th>
+                    <th>Arrival Time</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                // Include the database configuration file
+                include '../config/database.php';
+
+                // Query to fetch all flights
+                $query = "SELECT * FROM flights";
+                $result = mysqli_query($conn, $query);
+
+                // Check if there are any flights
+                if (mysqli_num_rows($result) > 0) {
+                    // Iterate over each flight record and display it in a table row
+                    while ($row = mysqli_fetch_assoc($result)) {
+                        echo "<tr>";
+                        echo "<td>" . $row['id'] . "</td>";
+                        echo "<td>" . $row['flight_number'] . "</td>";
+                        echo "<td>" . $row['departure_location'] . "</td>";
+                        echo "<td>" . $row['arrival_location'] . "</td>";
+                        echo "<td>" . $row['Departure-Time'] . "</td>";
+                        echo "<td>" . $row['Arrival-Time'] . "</td>";
+                        echo "</tr>";
+                    }
+                } else {
+                    // If no flights found, display a message
+                    echo "<tr><td colspan='6'>No flights found</td></tr>";
+                }
+
+                // Close the database connection
+                mysqli_close($conn);
+                ?>
+            </tbody>
+        </table>
+    </div>
 </main>
-</body>
 <script src="../assets/bootstrap/js/bootstrap.bundle.min.js"></script>
+</body>
 </html>

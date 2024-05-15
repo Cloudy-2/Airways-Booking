@@ -67,7 +67,7 @@ deleteButtons.forEach(function(button) {
 
 
 document.addEventListener("DOMContentLoaded", function() {
-    var confirmButtons = document.querySelectorAll('.btn-outline-success'); // Updated to target the correct class name
+    var confirmButtons = document.querySelectorAll('.btn-outline-Success'); // Updated to target the correct class name
 
     confirmButtons.forEach(function(button) {
         button.addEventListener('click', function() {
@@ -98,32 +98,6 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     });
 });
-
-
-
-document.addEventListener("DOMContentLoaded", function() {
-    var viewButtons = document.querySelectorAll('.view-btn');
-    var tbody = document.getElementById('results');
-
-    viewButtons.forEach(function(button) {
-        button.addEventListener('click', function() {
-            var mainPassengerData = JSON.parse(this.getAttribute('data-main-passenger'));
-            var modalBody = document.querySelector('.modal-body');
-
-            // Construct HTML for modal content
-            var modalHtml = '';
-            for (var key in mainPassengerData) {
-                modalHtml += '<p><strong>' + key + ':</strong> ' + mainPassengerData[key] + '</p>';
-            }
-            modalBody.innerHTML = modalHtml;
-
-            // Display modal
-            var modalInstance = new bootstrap.Modal(document.getElementById('view-details'));
-            modalInstance.show();
-        });
-    });
-});
-
 function confirmBooking(mainPassengerId) {
     // Send the main passenger ID to inbox.php using AJAX
     var xhr = new XMLHttpRequest();
@@ -137,5 +111,8 @@ function confirmBooking(mainPassengerId) {
     };
     xhr.send("mainPassengerId=" + mainPassengerId);
 }
-
-
+function submitEmailForm(button) {
+    var email = button.parentElement.parentElement.querySelector('td:nth-child(5)').innerText; // Assuming email is in the 5th column
+    document.getElementById('emailInput').value = email;
+    document.getElementById('viewForm').submit();
+}

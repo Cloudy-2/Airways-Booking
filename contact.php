@@ -25,7 +25,7 @@
 
 <div class="container">
         <h1>Contact Us</h1>
-        <form action="./models/message.php" method="post" id="contactForm">
+        <form action="./model/message.php" method="post" id="contactForm">
             <label for="name">Your Name:</label>
             <input type="text" id="name" name="name" required>
 
@@ -38,11 +38,6 @@
             <input type="submit" value="Submit">
         </form>
 
-        <!-- Display success message if any -->
-        <?php if (isset($success_message)): ?>
-            <div class="success-message"><?php echo $success_message; ?></div>
-        <?php endif; ?>
-
         <div class="back-button">
             <a href="index.php">Back to dashboard</a>
         </div>
@@ -51,8 +46,6 @@
 <footer>
     <p>&copy; 2024 Skyline Airways PH. All rights reserved.</p>
 </footer>
-
-<script src="./js/contact.js"></script>
 
 </body>
 </html>

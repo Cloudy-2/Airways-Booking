@@ -1,43 +1,39 @@
 <?php
-include '../config/database.php';
 
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update-btn'])) {
-    // Retrieve the ID of the record to be confirmed
-    $passenger_id = $_POST['passenger_id'];
+$message_data = array(
+    'name' => "'" . $_POST['name'] . "'",
+    'email' => "'" . $_POST['email'] . "'",
+    'message' => "'" . $_POST['message'] . "'"
+);
 
-    // Prepare and execute the query to move the record to the confirmed bookings table
-    $stmt_confirm_passenger = $conn->prepare("INSERT INTO booking_confirm SELECT MainPassenger FROM main_passengers WHERE MainPassenger = ?");
-    $stmt_confirm_passenger->bind_param("i", $passenger_id);
+save_message($message_data);
 
-    if ($stmt_confirm_passenger->execute()) {
-        // Record moved to confirmed bookings successfully
-        // Now, if you want to delete the record from the main table, you can uncomment the following lines:
-        $stmt_delete_passenger = $conn->prepare("DELETE FROM main_passengers WHERE MainPassenger = $passenger_id");
-        $stmt_delete_passenger->execute();
+function save_message($data)
+{
+    include '../config/database.php';
 
-        echo "success";
+    // Escape and format data
+    $name = mysqli_real_escape_string($conn, $_POST['name']);
+    $email = mysqli_real_escape_string($conn, $_POST['email']);
+    $message = mysqli_real_escape_string($conn, $_POST['message']);
+
+    $attributes = implode(", ", array_keys($data));
+    $values = implode(", ", array_values($data));
+
+    $query = "INSERT INTO contact_information ($attributes) VALUES ($values)";
+    $result = mysqli_query($conn, $query);
+
+    if ($result) {
+        // Set success message if insertion is successful
+        $success_message = 'Your message has been submitted successfully!';
+        
+        // Reset form fields after successful submission
+        $name = $email = $message = '';
     } else {
-        // Handle confirmation failure
-        echo "error";
+        // Handle insertion failure
+        $success_message = 'Failed to submit your message. Please try again later.';
     }
-} else if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Retrieve data from the AJAX request
-    $con_fname = $_POST['con_fname'];
-    $con_lname = $_POST['con_lname'];
-    $con_email = $_POST['con_email'];
-    $con_seat = $_POST['con_seat'];
-    $con_acc = $_POST['con_acc'];
-    $con_price = $_POST['con_price'];
 
-    // Insert data into the database
-    $stmt = $conn->prepare("INSERT INTO booking_confirm (con_fname, con_lname, con_email, con_seat, con_acc, con_price) VALUES (?, ?, ?, ?, ?, ?)");
-    $stmt->bind_param("ssssss", $con_fname, $con_lname, $con_email, $con_seat, $con_acc, $con_price);
-
-    
-    if ($stmt->execute()) {
-        echo "success";
-    } else {
-        echo "error";
-    }
+    mysqli_close($conn);
 }
 ?>
