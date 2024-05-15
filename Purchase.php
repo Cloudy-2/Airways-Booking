@@ -36,6 +36,25 @@ if ($result_main->num_rows > 0) {
         }
     }
 }
+
+// $sql = "SELECT `trip_dep`, `trip_deptime`, `trip_depdate`, `trip_arrival`, `trip_ardate`, `trip_artime`, `trip_fno`, `trip_price` FROM `tripsum` WHERE trip_email = '$email'";
+// $stmt_trip = $conn->prepare($sql);
+// $stmt_trip->bind_param("s", $email);
+// $stmt_trip->execute();
+// $result_trip = $stmt_trip->get_result();
+// $row = $result_trip->fetch_assoc();
+
+$sql = "SELECT `trip_id`, `trip_dep`, `trip_deptime`, `trip_depdate`, `trip_arrival`, `trip_email` FROM `tripsum` WHERE trip_email = '$email'";
+$result = $conn->query($sql);
+
+// Check if query was successful and if there are rows returned
+if ($result && $result->num_rows > 0) {
+    $row = $result->fetch_assoc();
+} else {
+    // Handle the case when no data is found
+    echo "No trip data found for the logged-in user.";
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -93,7 +112,7 @@ if(empty($main_passenger_data)) {
             echo "<td>" . $main_passenger["first_name"] . "</td>";
             echo "<td>" . $main_passenger["last_name"] . "</td>";
             echo "<td>" . $main_passenger["Status"] . "</td>";
-            echo "<td><button class='btn btn-outline-primary view-btn' data-mainpassenger='" . $main_passenger["MainPassenger"] . "'>View Details</button></td>"; // Updated button with data attribute
+            echo "<td><button class='btn btn-outline-primary view-btn' data-mainpassenger='" . $main_passenger["MainPassenger"] . "'>View as Ticket</button></td>"; // Updated button with data attribute
             echo "</tr>";
         }
         ?>
@@ -123,7 +142,7 @@ if(empty($main_passenger_data)) {
                 echo "<td>" . $other_passenger["first_name"] . "</td>";
                 echo "<td>" . $other_passenger["last_name"] . "</td>";
                 echo "<td>" . $other_passenger["Status"] . "</td>";
-                echo "<td><button class='btn btn-outline-primary view-btn' data-mainpassenger='" . $other_passenger["MainPassenger"] . "'>View Details</button></td>"; // Updated button with data attribute
+                echo "<td><button class='btn btn-outline-primary view-btn' data-mainpassenger='" . $other_passenger["MainPassenger"] . "'>View as Ticket</button></td>"; // Updated button with data attribute
                 echo "</tr>";
             }
         } else {
@@ -134,104 +153,76 @@ if(empty($main_passenger_data)) {
 </div>
 
 <div class="modal fade" id="view-details">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <!-- Modal Header -->
-            <div class="modal-header">
-                <h4 class="modal-title">Booking Details</h4>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        <div class="modal-dialog  modal-lg">
+            <div class="modal-content">
+                <!-- Modal Header -->
+                <div  class="modal-header">
+                    <h4 class="modal-title">Ticket Details</h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <!-- Modal body -->
+            <div class="modal-body" id="modal-body">
+                <div class="boarding-pass" >
+                    <div class="header">
+                        <div class="logo">
+                            <img src="/assets/images/logo.jpg" alt="Airplane Logo">
+                        </div>
+                        <div class="airline-name">
+                            <h1>SKYLINE AIRWAYS</h1>
+                            <p>To Travel Safe Is Our Deal!</p>
+                        </div>
+                        <div class="boarding-pass-label">
+                            <p>STATUS</p>
+                            <h1><span id="status"></span></h1>
+                        </div>
+                    </div>
+                    <div class="passenger-info">
+                        <div class="section">
+                            <p>PASSENGER NAME</p>
+                            <h2><span id="lastName"></span>, <span id="firstName"></span> </h2>
+                        </div>
+                        <div class="section">
+                            <p>FLIGHT NO.</p>
+                            <h2><span id="flightID"></span></h2>
+                        </div>
+                        <div class="section">
+                            <p>SEAT</p>
+                            <h2>10A</h2>
+                        </div>
+                        <div class="section">
+                            <p>EMAIL</p>
+                            <h2><?php echo $row["trip_email"]; ?></h2>
+                        </div>
+                    </div>
+                    <div class="boarding-time">
+                        <p>BOARDING TIME</p>
+                        <h2><?php echo $row["trip_deptime"]; ?> - <?php echo $row["trip_depdate"]; ?></h2>
+                    </div>
+                    <div class="barcode">
+                        <img src="/assets/images/barcode.gif" alt="Barcode">
+                    </div>
+                    <div class="footer">
+                        <div class="section">
+                            <p>FROM</p>
+                            <h2><?php echo $row["trip_dep"]; ?></h2>
+                        </div>
+                        <div class="section">
+                            <p>TO</p>
+                            <h2><?php echo $row["trip_arrival"]; ?></h2>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <!-- Modal body -->
-            <div class="modal-body" id="modal-body" style="display: flex; flex-direction: column;">
-                
-                    <div class="in-header">
-                        <img class="logo-pp" src="./assets/images/ellipse-1@2x.png" alt="">
-                        <h5 class="h1-pp">SKYLINE AIRWAYS&reg;</h5>
-                        <div class="row hed1">
-                            <div  class="col-md-12">
-                                <p style="background-color: #f2f2f2; border-radius: 10px;" ><strong>Flight ID:</strong> <span id="flightID"></span></p>
-                            </div>
-                        </div>
-                    </div>
-
-                <hr style="background-color: white; height: 3px;">
-                    <div class="in-body">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <p><strong>Main Passenger:</strong> <span id="mainPassenger"></span></p>
-                            </div>
-                        </div>
-                        
-                        <div class="row">
-                            <div class="col-md-12">
-                                <p><strong>First Name:</strong> <span id="firstName"></span></p>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <p><strong>Last Name:</strong> <span id="lastName"></span></p>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <p><strong>Status:</strong> <span id="status"></span></p>
-                            </div>
-                        </div>
-                    </div>
-                <hr style="background-color: white; height: 3px;">
-                    <div  class="in-footer">
-                       <div class="booking-details">
-       
-        <table class="tbl_booking">
-            <tr>
-                <td><strong>Flight Number:</strong></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td><strong>Departure:</strong></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td><strong>Departure Date:</strong></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td><strong>Departure Time:</strong></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td><strong>Arrival:</strong></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td><strong>Arrival Date:</strong></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td><strong>Arrival Time:</strong></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td><strong>Price:</strong></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td><strong>Passenger Email:</strong></td>
-                <td></td>
-            </tr>
-        </table>
-                    </div>
-            </div>
-
-
-            <!-- Modal footer -->
-            <div class="modal-footer">
-                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-                <button class='btn btn-success download-btn'>Download as Ticket</button>
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                    <button class="btn btn-success download-btn">Download as Ticket</button>
+                </div>
             </div>
         </div>
     </div>
-</div>
+<div>
+        
 
 <script src="./assets/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
@@ -270,7 +261,12 @@ $(document).ready(function(){
 });
 
 </script>
-
-
+<script src="./assets/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+crossorigin="anonymous"></script>
+<script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+    
 </body>
 </html>
+
+
