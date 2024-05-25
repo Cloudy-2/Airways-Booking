@@ -189,6 +189,7 @@ if ($result && $result->num_rows > 0) {
                             <img src="./assets/images/logo.jpg" alt="Airplane Logo">
                         </div>
                         <div class="airline-name">
+                            <span id="Airline"></span>
                             <h1>SKYLINE AIRWAYS</h1>
                             <p style="padding-left: 0;">Your Trusted Airline Companion</p>
                         </div>
@@ -256,6 +257,7 @@ crossorigin="anonymous"></script>
         var firstName = $(this).data('firstname');
         var lastName = $(this).data('lastname');
         var seatNumber = $(this).data('seatnumber');
+        var Airline = $(this).data('Airline');
         var status = $(this).data('status');
 
         // Populate modal with data
@@ -264,6 +266,7 @@ crossorigin="anonymous"></script>
         $('#firstName').text(firstName);
         $('#lastName').text(lastName);
         $('#seatNumber').text(seatNumber);
+        $('#Airline').text(Airline);
         $('#status').text(status);
 
         $('#view-details').modal('show');

@@ -10,8 +10,7 @@ function togglePopup(popupId) {
 document.getElementById('confirmButton').addEventListener('click', function() {
     // Check if the required inputs are filled
     var mobileNumber = document.getElementById('gcash-mobile-number').value.trim();
-    var mpin = document.getElementById('gcash-password').value.trim();
-    if (mobileNumber === '' || mpin === '') {
+    if (mobileNumber === '') {
         alert("Please fill in all required fields.");
         return; // Prevent further execution
     }

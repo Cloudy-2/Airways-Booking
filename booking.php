@@ -23,22 +23,31 @@ include_once './config/database.php';
 
 // Retrieve flight ID from the URL
 $flight_id = $_GET['flight_id'];
-$sql = "SELECT * FROM Cebu_pacific WHERE flight_number = '$flight_id' && ";
+
+// Escape flight ID to prevent SQL injection
+$flight_id = $conn->real_escape_string($flight_id);
+
+// Retrieve flight data based on airline and flight ID
+if ($airline === 'Cebu Pacific') {
+    $table = 'Cebu_pacific';
+} else if ($airline === 'Philippine Airline') {
+    $table = 'Philippine_Airline';
+} else {
+    // Invalid airline name, handle accordingly (redirect or show error message)
+    header("Location: flights.php");
+    exit();
+}
+
+$sql = "SELECT * FROM $table WHERE flight_number = '$flight_id'";
 $result = $conn->query($sql);
 
 // Check if the flight exists
 if ($result->num_rows > 0) {
     $flight = $result->fetch_assoc();
+    // Display flight details
+    // Example: echo $flight['departure_location'], etc.
 } else {
-    header("Location: flights.php");
-    exit();
-}
-$sql = "SELECT * FROM Philippine_Airline WHERE flight_number = '$flight_id'";
-$result = $conn->query($sql);
-// Check if the flight exists
-if ($result->num_rows > 0) {
-    $flight = $result->fetch_assoc();
-} else {
+    // Flight not found, redirect to flights page or show error message
     header("Location: flights.php");
     exit();
 }
@@ -52,7 +61,6 @@ if ($checkResult->num_rows > 0) {
     header("Location: trip_already_confirmed.php");
     exit();
 }
-
 // Insert trip summary data into the database
 $insertSql = "INSERT INTO tripsum (trip_id, trip_fno, trip_dep, trip_depdate, trip_deptime, trip_arrival, trip_ardate, trip_artime, trip_price, trip_email) 
               VALUES ('$flight_id', '{$flight['flight_number']}', '{$flight['departure_location']}', '{$_GET['departure_date']}', '{$flight['Departure-Time']}', '{$flight['arrival_location']}', '{$_GET['arrival_date']}', '{$flight['Arrival-Time']}', '{$flight['price']}', '{$_SESSION['username']}')";
@@ -109,7 +117,7 @@ $conn->close();
 
 <main>
     <div class="booking-details">
-        <h2>Trip Summary of Flight - #<?php echo $flight['flight_number'] . $airline = $_GET['Airline']; ?></h2>
+        <h2>Trip Summary of <?php echo$airline = $_GET['Airline'];?> Flight - #<?php echo $flight['flight_number']; ?></h2> 
         <table class="tbl_booking">
             <tr>
                 <td><strong>Flight Number:</strong></td>
@@ -150,6 +158,7 @@ $conn->close();
         </table>
         <form action="confirm_booking.php" method="POST" id="bookingForm" onsubmit="return validateForm()">
         <input type="hidden" name="price" value="<?php echo $flight['price']; ?>">
+        <input type="hidden" name="airline" value="<?php echo ($airline); ?>">
         <input type="hidden" name="Flight Number" value="<?php echo $flight['flight_number']; ?>">
             <!-- Your form content -->
             <label for="passengers">Number of Passengers:</label>

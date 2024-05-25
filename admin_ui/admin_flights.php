@@ -95,12 +95,14 @@
 
                 // Query to fetch flights based on search
                 if ($searchQuery) {
-                    $query = "SELECT * FROM flights WHERE flight_number LIKE ? OR departure_location LIKE ?";
+                    $query = "SELECT * FROM philippine_airline WHERE flight_number LIKE ? OR departure_location LIKE ?";
                     $stmt = $conn->prepare($query);
                     $searchParam = "%" . $searchQuery . "%";
                     $stmt->bind_param("ss", $searchParam, $searchParam);
                 } else {
-                    $query = "SELECT * FROM flights";
+                    $query = "SELECT * FROM philippine_airline";
+                    $stmt = $conn->prepare($query);
+                    $query = "SELECT * FROM cebu_pacific";
                     $stmt = $conn->prepare($query);
                 }
 

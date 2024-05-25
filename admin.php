@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -143,6 +145,27 @@
     </div>
 </div>
 
+<?php
+// Fetch seat information from the database
+$query = "SELECT Flight_ID, Seat_Number FROM main_passengers";
+$result = mysqli_query($conn, $query);
+
+// Create an associative array to store seat information
+$seatInfo = array();
+while ($row = mysqli_fetch_assoc($result)) {
+    $flightID = $row['Flight_ID'];
+    $seatNumber = $row['Seat_Number'];
+    // Add seat number to the corresponding flight ID array
+    if (!isset($seatInfo[$flightID])) {
+        $seatInfo[$flightID] = array();
+    }
+    $seatInfo[$flightID][] = $seatNumber;
+}
+
+// Encode seat information into JSON format
+$seatInfoJSON = json_encode($seatInfo);
+?>
+
 
 <div class="main-container">
     
@@ -189,7 +212,6 @@
                     <th>Contact Number</th>
                     <th>Seat</th>
                     <th>Accommodation</th>
-                    <th>Ticket price</th>
                     <th>Total Price</th>
                     <th>Status</th>
                     <th>Seat#</th>
@@ -210,38 +232,38 @@
                         <td><?= $main_passenger_data['contact_number'] ?></td>
                         <td><?= $main_passenger_data['seat'] ?></td>
                         <td><?= $main_passenger_data['accommodation'] ?></td>
-                        <td><?= $main_passenger_data['ticket_price'] ?></td>
                         <td>₱ <?= $main_passenger_data['total_price'] ?></td>
                         <td><?= $main_passenger_data['Status'] ?></td>
                         <td><?= $main_passenger_data['Seat_Number'] ?></td>
-                        <td>
-    <img 
-        src="path/to/" 
-        alt="View Receipt" 
-        class="thumbnail" 
-        data-full-image="data:image/png;base64,<?= base64_encode($main_passenger_data['prof']) ?>" 
-        onclick="showFullImage(this)"
-        style="cursor: pointer; max-width: 100px;" />
-</td>
+                        <td class="receipt">
+                            <a href="#" class="view-receipt" data-bs-toggle="modal" data-bs-target="#receiptModal<?= $main_passenger_data['MainPassenger'] ?>">
+                                <img class="receipt-image" src="data:image/jpeg;base64,<?= base64_encode($main_passenger_data['prof']) ?>" />
+                            </a>
+                        </td>
+
+                        <!-- Modal for displaying the zoomable receipt image -->
+                        <div class="modal fade" id="receiptModal<?= $main_passenger_data['MainPassenger'] ?>" tabindex="-1" aria-labelledby="receiptModalLabel<?= $main_passenger_data['MainPassenger'] ?>" aria-hidden="true">
+                            <div class="modal-dialog modal-lg modal-dialog-centered">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="receiptModalLabel<?= $main_passenger_data['MainPassenger'] ?>">View Receipt</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <img class="img-fluid" src="data:image/jpeg;base64,<?= base64_encode($main_passenger_data['prof']) ?>" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
 
                         <td class="btn-td">
                             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#seatSelectionModal<?= $main_passenger_data['MainPassenger'] ?>">UPDATE</button>
-                            <button class="btn btn-outline-primary view-btn" data-bs-toggle="modal" data-bs-target="#viewModal"
-                    data-mainpassenger="<?= $main_passenger_data['MainPassenger'] ?>"
-                    data-flightid="<?= $main_passenger_data['Flight_ID'] ?>"
-                    data-firstname="<?= $main_passenger_data['first_name'] ?>"
-                    data-lastname="<?= $main_passenger_data['last_name'] ?>"
-                    data-email="<?= $main_passenger_data['email'] ?>"
-                    data-contactnumber="<?= $main_passenger_data['contact_number'] ?>"
-                    data-seat="<?= $main_passenger_data['seat'] ?>"
-                    data-accommodation="<?= $main_passenger_data['accommodation'] ?>"
-                    data-accommodation="<?= $main_passenger_data['ticket_price'] ?>"
-                    data-totalprice="<?= $main_passenger_data['total_price'] ?>"
-                    data-status="<?= $main_passenger_data['Status'] ?>"
-                    data-seatnumber="<?= $main_passenger_data['Seat_Number'] ?>">
-                    View
-                </button>
+
+                            <button class="btn btn-outline-primary view-btn" data-mainpassenger="<?php echo $main_passenger["MainPassenger"]; ?>" data-flightid="<?php echo $main_passenger["Flight_ID"]; ?>" data-firstname="<?php echo $main_passenger["first_name"]; ?>" data-lastname="<?php echo $main_passenger["last_name"]; ?>" data-seatnumber="<?php echo $main_passenger["Seat_Number"]; ?>" data-status="<?php echo $main_passenger["Status"]; ?>">View Details</button>
+                            
+
+
                             <form method="post" action="UpdateBooking.php">
                                 <div class="modal fade" id="seatSelectionModal<?= $main_passenger_data['MainPassenger'] ?>" tabindex="-1" aria-labelledby="seatSelectionModalLabel" aria-hidden="true">
                                     <div class="modal-dialog">
@@ -251,29 +273,107 @@
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div>
                                             <div class="modal-body">
-                                                <div class="seat-map mb-3">
-                                                    <img src="./assets/images/seatmap.png" alt="Airplane Seat Map" class="img-fluid" style="width:100%">
-                                                </div>
-                                                <!-- Dropdown select for seat number -->
-                                                <div class="mb-3">
-                                                    <label for="SeatSelect<?= $main_passenger_data['MainPassenger'] ?>" class="form-label">Select Seat Number</label>
-                                                    <select class="form-select" id="SeatSelect<?= $main_passenger_data['MainPassenger'] ?>" name="SeatSelect">
-                                                        <option value='' disabled selected>Select Seat</option>
-                                                        <?php 
-                                                        $sections = ['A', 'B', 'C', 'D'];
-                                                        foreach ($sections as $section) {
-                                                            for ($i = 1; $i <= 15; $i++) {
-                                                                $seatNumber = $section . $i;
-                                                                if (in_array($seatNumber, $takenSeats)) {
-                                                                    echo "<option value='$seatNumber' disabled style='background-color: red;'>$seatNumber</option>";
-                                                                } else {
-                                                                    echo "<option value='$seatNumber'>$seatNumber</option>";
-                                                                }
-                                                            }
+                                            <div class="seat-map-container">
+                                                <div class="seat-section first-class">
+                                                    <h3>First Class</h3>
+                                                    <div class="seat-row">
+                                                        <?php
+                                                        // Loop through seat elements and apply 'occupied' class based on seatInfo
+                                                        for ($i = 1; $i <= 9; $i++) {
+                                                            $seatId = 'F' . $i;
+                                                            $isOccupied = in_array($seatId, $takenSeats);
+                                                            $seatClass = $isOccupied ? 'occupied' : '';
+                                                            // Add an onclick attribute to call the JavaScript function
+                                                            echo "<div class='seat $seatClass' id='$seatId' onclick='handleSeatSelection(\"{$main_passenger_data['MainPassenger']}\", \"$seatId\")'>$seatId</div>";
                                                         }
                                                         ?>
-                                                    </select>
+                                                    </div>
+                                                    <div class="seat-row">
+                                                        <?php
+                                                        for ($i = 10; $i <= 18; $i++) {
+                                                            $seatId = 'F' . $i;
+                                                            $isOccupied = in_array($seatId, $takenSeats);
+                                                            $seatClass = $isOccupied ? 'occupied' : '';
+                                                            // Add an onclick attribute to call the JavaScript function
+                                                            echo "<div class='seat $seatClass' id='$seatId' onclick='handleSeatSelection(\"{$main_passenger_data['MainPassenger']}\", \"$seatId\")'>$seatId</div>";
+                                                        }
+                                                        ?>
+                                                    </div>
                                                 </div>
+                                                <div class="seat-section business-class">
+                                                    <h3>Business Class</h3>
+                                                    <div class="seat-row">
+                                                        <?php
+                                                        for ($i = 1; $i <= 9; $i++) {
+                                                            $seatId = 'B' . $i;
+                                                            $isOccupied = in_array($seatId, $takenSeats);
+                                                            $seatClass = $isOccupied ? 'occupied' : '';
+                                                            // Add an onclick attribute to call the JavaScript function
+                                                            echo "<div class='seat $seatClass' id='$seatId' onclick='handleSeatSelection(\"{$main_passenger_data['MainPassenger']}\", \"$seatId\")'>$seatId</div>";
+                                                        }
+                                                        ?>
+                                                    </div>
+                                                    <div class="seat-row">
+                                                        <?php
+                                                        for ($i = 10; $i <= 18; $i++) {
+                                                            $seatId = 'B' . $i;
+                                                            $isOccupied = in_array($seatId, $takenSeats);
+                                                            $seatClass = $isOccupied ? 'occupied' : '';
+                                                            // Add an onclick attribute to call the JavaScript function
+                                                            echo "<div class='seat $seatClass' id='$seatId' onclick='handleSeatSelection(\"{$main_passenger_data['MainPassenger']}\", \"$seatId\")'>$seatId</div>";
+                                                        }
+                                                        ?>
+                                                    </div>
+                                                </div>
+                                                <div class="seat-section economy-class">
+                                                    <h3>Economy Class</h3>
+                                                    <div class="seat-row">
+                                                        <?php
+                                                        for ($i = 1; $i <= 9; $i++) {
+                                                            $seatId = 'E' . $i;
+                                                            $isOccupied = in_array($seatId, $takenSeats);
+                                                            $seatClass = $isOccupied ? 'occupied' : '';
+                                                            // Add an onclick attribute to call the JavaScript function
+                                                            echo "<div class='seat $seatClass' id='$seatId' onclick='handleSeatSelection(\"{$main_passenger_data['MainPassenger']}\", \"$seatId\")'>$seatId</div>";
+                                                        }
+                                                        ?>
+                                                    </div>
+                                                    <div class="seat-row">
+                                                        <?php
+                                                        for ($i = 10; $i <= 18; $i++) {
+                                                            $seatId = 'E' . $i;
+                                                            $isOccupied = in_array($seatId, $takenSeats);
+                                                            $seatClass = $isOccupied ? 'occupied' : '';
+                                                            // Add an onclick attribute to call the JavaScript function
+                                                            echo "<div class='seat $seatClass' id='$seatId' onclick='handleSeatSelection(\"{$main_passenger_data['MainPassenger']}\", \"$seatId\")'>$seatId</div>";
+                                                        }
+                                                        ?>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- Dropdown select for seat number -->
+                                            <div class="mb-3">
+                                                <label for="SeatSelect<?= $main_passenger_data['MainPassenger'] ?>" class="form-label">Select Seat Number</label>
+                                                <select class="form-select" id="SeatSelect<?= $main_passenger_data['MainPassenger'] ?>" name="SeatSelect">
+                                                    <option value='' disabled selected>Select Seat</option>
+                                                    <?php 
+                                                    $sections = ['F', 'B', 'E'];
+                                                    foreach ($sections as $section) {
+                                                        for ($i = 1; $i <= 18; $i++) {
+                                                            $seatNumber = $section . $i;
+                                                            // Check if the seat is taken
+                                                            if (in_array($seatNumber, $takenSeats)) {
+                                                                echo "<option value='$seatNumber' disabled style='background-color: red;'>$seatNumber</option>";
+                                                            } else {
+                                                                echo "<option value='$seatNumber'>$seatNumber</option>";
+                                                            }
+                                                        }
+                                                    }
+                                                    ?>
+                                                </select>
+                                            </div>
+
                                                 <!-- Additional passenger information can be displayed here -->
                                                 <div id="passengerInfo<?= $main_passenger_data['MainPassenger'] ?>"></div>
                                             </div>
@@ -286,28 +386,24 @@
                                     </div>
                                 </div>
                             </form>
-                          <!-- Modal for displaying the full image -->
-<div id="imageModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background-color:rgba(0,0,0,0.8); justify-content:center; align-items:center;">
-    <span id="closeButton" style="position:absolute; top:20px; right:30px; font-size:30px; color:white; cursor:pointer;">&times;</span>
-    <img id="fullImage" style="max-width:90%; max-height:90%;" />
-</div>
-                           <!-- Modal for displaying passenger info -->
-<div class="modal fade" id="viewModal" tabindex="-1" aria-labelledby="viewModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="viewModalLabel">Passenger Information</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <!-- Data will be populated here -->
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            </div>
-        </div>
-    </div>
-</div>
+                            
+                            <!-- Modal for displaying passenger info -->
+                            <div class="modal fade" id="viewModal" tabindex="-1" aria-labelledby="viewModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="viewModalLabel">Passenger Information</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </td>
                     </tr>
                 <?php
@@ -357,7 +453,6 @@
                 <th>Contact Number</th>
                 <th>Seat</th>
                 <th>Accommodation</th>
-                <th>price</th>
                 <th>Status</th>
                 <th>Seat#</th>
                 <th>Action</th>
@@ -377,31 +472,14 @@
                     <td><?= $row['contact_number'] ?></td>
                     <td><?= $row['seat'] ?></td>
                     <td><?= $row['accommodation'] ?></td>
-                    <td><?= $row['ticket_price'] ?></td>
                     <td><?= $row['Status'] ?></td>
                     <td><?= $row['Seat_Number'] ?></td>
                     <td class="btn-td">
                         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#OtherseatSelectionModal<?= $other_passengerId ?>">Update</button>
-                     
-                        <button class="btn btn-outline-primary view-btn-other" onclick="submitEmailForm(this)" 
-    data-main-passenger="<?= htmlspecialchars(json_encode($row), ENT_QUOTES, 'UTF-8') ?>" 
-    data-flightid="<?= $flightID ?>" 
-    data-firstname="<?= $row['first_name'] ?>" 
-    data-lastname="<?= $row['last_name'] ?>" 
-    data-email="<?= $row['email'] ?>" 
-    data-contactnumber="<?= $row['contact_number'] ?>" 
-    data-seat="<?= $row['seat'] ?>" 
-    data-accommodation="<?= $row['accommodation'] ?>" 
-    data-totalprice="<?= $row['ticket_price'] ?>" 
-    data-status="<?= $row['Status'] ?>" 
-    data-seatnumber="<?= $row['Seat_Number'] ?>" 
-    data-bs-toggle="modal" 
-    data-bs-target="#viewModalOtherPassenger">
-    View
-</button>
-
-
-
+                        <form id="viewForm" method="POST" style="display: none;" action="userinfo.php">
+                            <input type="hidden" id="emailInput" name="email" value="">
+                        </form>
+                        <button class="btn btn-outline-primary view-btn" onclick="submitEmailForm(this)" data-main-passenger="<?= htmlspecialchars(json_encode($row), ENT_QUOTES, 'UTF-8') ?>">View</button>
                         <form method="post" action="UpdateBooking.php">
                             <div class="modal fade" id="OtherseatSelectionModal<?= $other_passengerId ?>" tabindex="-1" aria-labelledby="OtherseatSelectionModal" aria-hidden="true">
                                 <div class="modal-dialog">
@@ -445,23 +523,23 @@
                             </div>
                         </form>
 
-           <!-- Modal for displaying passenger info -->
-           <div class="modal fade" id="viewModalOtherPassenger" tabindex="-1" aria-labelledby="viewModalLabelOtherPassenger" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="viewModalLabel">Passenger Information</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body" id="viewModalBody">
-                <!-- Passenger information will be populated here -->
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            </div>
-        </div>
-    </div>
-</div>
+                        <!-- Modal for displaying passenger info -->
+                        <div class="modal fade" id="viewModal" tabindex="-1" aria-labelledby="viewModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="viewModalLabel">Passenger Information</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body" id="viewModalBody">
+                                                <!-- Passenger information will be populated here -->
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                     </td>
                 </tr>
             <?php
@@ -483,7 +561,9 @@
 </div>
 </main>
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> 
+<script>
+    var seatInfo = <?php echo $seatInfoJSON; ?>;
+</script>
 <script src="./js/adminfunct.js"></script>
 <script src="./assets/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="

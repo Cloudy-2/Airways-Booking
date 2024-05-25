@@ -18,7 +18,7 @@ if (!isset($_POST['passengers'])) {
     header("Location: booking.php?flight_id=" . $_GET['flight_id'] . "&departure_date=" . $_GET['departure_date'] . "&arrival_date=" . $_GET['arrival_date']);
     exit();
 }
-
+$airline = $_POST['airline'];
 $passenger_count = $_POST['passengers'];
 $ticket_price = $_POST['price'];
 $total_price = $ticket_price * $passenger_count;
@@ -75,11 +75,12 @@ include_once './config/database.php';
         <div class="logo logo-passenger-title">
             <img src="./assets/images/logo.jpg" alt="Airline Logo">
         </div>
-        <h2 class="passenger_title">Passenger Details</h2>
+        <h2 class="passenger_title">Passenger Details </h2>
     </div>
 
     <div class="passenger-details">
     <form action="insertdata.php" method="POST" enctype="multipart/form-data">
+        <input type="hidden" name="airline"  value="<?php echo $airline ?>">
     <!-- Passenger Details -->
 <?php
 $totalTicketPrice = 0;
@@ -183,15 +184,12 @@ for ($i = 1; $i <= $passenger_count; $i++) {
     <div class="popup-content">
         <span class="close-icon" onclick="closePopupAndUnselectRadio('gcash-popup', 'gcash-radio')">&times;</span>
         <div class="payment-method">
-            <img src="./assets/images/gcash" alt="GCash Logo" class="payment-logo">
+            <img src="./assets/images/gcash.png" alt="GCash Logo" class="payment-logo">
             <h1>GCash Payment</h1>
             <p>Merchant: Airways Flight Booking</p>
             <p>Amount: ₱<span id="gcash-amount"><?php echo $totalTicketPrice; ?></span></p>
             <label for="gcash-mobile-number">Mobile number</label>
             <input type="number" id="gcash-mobile-number" placeholder="Enter your Mobile Number" required>
-            <label for="gcash-password">MPIN</label>
-            <input type="password" id="gcash-password" placeholder="Enter your MPIN" required>
-            <!-- Pass the username to the validateAndLogin function -->
             <button type="submit" id="confirmButton">Confirm</button>
         </div>
     </div>
@@ -202,14 +200,12 @@ for ($i = 1; $i <= $passenger_count; $i++) {
     <div class="popup-content">
         <span class="close-icon" onclick="closePopupAndUnselectRadio('paypal-popup', 'paypal-radio')">&times;</span>
         <div class="payment-method">
-            <img src="./assets/images/paypal" alt="PayPal Logo" class="payment-logo">
+            <img src="./assets/images/paypal.png" alt="PayPal Logo" class="payment-logo">
             <h1>PayPal Payment</h1>
             <p>Merchant: Airways Flight Booking</p>
             <p>Amount: <span id="paypal-amount"><?php echo $totalTicketPrice; ?></span></p>
             <label for="paypal-email-or-mobile">Email or mobile number</label>
             <input type="text" id="paypal-email-or-mobile" placeholder="Enter your email or mobile number" required>
-            <label for="paypal-password">Password</label>
-            <input type="password" id="paypal-password" placeholder="Enter your password" required>
             <button type="submit" id="PconfirmButton">Confirm</button>
         </div>
     </div>

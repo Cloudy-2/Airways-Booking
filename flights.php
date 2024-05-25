@@ -119,7 +119,7 @@ $Airline2 = 'Cebu Pacific';
             $departureDate = $_SESSION['search_departure'];
 
             // Perform a database query to search for flights based on user input
-            $sql = "SELECT * FROM Cebu_Pasific WHERE departure_location LIKE '%$location%' AND arrival_location LIKE '%$destination%'";
+            $sql = "SELECT * FROM Cebu_Pacific WHERE departure_location LIKE '%$location%' AND arrival_location LIKE '%$destination%'";
             $result = $conn->query($sql);
 
             if ($result->num_rows > 0) {

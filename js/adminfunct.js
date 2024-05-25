@@ -122,96 +122,54 @@ function submitEmailForm(button) {
     document.getElementById('viewForm').submit();
 }
 
-$(document).ready(function() {
-    $('.view-btn').on('click', function() {
-        // Get data from the button's data- attributes
-        var mainPassenger = $(this).data('mainpassenger');
-        var flightID = $(this).data('flightid');
-        var firstName = $(this).data('firstname');
-        var lastName = $(this).data('lastname');
-        var email = $(this).data('email');
-        var contactNumber = $(this).data('contactnumber');
-        var seat = $(this).data('seat');
-        var accommodation = $(this).data('accommodation');
-        var totalPrice = $(this).data('totalprice');
-        var status = $(this).data('status');
-        var seatNumber = $(this).data('seatnumber');
-
-        // Populate the modal with the fetched data
-        var modalBody = $('#viewModal .modal-body');
-        modalBody.html(`
-            <p><strong>Main Passenger:</strong> ${mainPassenger}</p>
-            <p><strong>Flight ID:</strong> ${flightID}</p>
-            <p><strong>First Name:</strong> ${firstName}</p>
-            <p><strong>Last Name:</strong> ${lastName}</p>
-            <p><strong>Email:</strong> ${email}</p>
-            <p><strong>Contact Number:</strong> ${contactNumber}</p>
-            <p><strong>Seat:</strong> ${seat}</p>
-            <p><strong>Accommodation:</strong> ${accommodation}</p>
-            <p><strong>Total Price:</strong> ₱${totalPrice}</p>
-            <p><strong>Status:</strong> ${status}</p>
-            <p><strong>Seat Number:</strong> ${seatNumber}</p>
-        `);
+//zoom receipt
+document.addEventListener('DOMContentLoaded', function() {
+    // Get all elements with the class 'zoomable-image'
+    var zoomableImages = document.querySelectorAll('.zoomable-image');
+    
+    // Loop through each zoomable image
+    zoomableImages.forEach(function(image) {
+        // Add click event listener to each image
+        image.addEventListener('click', function() {
+            // Create a new div element to display the enlarged image
+            var zoomedImage = document.createElement('div');
+            zoomedImage.className = 'zoomed-image';
+            
+            // Create an image element inside the zoomed div
+            var img = document.createElement('img');
+            img.src = image.src;
+            zoomedImage.appendChild(img);
+            
+            // Append the zoomed image div to the body
+            document.body.appendChild(zoomedImage);
+            
+            // Add click event listener to close the zoomed image when clicked
+            zoomedImage.addEventListener('click', function() {
+                document.body.removeChild(zoomedImage);
+            });
+        });
     });
 });
-// Click event for Other Passenger button
-$('.view-btn-other').on('click', function() {
-    // Get data from the button's data- attributes
-    var mainPassenger = $(this).data('mainpassenger');
-    var flightID = $(this).data('flightid');
-    var firstName = $(this).data('firstname');
-    var lastName = $(this).data('lastname');
-    var email = $(this).data('email');
-    var contactNumber = $(this).data('contactnumber');
-    var seat = $(this).data('seat');
-    var accommodation = $(this).data('accommodation');
-    var totalPrice = $(this).data('totalprice');
-    var status = $(this).data('status');
-    var seatNumber = $(this).data('seatnumber');
-
-    // Populate the modal with the fetched data
-    var modalBody = $('#viewModalOtherPassenger .modal-body');
-    modalBody.html(`
-        <p><strong>Main Passenger:</strong> ${mainPassenger}</p>
-        <p><strong>Flight ID:</strong> ${flightID}</p>
-        <p><strong>First Name:</strong> ${firstName}</p>
-        <p><strong>Last Name:</strong> ${lastName}</p>
-        <p><strong>Email:</strong> ${email}</p>
-        <p><strong>Contact Number:</strong> ${contactNumber}</p>
-        <p><strong>Seat:</strong> ${seat}</p>
-        <p><strong>Accommodation:</strong> ${accommodation}</p>
-        <p><strong>Ticket Price:</strong> ₱${totalPrice}</p>
-        <p><strong>Status:</strong> ${status}</p>
-        <p><strong>Seat Number:</strong> ${seatNumber}</p>
-    `);
-});
 
 
-function showFullImage(imgElement) {
-    // Get the full image data from the data-full-image attribute
-    var fullImageData = imgElement.getAttribute('data-full-image');
-
-    // Set the src of the fullImage img element to the full image data
-    var fullImage = document.getElementById('fullImage');
-    fullImage.src = fullImageData;
-
-    // Display the modal
-    var imageModal = document.getElementById('imageModal');
-    imageModal.style.display = 'flex';
-}
-
-function closeModal() {
-    // Hide the modal
-    var imageModal = document.getElementById('imageModal');
-    imageModal.style.display = 'none';
-}
-
-// Add event listener to the close button
-document.getElementById('closeButton').addEventListener('click', closeModal);
-
-// Add event listener to close the modal when clicking outside the image
-document.getElementById('imageModal').addEventListener('click', function(event) {
-    if (event.target === this) {
-        closeModal();
+// Define a JavaScript function to handle seat selection
+function handleSeatSelection(mainPassengerId, seatId) {
+    // Check if the seat is already occupied or selected
+    if (document.getElementById(seatId).classList.contains('occupied') || document.getElementById(seatId).classList.contains('selected')) {
+        // If the seat is occupied or selected, do nothing
+        return;
     }
-});
+
+    // Clear previously selected seats
+    var selectedSeats = document.querySelectorAll('.seat.selected');
+    selectedSeats.forEach(function(seat) {
+        seat.classList.remove('selected');
+    });
+
+    // Mark the selected seat as 'selected'
+    document.getElementById(seatId).classList.add('selected');
+
+    // Update the selected seat number in the dropdown
+    var seatSelectDropdown = document.getElementById('SeatSelect' + mainPassengerId);
+    seatSelectDropdown.value = seatId;
+}

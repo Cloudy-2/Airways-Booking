@@ -27,11 +27,11 @@ $passenger_count = 15;
 $error_message = "Input Data Doesn't Match to Your Login Data.";
 
 // Prepare and bind parameters for the main passenger insertion
-$stmt_main_passenger = $conn->prepare("INSERT INTO main_passengers (Flight_ID, first_name, last_name, email, contact_number, dob, seat, accommodation, ticket_price, total_price, Status, prof) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-$stmt_main_passenger->bind_param("ssssssssddss", $flight_id, $first_name_main, $last_name_main, $email_main, $contact_number_main, $dob_main, $seat_main, $accommodation_main, $main_ticket_price, $total_price_main, $status, $prof_payment);
+$stmt_main_passenger = $conn->prepare("INSERT INTO main_passengers (Flight_ID, first_name, last_name, email, contact_number, dob, seat, accommodation, ticket_price, total_price, Status, prof, Airline) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+$stmt_main_passenger->bind_param("ssssssssddsss", $flight_id, $first_name_main, $last_name_main, $email_main, $contact_number_main, $dob_main, $seat_main, $accommodation_main, $main_ticket_price, $total_price_main, $status, $prof_payment, $airline);
 
 // Retrieve data from $_POST array for the main passenger
-
+$airline = $_POST['airline'];
 $prof_payment = $file_content;
 $flight_id = $flightNumber;
 $first_name_main = $_POST['first_name_1'];
@@ -55,6 +55,7 @@ for ($i = 2; $i <= $passenger_count; $i++) {
     if (isset($_POST['first_name_' . $i])) {
         // Retrieve data from $_POST array for other passengers
         $flight_id = $flightNumber;
+        $airline = $_POST['airline'];
         $first_name = $_POST['first_name_' . $i];
         $last_name = $_POST['last_name_' . $i];
         $email = $_POST['email_' . $i];
@@ -66,8 +67,8 @@ for ($i = 2; $i <= $passenger_count; $i++) {
         $status = 'Pending';
 
         // Prepare SQL statement for other passengers
-        $stmt_other_passenger = $conn->prepare("INSERT INTO Other_passengers (Flight_ID, MainPassenger, first_name, last_name, email, contact_number, dob, seat, accommodation, ticket_price, Status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-        $stmt_other_passenger->bind_param("sisssssssds", $flight_id, $main_passenger_id, $first_name, $last_name, $email, $contact_number, $dob, $seat, $accommodation, $ticket_price, $status,);
+        $stmt_other_passenger = $conn->prepare("INSERT INTO Other_passengers (Flight_ID, MainPassenger, first_name, last_name, email, contact_number, dob, seat, accommodation, ticket_price, Status, Airline) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+        $stmt_other_passenger->bind_param("sisssssssdss", $flight_id, $main_passenger_id, $first_name, $last_name, $email, $contact_number, $dob, $seat, $accommodation, $ticket_price, $status,$airline);
 
         // Execute the statement for other passengers
         if ($stmt_other_passenger->execute() !== TRUE) {
