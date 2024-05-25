@@ -83,8 +83,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <nav>
         <ul>
             <li><a href="index.php">Dashboard</a></li>>
-            <li><a href="#">Flights</a></li>
-            <li><a href="#">Analytics</a></li>
+            <li><a href="flights.php">Flights</a></li>
             <?php
             if(isset($_SESSION['username'])) {
                 echo '<li><a href="logout.php">Logout</a></li>';

@@ -8,35 +8,39 @@ if(isset($_GET['error'])) {
 }
 // Check if the user is logged in
 if (!isset($_SESSION['username'])) {
-    // Redirect the user to the login page if not logged in
     header("Location: login.php");
-    exit(); // Stop further execution
+    exit();
 }
 
 // Check if the flight ID is provided
 if (!isset($_GET['flight_id'])) {
-    // Redirect the user back to the search results page if flight ID is not provided
     header("Location: flights.php");
-    exit(); // Stop further execution
+    exit();
 }
-
+$airline = $_GET['Airline'];
 // Include necessary files
 include_once './config/database.php';
 
 // Retrieve flight ID from the URL
 $flight_id = $_GET['flight_id'];
-
-// Fetch flight details from the database based on the provided flight ID
-$sql = "SELECT * FROM flights WHERE flight_number = '$flight_id'";
+$sql = "SELECT * FROM Cebu_pacific WHERE flight_number = '$flight_id' && ";
 $result = $conn->query($sql);
 
 // Check if the flight exists
 if ($result->num_rows > 0) {
     $flight = $result->fetch_assoc();
 } else {
-    // Redirect the user back to the search results page if the flight does not exist
     header("Location: flights.php");
-    exit(); // Stop further execution
+    exit();
+}
+$sql = "SELECT * FROM Philippine_Airline WHERE flight_number = '$flight_id'";
+$result = $conn->query($sql);
+// Check if the flight exists
+if ($result->num_rows > 0) {
+    $flight = $result->fetch_assoc();
+} else {
+    header("Location: flights.php");
+    exit();
 }
 
 // Check if the trip summary already exists for the logged-in user and the selected flight
@@ -45,9 +49,8 @@ $checkSql = "SELECT * FROM tripsum WHERE trip_id = '$flight_id' AND trip_email =
 $checkResult = $conn->query($checkSql);
 
 if ($checkResult->num_rows > 0) {
-    // If trip summary already exists, redirect the user to a page indicating that the trip has already been confirmed
     header("Location: trip_already_confirmed.php");
-    exit(); // Stop further execution
+    exit();
 }
 
 // Insert trip summary data into the database
@@ -60,7 +63,6 @@ if ($conn->query($insertSql) === TRUE) {
     echo "Error: " . $insertSql . "<br>" . $conn->error;
 }
 
-// Close the database connection
 $conn->close();
 ?>
 
@@ -74,7 +76,7 @@ $conn->close();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./css/booking.css">
-    <link rel="icon" href="./assets/images/favicon.jpg">
+    <link rel="icon" href="../assets/images/favicon.jpg">
     <title>Skyline - Trip Summary</title>
 </head>
 <body>
@@ -93,8 +95,8 @@ $conn->close();
         <li><a href="offers.php">Offers</a></li>
         <?php
         // Display username and logout button
-        echo '<li class="dropdown">'; // Add the "dropdown" class to the list item
-        echo '<a class="dropbtn">Hello, ' . $_SESSION['username'] . '</a>'; // Change button to anchor tag
+        echo '<li class="dropdown">';
+        echo '<a class="dropbtn">Hello, ' . $_SESSION['username'] . '</a>';
         echo '<div class="dropdown-content">';
         echo '<a href="#">Profile</a>';
         echo '<a href="logout.php" class="logout">Logout</a>';
@@ -107,7 +109,7 @@ $conn->close();
 
 <main>
     <div class="booking-details">
-        <h2>Trip Summary of Flight - #<?php echo $flight['flight_number']; ?></h2>
+        <h2>Trip Summary of Flight - #<?php echo $flight['flight_number'] . $airline = $_GET['Airline']; ?></h2>
         <table class="tbl_booking">
             <tr>
                 <td><strong>Flight Number:</strong></td>

@@ -19,7 +19,6 @@
     <nav>
       <ul>
         <li><a href="index.php">Dashboard</a></li>
-        <li><a href="flights.php">Analytics</a></li>
         <li><a href="contact.php">Contact</a></li> 
       </ul>  
     </nav>

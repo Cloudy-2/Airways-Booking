@@ -2,7 +2,6 @@
 session_start();
 
 if(isset($_POST['Flight_Number'])) {
-    // Retrieve the Flight Number value from the form
     $flightNumber = $_POST['Flight_Number'];
 }
 
@@ -20,13 +19,13 @@ if (!isset($_POST['passengers'])) {
     exit();
 }
 
-// Retrieve number of passengers from the form
 $passenger_count = $_POST['passengers'];
-$ticket_price = $_POST['price']; // Assuming this is the base ticket price
-$total_price = $ticket_price * $passenger_count; // Initialize total price with base ticket price
-
-// Initialize total price with the same value as the base ticket price
+$ticket_price = $_POST['price'];
+$total_price = $ticket_price * $passenger_count;
+$firstLetter = strtoupper($user[0]);
 $price = $total_price;
+    
+
 
 include_once './config/database.php';
 ?>
@@ -39,6 +38,7 @@ include_once './config/database.php';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./css/confirm_booking.css">
+    <link rel="icon" href="../assets/images/favicon.jpg">
     <link rel="icon" href="../assets/images/favicon.jpg">
     <title>Skyline - Confirm Booking</title>
 </head>
@@ -79,14 +79,13 @@ include_once './config/database.php';
     </div>
 
     <div class="passenger-details">
-    <form action="insertdata.php" method="POST">
+    <form action="insertdata.php" method="POST" enctype="multipart/form-data">
     <!-- Passenger Details -->
 <?php
 $totalTicketPrice = 0;
 
 // Loop through each passenger
 for ($i = 1; $i <= $passenger_count; $i++) {
-    // Passenger details inputs
     echo '<div class="passenger-info">';
     echo '<h2>Flight - #' . $flightNumber = $_POST['Flight_Number'] . '</h2>';
     echo '<input type="hidden" name="Flight_Number" value="' .  $flightNumber = $_POST['Flight_Number'] . '">';
@@ -111,23 +110,23 @@ for ($i = 1; $i <= $passenger_count; $i++) {
     echo '<div class="flight-seats">';
     echo '<label for="seat_' . $i . '">Select Seat:</label>';
     echo '<select id="seat_' . $i . '" name="seat_' . $i . '">';
-    echo '<option value="window">Window Seat</option>';
-    echo '<option value="aisle">Aisle Seat</option>';
-    echo '<option value="middle">Middle Seat</option>';
+    echo '<option value="Window">Window Seat</option>';
+    echo '<option value="Aisle">Aisle Seat</option>';
+    echo '<option value="Middle">Middle Seat</option>';
     echo '</select>';
     echo '</div>';
     // Accommodation Selection for each passenger
     echo '<div class="flight-accommodations">';
     echo '<label for="accommodation_' . $i . '">Select Accommodation:</label>';
     echo '<select id="accommodation_' . $i . '" name="accommodation_' . $i . '" onchange="calculateTotalPrice(' . $i . ')" required>';
-    echo '<option value="economy">Economy Class</option>';
-    echo '<option value="business">Business Class</option>';
-    echo '<option value="first">First Class</option>';
+    echo '<option value="Economy">Economy Class</option>';
+    echo '<option value="Business">Business Class</option>';
+    echo '<option value="First Class">First Class</option>';
     echo '</select>';
     
     // Indicator for discount
     echo '<span id="discount_indicator_' . $i . '" class="discount-indicator" style="display: none; color: green; font-weight: bold;">(Discount Applied)</span>';
-    echo '</div>'; // End of flight-accommodations
+    echo '</div>';
     
     // Display and calculate ticket price for each passenger
     echo '<div class="ticket-price">Ticket Price: ₱<span id="displayed_ticket_price_' . $i . '" class="displayed_price">' . $ticket_price . '</span></div>';
@@ -159,13 +158,16 @@ for ($i = 1; $i <= $passenger_count; $i++) {
                 <input type="radio" id="paypal-radio" name="payment-method" value="Paypal" onclick="togglePopup('paypal-popup')">
                 <label for="paypal-radio">PayPal</label>
             </li>
-            <li>
-                <input type="radio" id="mastercard-radio" name="payment-method" value="Mastercard" onclick="togglePopup('mastercard-popup')">
-                <label for="mastercard-radio">Mastercard</label>
-            </li>
         </ul>
     </div>
-
+   <div>
+        <h2>Prof Of Payment:</h2>
+        <label for="prof">Upload ScreenShoot: <b style="color: red">*</b></label>
+        <input type="file" name="prof" id="prof" accept="image/*" required onchange="previewImage(event)">
+        <br>
+        <img id="imagePreview" src="#" alt="Image Preview" style="width: 290px; height: 290px; display: none;">
+        <br>
+    </div>
     <!-- Submit Button -->
     <div class="submit-button">
         <button id="confirmBooking">Confirm Booking</button>
@@ -184,12 +186,13 @@ for ($i = 1; $i <= $passenger_count; $i++) {
             <img src="./assets/images/gcash" alt="GCash Logo" class="payment-logo">
             <h1>GCash Payment</h1>
             <p>Merchant: Airways Flight Booking</p>
-            <p>Amount: <?php echo $total_price; ?></p>
+            <p>Amount: ₱<span id="gcash-amount"><?php echo $totalTicketPrice; ?></span></p>
             <label for="gcash-mobile-number">Mobile number</label>
-            <input type="number" id="gcash-mobile-number" placeholder="Enter your mobile number" required>
-            <label for="gcash-password">OTP</label>
-            <input type="password" id="gcash-password" placeholder="Enter your GCash OTP" required>
-            <button onclick="validateAndLogin('gcash-mobile-number', 'gcash-password', 'gcash-popup')">PROCEED</button>
+            <input type="number" id="gcash-mobile-number" placeholder="Enter your Mobile Number" required>
+            <label for="gcash-password">MPIN</label>
+            <input type="password" id="gcash-password" placeholder="Enter your MPIN" required>
+            <!-- Pass the username to the validateAndLogin function -->
+            <button type="submit" id="confirmButton">Confirm</button>
         </div>
     </div>
 </div>
@@ -201,97 +204,86 @@ for ($i = 1; $i <= $passenger_count; $i++) {
         <div class="payment-method">
             <img src="./assets/images/paypal" alt="PayPal Logo" class="payment-logo">
             <h1>PayPal Payment</h1>
-            <p>Amount: <?php echo $total_price; ?></p>
-            <p>Email or mobile number</p>
+            <p>Merchant: Airways Flight Booking</p>
+            <p>Amount: <span id="paypal-amount"><?php echo $totalTicketPrice; ?></span></p>
+            <label for="paypal-email-or-mobile">Email or mobile number</label>
             <input type="text" id="paypal-email-or-mobile" placeholder="Enter your email or mobile number" required>
-            <p>Password</p>
+            <label for="paypal-password">Password</label>
             <input type="password" id="paypal-password" placeholder="Enter your password" required>
-            <button onclick="validateAndLogin('paypal-email-or-mobile', 'paypal-password', 'paypal-popup')">Log In</button>
+            <button type="submit" id="PconfirmButton">Confirm</button>
         </div>
     </div>
 </div>
 
-<!-- Mastercard pop-up -->
-<div id="mastercard-popup" class="popup">
-    <div class="popup-content">
-        <span class="close-icon" onclick="closePopupAndUnselectRadio('mastercard-popup', 'mastercard-radio')">&times;</span>
-        <div class="payment-method">
-            <img src="./assets/images/mastercard.jpg" alt="Mastercard Logo" class="payment-logo">
-            <h1>Mastercard Payment</h1>
-            <p>Amount: <?php echo $total_price; ?></p>
-            <p>Enter your Mastercard credentials</p>
-            <input type="text" id="mastercard-username" placeholder="Username" required>
-            <input type="password" id="mastercard-password" placeholder="Password" required>
-            <button onclick="validateAndLogin('mastercard-username', 'mastercard-password', 'mastercard-popup')">Log In</button>
+<div id="unique-receipt-container" class="receipt-container">
+        <div class="receipt-header">
+            <h1>Payment Receipt</h1>
+            <button id="doneButton" class="done-button">Done</button>
+        </div>
+        <div class="content">
+            <div class="successfully-paid">
+                <p>Successfully Paid To</p>
+                <div class="recipient">
+                    <div class="circle"><?php echo $firstLetter; ?></div>
+                    <p>Skyline Airways</p>
+                </div>
+            </div>
+            <div class="amount-due">
+            <span id="amount-due">₱<?php echo $totalTicketPrice; ?></span>
+            </div>
+            <div class="details">
+                <div>
+                    <span>Amount Due:</span>
+                    <span id="amount-d">₱<?php echo $totalTicketPrice; ?></span>
+                </div>
+                <div>
+                    <span>Payment Method:</span>
+                    <span>GCash</span>
+                </div>
+                <div>
+                    <span>Ref. No.</span>
+                    <span><?php echo rand(100000000, 999999999); ?></span>
+                </div>
+                <div>
+                    <span>Date:</span>
+                    <span><?php date_default_timezone_set('Asia/Manila'); echo date("d F Y"); ?></span>
+                </div>
+                <div>
+                    <span>Time:</span>
+                    <span><?php echo date("h:i A"); ?></span>
+                </div>
+            </div>
+            <p class="note">
+    <strong>Please Take a ScreenShoot of The Receipt for you to Provide a Prof of Payment</strong>
+</p>
+
+        </div>
+        <div class="receipt-footer">
+            <p>GCash Scan QR</p>
         </div>
     </div>
-</div>
-
-
+  
 <script src="./js/confirm_booking.js"></script>
 
 <script>
-    // Function to calculate total price based on accommodation selection for each passenger
-    function calculateTotalPrice(passengerIndex) {
-        var selectedAccommodation = document.getElementById("accommodation_" + passengerIndex).value;
-        var originalPrice = parseFloat(document.getElementById("mainticket1").value); // Using the base ticket price from the hidden input
-
-        // Calculate ticket price for the selected accommodation
-        var ticketPrice = originalPrice; // Default to base price
-        if (selectedAccommodation === "business") {
-            ticketPrice *= 1.5; // Business class multiplier
-        } else if (selectedAccommodation === "first") {
-            ticketPrice *= 2; // First class multiplier
-        }
-
-        // Check passenger age for discount
-        var dob = new Date(document.getElementById("dob_" + passengerIndex).value);
-        var today = new Date();
-        var age = today.getFullYear() - dob.getFullYear();
-        if (today.getMonth() < dob.getMonth() || (today.getMonth() === dob.getMonth() && today.getDate() < dob.getDate())) {
-            age--;
-        }
-
-        // Apply discount for passengers aged 60 or above
-        if (age >= 60) {
-            ticketPrice *= 0.9; // 10% discount
-            document.getElementById("discount_indicator_" + passengerIndex).style.display = "inline"; // Show discount indicator
-        } else {
-            document.getElementById("discount_indicator_" + passengerIndex).style.display = "none"; // Hide discount indicator
-        }
-
-        // Update the displayed ticket price for the passenger
-        document.getElementById("displayed_ticket_price_" + passengerIndex).textContent = ticketPrice.toFixed(2);
-
-        // Update the hidden input field for ticket price
-        document.getElementById("hidden_ticket_price_" + passengerIndex).value = ticketPrice.toFixed(2);
-
-        // Update the overall price
-        updateOverallPrice();
-    }
-
-    // Function to update the overall price
     function updateOverallPrice() {
         var overallPrice = 0;
-        var passengerCount = <?php echo $passenger_count; ?>; // Retrieve passenger count from PHP
+        var passengerCount = <?php echo $passenger_count; ?>;
         for (var i = 1; i <= passengerCount; i++) {
             overallPrice += parseFloat(document.getElementById("hidden_ticket_price_" + i).value);
         }
-        document.getElementById("displayed_overall_price").textContent = overallPrice.toFixed(2);
-        document.getElementById("total_price").value = overallPrice.toFixed(2); // Update hidden input for total price
+        var formattedPrice = overallPrice.toFixed(2);
+        document.getElementById("displayed_overall_price").textContent = formattedPrice;
+        document.getElementById("total_price").value = formattedPrice;
+        document.getElementById("gcash-amount").textContent = "₱" + formattedPrice; // Update the displayed amount
+        document.getElementById("gcash-amount").setAttribute("value", formattedPrice); // Update the value attribute
+        document.getElementById("paypal-amount").textContent = "₱" + formattedPrice; // Update the displayed amount
+        document.getElementById("paypal-amount").setAttribute("value", formattedPrice); // Update the value attribute
+        document.getElementById("amount-due").textContent = "₱" + formattedPrice; // Update the displayed amount
+        document.getElementById("amount-due").setAttribute("value", formattedPrice); // Update the value attribute
+        document.getElementById("amount-d").textContent = "₱" + formattedPrice; // Update the displayed amount
+        document.getElementById("amount-d").setAttribute("value", formattedPrice); // Update the value attribute
     }
-
-    document.addEventListener("DOMContentLoaded", function() {
-        // Initialize totalPriceElement after the DOM has fully loaded
-        var totalPriceElement = document.querySelector(".total-price");
-        // Check if totalPriceElement is not null before accessing its properties
-        if (totalPriceElement) {
-            var totalPrice = parseFloat(totalPriceElement.innerText.replace("Overall Price: ₱", ""));
-            document.getElementById("displayed_overall_price").textContent = totalPrice.toFixed(2);
-        } else {
-            console.error("Total price element not found.");
-        }
-    });
 </script>
 
 </main>

@@ -112,7 +112,106 @@ function confirmBooking(mainPassengerId) {
     xhr.send("mainPassengerId=" + mainPassengerId);
 }
 function submitEmailForm(button) {
-    var email = button.parentElement.parentElement.querySelector('td:nth-child(5)').innerText; // Assuming email is in the 5th column
+    var mainPassengerData = button.getAttribute('data-main-passenger');
+    var email = JSON.parse(mainPassengerData).email; // Assuming email is stored in the 'email' attribute of mainPassengerData
+
+    // Set the email value in the hidden input field
     document.getElementById('emailInput').value = email;
+
+    // Submit the form
     document.getElementById('viewForm').submit();
 }
+
+$(document).ready(function() {
+    $('.view-btn').on('click', function() {
+        // Get data from the button's data- attributes
+        var mainPassenger = $(this).data('mainpassenger');
+        var flightID = $(this).data('flightid');
+        var firstName = $(this).data('firstname');
+        var lastName = $(this).data('lastname');
+        var email = $(this).data('email');
+        var contactNumber = $(this).data('contactnumber');
+        var seat = $(this).data('seat');
+        var accommodation = $(this).data('accommodation');
+        var totalPrice = $(this).data('totalprice');
+        var status = $(this).data('status');
+        var seatNumber = $(this).data('seatnumber');
+
+        // Populate the modal with the fetched data
+        var modalBody = $('#viewModal .modal-body');
+        modalBody.html(`
+            <p><strong>Main Passenger:</strong> ${mainPassenger}</p>
+            <p><strong>Flight ID:</strong> ${flightID}</p>
+            <p><strong>First Name:</strong> ${firstName}</p>
+            <p><strong>Last Name:</strong> ${lastName}</p>
+            <p><strong>Email:</strong> ${email}</p>
+            <p><strong>Contact Number:</strong> ${contactNumber}</p>
+            <p><strong>Seat:</strong> ${seat}</p>
+            <p><strong>Accommodation:</strong> ${accommodation}</p>
+            <p><strong>Total Price:</strong> ₱${totalPrice}</p>
+            <p><strong>Status:</strong> ${status}</p>
+            <p><strong>Seat Number:</strong> ${seatNumber}</p>
+        `);
+    });
+});
+// Click event for Other Passenger button
+$('.view-btn-other').on('click', function() {
+    // Get data from the button's data- attributes
+    var mainPassenger = $(this).data('mainpassenger');
+    var flightID = $(this).data('flightid');
+    var firstName = $(this).data('firstname');
+    var lastName = $(this).data('lastname');
+    var email = $(this).data('email');
+    var contactNumber = $(this).data('contactnumber');
+    var seat = $(this).data('seat');
+    var accommodation = $(this).data('accommodation');
+    var totalPrice = $(this).data('totalprice');
+    var status = $(this).data('status');
+    var seatNumber = $(this).data('seatnumber');
+
+    // Populate the modal with the fetched data
+    var modalBody = $('#viewModalOtherPassenger .modal-body');
+    modalBody.html(`
+        <p><strong>Main Passenger:</strong> ${mainPassenger}</p>
+        <p><strong>Flight ID:</strong> ${flightID}</p>
+        <p><strong>First Name:</strong> ${firstName}</p>
+        <p><strong>Last Name:</strong> ${lastName}</p>
+        <p><strong>Email:</strong> ${email}</p>
+        <p><strong>Contact Number:</strong> ${contactNumber}</p>
+        <p><strong>Seat:</strong> ${seat}</p>
+        <p><strong>Accommodation:</strong> ${accommodation}</p>
+        <p><strong>Ticket Price:</strong> ₱${totalPrice}</p>
+        <p><strong>Status:</strong> ${status}</p>
+        <p><strong>Seat Number:</strong> ${seatNumber}</p>
+    `);
+});
+
+
+function showFullImage(imgElement) {
+    // Get the full image data from the data-full-image attribute
+    var fullImageData = imgElement.getAttribute('data-full-image');
+
+    // Set the src of the fullImage img element to the full image data
+    var fullImage = document.getElementById('fullImage');
+    fullImage.src = fullImageData;
+
+    // Display the modal
+    var imageModal = document.getElementById('imageModal');
+    imageModal.style.display = 'flex';
+}
+
+function closeModal() {
+    // Hide the modal
+    var imageModal = document.getElementById('imageModal');
+    imageModal.style.display = 'none';
+}
+
+// Add event listener to the close button
+document.getElementById('closeButton').addEventListener('click', closeModal);
+
+// Add event listener to close the modal when clicking outside the image
+document.getElementById('imageModal').addEventListener('click', function(event) {
+    if (event.target === this) {
+        closeModal();
+    }
+});

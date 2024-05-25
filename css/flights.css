@@ -1,5 +1,5 @@
 body{
-  background-color: #c4b5b5;
+  background-color: #b8b8b8;
 }
 /* Style for the table */
 table {
@@ -294,4 +294,19 @@ footer {
 .change-flight-link:hover {
   background-color: #0056b3; /* Darker shade when hovered */
 }
-
+.philippine-airline {
+  font-size: 34px;
+  color: white;
+  text-shadow: -1px -1px 0 #000,  
+               1px -1px 0 #000, 
+              -1px 1px 0 #000, 
+               1px 1px 0 #000;
+}
+.Cebu-pacific{
+  font-size: 34px;
+  color: white;
+  text-shadow: -1px -1px 0 #000,  
+               1px -1px 0 #000, 
+              -1px 1px 0 #000, 
+               1px 1px 0 #000;
+}
