@@ -57,129 +57,121 @@ $Airline2 = 'Cebu Pacific';
 </header>
 
 <main>
-    <!-- Display search results for Philippine Airline -->
-    <?php
-    if ($conn) {
-        // Retrieve user input from the form
-        if (isset($_SESSION['search_location']) && isset($_SESSION['search_destination']) && isset($_SESSION['search_departure'])) {
-            $location = $_SESSION['search_location'];
-            $destination = $_SESSION['search_destination'];
-            $departureDate = $_SESSION['search_departure'];
 
-            // Perform a database query to search for flights based on user input
-            $sql = "SELECT * FROM philippine_airline WHERE departure_location LIKE '%$location%' AND arrival_location LIKE '%$destination%'";
-            $result = $conn->query($sql);
+<!-- Display search results for Philippine Airlines -->
+<?php
+if ($conn) {
+    // Retrieve user input from the form
+    if (isset($_SESSION['search_location']) && isset($_SESSION['search_destination']) && isset($_SESSION['search_departure'])) {
+        $location = $_SESSION['search_location'];
+        $destination = $_SESSION['search_destination'];
+        $departureDate = $_SESSION['search_departure'];
 
-            if ($result->num_rows > 0) {
-                // Output table header
-                echo "<h2 class='philippine-airline'>Philippine Airline</h2>";
-                echo "<table>";
-                echo "<tr><th>Flight Number</th><th>Departure</th><th>Departure Date</th><th>Departure-Time</th><th>Arrival</th><th>Arrival Date</th><th>Arrival-Time</th><th>Price</th><th>Book</th></tr>";
+        // Perform a database query to search for flights based on user input
+        $sql = "SELECT flight_number, departure_location, arrival_location, `Departure-Time`, `Arrival-Time`, price, Airline FROM philippine_airline WHERE departure_location LIKE '%$location%' AND arrival_location LIKE '%$destination%'";
+        $result = $conn->query($sql);
 
-                // Output data of each row
-                while ($row = $result->fetch_assoc()) {
-                    echo "<tr>";
-                    echo "<td class='flight-number'>" . $row["flight_number"] . "</td>";
-                    echo "<td>" . $row["departure_location"] . "</td>";
-                    echo "<td>" . $departureDate . "</td>";
-                    echo "<td class='flight-number'>" . $row["Departure-Time"] . "</td>";
-                    echo "<td>" . $row["arrival_location"] . "</td>";
-                    echo "<td>" . $departureDate . "</td>";
-                    echo "<td class='flight-number'>" . $row["Arrival-Time"] . "</td>";
-                    echo "<td>₱" . $row["price"] . "</td>";
-                    // Check if user is logged in
-                    if (isset($_SESSION['username'])) {
-                        // Redirect user to booking.php with flight_id and dates as parameters
-                        echo "<td><a href='booking.php?Airline=Philippine%20Airline&flight_id=" . $row["flight_number"] . "&departure_date=" . $departureDate . "&arrival_date=" . $departureDate . "' class='book-now-button'>Book Now</a></td>";
-                    } else {
-                        echo "<td><button disabled>Log in to Book</button></td>";
-                    }
-                    echo "</tr>";
+        if ($result->num_rows > 0) {
+            // Output table header
+            echo "<h2 class='philippine-airline'>
+                    <img src='./assets/images/Phil_pac-removebg-preview.png' alt='Philippine Airlines Logo' class='airline-logo'>
+                    Philippine Airlines
+                  </h2>";
+            echo "<table>";
+            echo "<tr><th>Flight Number</th><th>Departure</th><th>Departure Date</th><th>Departure-Time</th><th>Arrival</th><th>Arrival Date</th><th>Arrival-Time</th><th>Price</th><th>Airline</th><th>Book</th></tr>";
+
+            // Output data of each row
+            while ($row = $result->fetch_assoc()) {
+                echo "<tr>";
+                echo "<td class='flight-number'>" . $row["flight_number"] . "</td>";
+                echo "<td>" . $row["departure_location"] . "</td>";
+                echo "<td>" . $departureDate . "</td>";
+                echo "<td class='flight-number'>" . $row["Departure-Time"] . "</td>";
+                echo "<td>" . $row["arrival_location"] . "</td>";
+                echo "<td>" . $departureDate . "</td>";
+                echo "<td class='flight-number'>" . $row["Arrival-Time"] . "</td>";
+                echo "<td>₱" . $row["price"] . "</td>";
+                echo "<td>" . $row["Airline"] . "</td>";
+                if (isset($_SESSION['username'])) {
+                    echo "<td><a href='booking.php?Airline=Philippine%20Airline&flight_id=" . $row["flight_number"] . "&departure_date=" . $departureDate . "&arrival_date=" . $departureDate . "' class='book-now-button'>Book Now</a></td>";
+                } else {
+                    echo "<td><button disabled>Log in to Book</button></td>";
                 }
-
-                echo "</table>";
-            } else {
-                echo "<p>No flights found.</p>";
+                echo "</tr>";
             }
+
+            echo "</table>";
         } else {
-            echo "<p>No search performed yet.</p>";
+            echo "<p>No flights found.</p>";
         }
     } else {
-        echo "Connection failed: " . $conn->connect_error;
+        echo "<p>No search performed yet.</p>";
     }
-    ?>
+} else {
+    echo "Connection failed: " . $conn->connect_error;
+}
+?>
 
-    <!-- Display search results for Cebu Pacific -->
-    <?php
-    if ($conn) {
-        // Retrieve user input from the form
-        if (isset($_SESSION['search_location']) && isset($_SESSION['search_destination']) && isset($_SESSION['search_departure'])) {
-            $location = $_SESSION['search_location'];
-            $destination = $_SESSION['search_destination'];
-            $departureDate = $_SESSION['search_departure'];
 
-            // Perform a database query to search for flights based on user input
-            $sql = "SELECT * FROM Cebu_Pacific WHERE departure_location LIKE '%$location%' AND arrival_location LIKE '%$destination%'";
-            $result = $conn->query($sql);
 
-            if ($result->num_rows > 0) {
-                // Output table header
-                echo "<h2 class='cebu-pacific'>Cebu Pacific</h2>";
-                echo "<table>";
-                echo "<tr><th>Flight Number</th><th>Departure</th><th>Departure Date</th><th>Departure-Time</th><th>Arrival</th><th>Arrival Date</th><th>Arrival-Time</th><th>Price</th><th>Book</th></tr>";
+<!-- Display search results for Cebu Pacific -->
+<?php
+if ($conn) {
+    // Retrieve user input from the form
+    if (isset($_SESSION['search_location']) && isset($_SESSION['search_destination']) && isset($_SESSION['search_departure'])) {
+        $location = $_SESSION['search_location'];
+        $destination = $_SESSION['search_destination'];
+        $departureDate = $_SESSION['search_departure'];
 
-                // Output data of each row
-                while ($row = $result->fetch_assoc()) {
-                    echo "<tr>";
-                    echo "<td class='flight-number'>" . $row["flight_number"] . "</td>";
-                    echo "<td>" . $row["departure_location"] . "</td>";
-                    echo "<td>" . $departureDate . "</td>";
-                    echo "<td class='flight-number'>" . $row["Departure-Time"] . "</td>";
-                    echo "<td>" . $row["arrival_location"] . "</td>";
-                    echo "<td>" . $departureDate . "</td>";
-                    echo "<td class='flight-number'>" . $row["Arrival-Time"] . "</td>";
-                    echo "<td>₱" . $row["price"] . "</td>";
-                    // Check if user is logged in
-                    if (isset($_SESSION['username'])) {
-                        // Redirect user to booking.php with flight_id and dates as parameters
-                        echo "<td><a href='booking.php?Airline=Cebu%20Pacific&flight_id=" . $row["flight_number"] . "&departure_date=" . $departureDate . "&arrival_date=" . $departureDate . "' class='book-now-button'>Book Now</a></td>";
-                    } else {
-                        echo "<td><button disabled>Log in to Book</button></td>";
-                    }
-                    echo "</tr>";
+        // Perform a database query to search for flights based on user input
+        $sql = "SELECT flight_number, departure_location, arrival_location, `Departure-Time`, `Arrival-Time`, price, Airline FROM Cebu_Pacific WHERE departure_location LIKE '%$location%' AND arrival_location LIKE '%$destination%'";
+        $result = $conn->query($sql);
+
+        if ($result->num_rows > 0) {
+            // Output table header
+            echo "<h2 class='cebu-pacific'>
+                    <img src='./assets/images/Ceb_pac.png' class='airline-logo'>
+                    Cebu Pacific
+                  </h2>";
+            echo "<table>";
+            echo "<tr><th>Flight Number</th><th>Departure</th><th>Departure Date</th><th>Departure-Time</th><th>Arrival</th><th>Arrival Date</th><th>Arrival-Time</th><th>Price</th><th>Airline</th><th>Book</th></tr>";
+
+            // Output data of each row
+            while ($row = $result->fetch_assoc()) {
+                echo "<tr>";
+                echo "<td class='flight-number'>" . $row["flight_number"] . "</td>";
+                echo "<td>" . $row["departure_location"] . "</td>";
+                echo "<td>" . $departureDate . "</td>";
+                echo "<td class='flight-number'>" . $row["Departure-Time"] . "</td>";
+                echo "<td>" . $row["arrival_location"] . "</td>";
+                echo "<td>" . $departureDate . "</td>";
+                echo "<td class='flight-number'>" . $row["Arrival-Time"] . "</td>";
+                echo "<td>₱" . $row["price"] . "</td>";
+                echo "<td>" . $row["Airline"] . "</td>";
+                if (isset($_SESSION['username'])) {
+                    echo "<td><a href='booking.php?Airline=Cebu%20Pacific&flight_id=" . $row["flight_number"] . "&departure_date=" . $departureDate . "&arrival_date=" . $departureDate . "' class='book-now-button'>Book Now</a></td>";
+                } else {
+                    echo "<td><button disabled>Log in to Book</button></td>";
                 }
-
-                echo "</table>";
-            } else {
-                echo "<p>No flights found.</p>";
+                echo "</tr>";
             }
+            
+            echo "</table>";
         } else {
-            echo "<p>No search performed yet.</p>";
+            echo "<p>No flights found.</p>";
         }
     } else {
-        echo "Connection failed: " . $conn->connect_error;
+        echo "<p>No search performed yet.</p>";
     }
-    ?>
+} else {
+    echo "Connection failed: " . $conn->connect_error;
+}
+?>
+
     <div class="change-flight-button">
         <a href="index.php" class="change-flight-link">Change Flight</a>
     </div>
 </main>
-
-<footer>
-    <div class="payment-methods">
-        <h3>Available Payment Methods</h3>
-        <ul>
-            <li>
-                <img src="./assets/images/gcash.png" alt="Gcash">
-                <span>Gcash</span>
-            </li>
-            <li>
-                <img src="./assets/images/paypal.png" alt="PayPal">
-                <span>PayPal</span>
-            </li>
-        </ul>
-    </div>
-</footer>
 
 </body>
 </html>

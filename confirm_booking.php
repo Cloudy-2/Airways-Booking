@@ -211,53 +211,65 @@ for ($i = 1; $i <= $passenger_count; $i++) {
     </div>
 </div>
 
-<div id="unique-receipt-container" class="receipt-container">
-        <div class="receipt-header">
-            <h1>Payment Receipt</h1>
-            <button id="doneButton" class="done-button">Done</button>
-        </div>
-        <div class="content">
-            <div class="successfully-paid">
-                <p>Successfully Paid To</p>
-                <div class="recipient">
-                    <div class="circle"><?php echo $firstLetter; ?></div>
-                    <p>Skyline Airways</p>
-                </div>
-            </div>
-            <div class="amount-due">
-            <span id="amount-due">₱<?php echo $totalTicketPrice; ?></span>
-            </div>
-            <div class="details">
-                <div>
-                    <span>Amount Due:</span>
-                    <span id="amount-d">₱<?php echo $totalTicketPrice; ?></span>
-                </div>
-                <div>
-                    <span>Payment Method:</span>
-                    <span>GCash</span>
-                </div>
-                <div>
-                    <span>Ref. No.</span>
-                    <span><?php echo rand(100000000, 999999999); ?></span>
-                </div>
-                <div>
-                    <span>Date:</span>
-                    <span><?php date_default_timezone_set('Asia/Manila'); echo date("d F Y"); ?></span>
-                </div>
-                <div>
-                    <span>Time:</span>
-                    <span><?php echo date("h:i A"); ?></span>
-                </div>
-            </div>
-            <p class="note">
-    <strong>Please Take a ScreenShoot of The Receipt for you to Provide a Prof of Payment</strong>
-</p>
-
-        </div>
-        <div class="receipt-footer">
-            <p>GCash Scan QR</p>
-        </div>
+<div id="unique-receipt-container" class="receipt-container"> 
+    <div class="receipt-header">
+        <h1>Payment Receipt</h1>
+        <button id="doneButton" class="done-button">Done</button>
     </div>
+    <div class="content">
+        <div class="successfully-paid">
+            <p>Successfully Paid To</p>
+            <div class="recipient">
+                <div class="circle"><?php echo $firstLetter; ?></div>
+                <p>Skyline Airways</p>
+            </div>
+        </div>
+        <div class="amount-due">
+            <span id="amount-due">₱<?php echo $totalTicketPrice; ?></span>
+        </div>
+        <div class="details">
+            <div>
+                <span>Amount Due:</span>
+                <span id="amount-d">₱<?php echo $totalTicketPrice; ?></span>
+            </div>
+            <div>
+                <span>Payment Method:</span>
+                <span>GCash</span>
+            </div>
+            <div>
+                <span>Ref. No.</span>
+                <span><?php echo rand(100000000, 999999999); ?></span>
+            </div>
+            <div>
+                <span>Date:</span>
+                <span><?php date_default_timezone_set('Asia/Manila'); echo date("d F Y"); ?></span>
+            </div>
+            <div>
+                <span>Time:</span>
+                <span><?php echo date("h:i A"); ?></span>
+            </div>
+        </div>
+        <p class="note">
+            <strong>Please Take a ScreenShoot of The Receipt for you to Provide a Proof of Payment</strong>
+        </p>
+    </div>
+    <div class="receipt-footer">
+        <p>GCash Scan QR</p>
+    </div>
+</div>
+
+<!-- JavaScript for SweetAlert -->
+<script>
+    document.getElementById('doneButton').addEventListener('click', function() {
+        swal({
+            title: "Gcash",
+            text: "Thanks for choosing Skyline Airways",
+            icon: "success",
+            button: "Confirm",
+        });
+    });
+</script>
+
   
 <script src="./js/confirm_booking.js"></script>
 
@@ -281,7 +293,7 @@ for ($i = 1; $i <= $passenger_count; $i++) {
         document.getElementById("amount-d").setAttribute("value", formattedPrice); // Update the value attribute
     }
 </script>
-
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </main>
 </body>
 </html>
