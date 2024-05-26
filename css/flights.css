@@ -3,6 +3,7 @@ body{
 }
 /* Style for the table */
 table {
+  margin-bottom: 10px;
   border-collapse: collapse;
   width: 100%;
   border-spacing: 0; /* Remove spacing between table cells */
@@ -294,19 +295,38 @@ footer {
 .change-flight-link:hover {
   background-color: #0056b3; /* Darker shade when hovered */
 }
+
+/* Philippine Airline Styling */
 .philippine-airline {
-  font-size: 34px;
-  color: white;
-  text-shadow: -1px -1px 0 #000,  
-               1px -1px 0 #000, 
-              -1px 1px 0 #000, 
-               1px 1px 0 #000;
+  text-align: left; /* Align text to the left */
+  font-family: 'Montserrat', sans-serif; /* Use the Montserrat font */
+  margin: 0;
+  padding-top: px;
+  padding-bottom: 40px;
+  font-size: 38px; /* Larger font size */
+  color: rgba(220, 20, 60, 1); /* Font color matches the gradient Crimson */
+  font-weight: 700; /* Bolder text */
+  text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3); /* More pronounced text shadow */
+  border-radius: 10px; /* More rounded corners */
 }
-.cebu-pacific{
-  font-size: 34px;
-  color: white;
-  text-shadow: -1px -1px 0 #000,  
-               1px -1px 0 #000, 
-              -1px 1px 0 #000, 
-               1px 1px 0 #000;
+
+/* Cebu Pacific Styling */
+.cebu-pacific {
+  text-align: left; /* Align text to the left */
+  font-family: 'Montserrat', sans-serif; /* Use the Montserrat font */
+  margin: 0;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  font-size: 38px; /* Larger font size */
+  color: rgba(255, 165, 0, 1); /* Font color matches the gradient Orange */
+  font-weight: 700; /* Bolder text */
+  text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3); /* More pronounced text shadow */
+  border-radius: 10px; /* More rounded corners */
 }
+/* Logo Styling */
+.airline-logo {
+  height: 50px; /* Adjust size as necessary */
+  vertical-align: middle;
+  margin-right: 5px;
+}
+
