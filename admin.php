@@ -479,11 +479,7 @@
         onclick="redirectToOtherUserInfo('<?php echo $row['email']; ?>')">
     View
 </button>
-                        <form id="viewForm" method="POST" style="display: none;" action="userinfo.php">
-                            <input type="hidden" id="emailInput" name="email" value="">
-                        </form>
-                       
-                        <form method="post" action="UpdateBooking.php">
+                     <form method="post" action="UpdateBooking.php">
     <div class="modal fade" id="OtherseatSelectionModal<?= $other_passengerId ?>" tabindex="-1" aria-labelledby="OtherseatSelectionModal" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -495,102 +491,30 @@
                     <div class="seat-map-container">
                         <div class="seat-section first-class">
                             <h3>First Class</h3>
-                            <div class="seat-row">
-                                <?php
-                                for ($i = 1; $i <= 9; $i++) {
-                                    $seatId = 'F' . $i;
-                                    $isOccupied = in_array($seatId, $takenSeats);
-                                    $seatClass = $isOccupied ? 'occupied' : '';
-                                    echo "<div class='seat $seatClass' id='$seatId' onclick='handleSeatSelection(\"{$other_passengerId}\", \"$seatId\")'>$seatId</div>";
-                                }
-                                ?>
-                            </div>
-                            <div class="seat-row">
-                                <?php
-                                for ($i = 10; $i <= 18; $i++) {
-                                    $seatId = 'F' . $i;
-                                    $isOccupied = in_array($seatId, $takenSeats);
-                                    $seatClass = $isOccupied ? 'occupied' : '';
-                                    echo "<div class='seat $seatClass' id='$seatId' onclick='handleSeatSelection(\"{$other_passengerId}\", \"$seatId\")'>$seatId</div>";
-                                }
-                                ?>
-                            </div>
-                            <div class="seat-row">
-                                <?php
-                                for ($i = 19; $i <= 27; $i++) {
-                                    $seatId = 'F' . $i;
-                                    $isOccupied = in_array($seatId, $takenSeats);
-                                    $seatClass = $isOccupied ? 'occupied' : '';
-                                    echo "<div class='seat $seatClass' id='$seatId' onclick='handleSeatSelection(\"{$other_passengerId}\", \"$seatId\")'>$seatId</div>";
-                                }
-                                ?>
-                            </div>
+                            <?php for ($i = 1; $i <= 54; $i++) {
+                                $seatId = 'F' . $i;
+                                $isOccupied = in_array($seatId, $takenSeats);
+                                $seatClass = $isOccupied ? 'occupied' : '';
+                                echo "<div class='seat $seatClass' id='$seatId' onclick='handleSeatSelection(\"{$other_passengerId}\", \"$seatId\")'>$seatId</div>";
+                            } ?>
                         </div>
                         <div class="seat-section business-class">
                             <h3>Business Class</h3>
-                            <div class="seat-row">
-                                <?php
-                                for ($i = 1; $i <= 9; $i++) {
-                                    $seatId = 'B' . $i;
-                                    $isOccupied = in_array($seatId, $takenSeats);
-                                    $seatClass = $isOccupied ? 'occupied' : '';
-                                    echo "<div class='seat $seatClass' id='$seatId' onclick='handleSeatSelection(\"{$other_passengerId}\", \"$seatId\")'>$seatId</div>";
-                                }
-                                ?>
-                            </div>
-                            <div class="seat-row">
-                                <?php
-                                for ($i = 10; $i <= 18; $i++) {
-                                    $seatId = 'B' . $i;
-                                    $isOccupied = in_array($seatId, $takenSeats);
-                                    $seatClass = $isOccupied ? 'occupied' : '';
-                                    echo "<div class='seat $seatClass' id='$seatId' onclick='handleSeatSelection(\"{$other_passengerId}\", \"$seatId\")'>$seatId</div>";
-                                }
-                                ?>
-                            </div>
-                            <div class="seat-row">
-                                <?php
-                                for ($i = 19; $i <= 27; $i++) {
-                                    $seatId = 'B' . $i;
-                                    $isOccupied = in_array($seatId, $takenSeats);
-                                    $seatClass = $isOccupied ? 'occupied' : '';
-                                    echo "<div class='seat $seatClass' id='$seatId' onclick='handleSeatSelection(\"{$other_passengerId}\", \"$seatId\")'>$seatId</div>";
-                                }
-                                ?>
-                            </div>
+                            <?php for ($i = 1; $i <= 54; $i++) {
+                                $seatId = 'B' . $i;
+                                $isOccupied = in_array($seatId, $takenSeats);
+                                $seatClass = $isOccupied ? 'occupied' : '';
+                                echo "<div class='seat $seatClass' id='$seatId' onclick='handleSeatSelection(\"{$other_passengerId}\", \"$seatId\")'>$seatId</div>";
+                            } ?>
                         </div>
                         <div class="seat-section economy-class">
                             <h3>Economy Class</h3>
-                            <div class="seat-row">
-                                <?php
-                                for ($i = 1; $i <= 9; $i++) {
-                                    $seatId = 'E' . $i;
-                                    $isOccupied = in_array($seatId, $takenSeats);
-                                    $seatClass = $isOccupied ? 'occupied' : '';
-                                    echo "<div class='seat $seatClass' id='$seatId' onclick='handleSeatSelection(\"{$other_passengerId}\", \"$seatId\")'>$seatId</div>";
-                                }
-                                ?>
-                            </div>
-                            <div class="seat-row">
-                                <?php
-                                for ($i = 10; $i <= 18; $i++) {
-                                    $seatId = 'E' . $i;
-                                    $isOccupied = in_array($seatId, $takenSeats);
-                                    $seatClass = $isOccupied ? 'occupied' : '';
-                                    echo "<div class='seat $seatClass' id='$seatId' onclick='handleSeatSelection(\"{$other_passengerId}\", \"$seatId\")'>$seatId</div>";
-                                }
-                                ?>
-                            </div>
-                            <div class="seat-row">
-                                <?php
-                                for ($i = 19; $i <= 27; $i++) {
-                                    $seatId = 'E' . $i;
-                                    $isOccupied = in_array($seatId, $takenSeats);
-                                    $seatClass = $isOccupied ? 'occupied' : '';
-                                    echo "<div class='seat $seatClass' id='$seatId' onclick='handleSeatSelection(\"{$other_passengerId}\", \"$seatId\")'>$seatId</div>";
-                                }
-                                ?>
-                            </div>
+                            <?php for ($i = 1; $i <= 54; $i++) {
+                                $seatId = 'E' . $i;
+                                $isOccupied = in_array($seatId, $takenSeats);
+                                $seatClass = $isOccupied ? 'occupied' : '';
+                                echo "<div class='seat $seatClass' id='$seatId' onclick='handleSeatSelection(\"{$other_passengerId}\", \"$seatId\")'>$seatId</div>";
+                            } ?>
                         </div>
                     </div>
 
@@ -601,7 +525,7 @@
                             <?php 
                             $sections = ['F', 'B', 'E'];
                             foreach ($sections as $section) {
-                                for ($i = 1; $i <= 27; $i++) {
+                                for ($i = 1; $i <= 54; $i++) {
                                     $seatNumber = $section . $i;
                                     if (in_array($seatNumber, $takenSeats)) {
                                         echo "<option value='$seatNumber' disabled style='background-color: red;'>$seatNumber</option>";
