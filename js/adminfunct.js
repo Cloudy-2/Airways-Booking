@@ -101,10 +101,11 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 
-// Define a JavaScript function to handle seat selection
+// Define a JavaScript function to handle seat selection mainpassenger
 function handleSeatSelection(mainPassengerId, seatId) {
     // Check if the seat is already occupied or selected
-    if (document.getElementById(seatId).classList.contains('occupied') || document.getElementById(seatId).classList.contains('selected')) {
+    var seatElement = document.getElementById(seatId);
+    if (seatElement.classList.contains('occupied') || seatElement.classList.contains('selected')) {
         // If the seat is occupied or selected, do nothing
         return;
     }
@@ -116,12 +117,63 @@ function handleSeatSelection(mainPassengerId, seatId) {
     });
 
     // Mark the selected seat as 'selected'
-    document.getElementById(seatId).classList.add('selected');
+    seatElement.classList.add('selected');
 
     // Update the selected seat number in the dropdown
     var seatSelectDropdown = document.getElementById('SeatSelect' + mainPassengerId);
-    seatSelectDropdown.value = seatId;
+    if (seatSelectDropdown) {
+        seatSelectDropdown.value = seatId;
+    }
 }
+
+// Add hover effect for a few seconds
+document.querySelectorAll('.seat').forEach(function(seat) {
+    seat.addEventListener('mouseover', function() {
+        seat.classList.add('hover-effect');
+        setTimeout(function() {
+            seat.classList.remove('hover-effect');
+        }, 2000); // Adjust time in milliseconds as needed
+    });
+});
+
+
+// Define a JavaScript function to handle seat selection for other passengers
+function handleOtherPassengerSeatSelection(otherPassengerId, seatId) {
+    // Check if the seat is already occupied or selected
+    var seatElement = document.getElementById(seatId);
+    if (seatElement.classList.contains('occupied') || seatElement.classList.contains('selected')) {
+        // If the seat is occupied or selected, do nothing
+        return;
+    }
+
+    // Clear previously selected seats
+    var selectedSeats = document.querySelectorAll('.seat.selected');
+    selectedSeats.forEach(function(seat) {
+        seat.classList.remove('selected');
+    });
+
+    // Mark the selected seat as 'selected'
+    seatElement.classList.add('selected');
+
+    // Update the selected seat number in the dropdown
+    var seatSelectDropdown = document.getElementById('Other_SeatSelect' + otherPassengerId);
+    if (seatSelectDropdown) {
+        seatSelectDropdown.value = seatId;
+    }
+}
+
+// Add hover effect for a few seconds (for other passengers)
+document.querySelectorAll('.seat').forEach(function(seat) {
+    seat.addEventListener('mouseover', function() {
+        seat.classList.add('hover-effect');
+        setTimeout(function() {
+            seat.classList.remove('hover-effect');
+        }, 2000); // Adjust time in milliseconds as needed
+    });
+});
+
+
+
 function redirectToUserInfo(email) {
     window.location.href = 'userinfo.php?email=' + email;
 }
