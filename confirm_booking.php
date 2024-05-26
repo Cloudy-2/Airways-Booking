@@ -96,17 +96,12 @@ for ($i = 1; $i <= $passenger_count; $i++) {
     echo '<label for="last_name_' . $i . '">Last Name:</label>';
     echo '<input type="text" id="last_name_' . $i . '" name="last_name_' . $i . '" required>';
     echo '<label for="email_' . $i . '">Email:</label>';
-    if ($i == 1) {
-        // Apply the value only for the first email
-        echo '<input type="email" id="email_' . $i . '" name="email_' . $i . '" value="' . $user . '" readonly required>';
-    } else {
-        // For other emails, leave the value empty
-        echo '<input type="email" id="email_' . $i . '" name="email_' . $i . '" required>';
-    }
+    echo '<input type="email" id="email_' . $i . '" name="email_' . $i . '" value="' . $user . '" readonly required>';
     echo '<label for="contact_number_' . $i . '">Contact Number:</label>';
     echo '<input type="text" id="contact_number_' . $i . '" name="contact_number_' . $i . '" required>';
     echo '<label for="dob_' . $i . '">Date of Birth:</label>';
     echo '<input type="date" id="dob_' . $i . '" name="dob_' . $i . '" onchange="calculateTotalPrice(' . $i . ')" required>';
+    
     // Seat Selection for each passenger
     echo '<div class="flight-seats">';
     echo '<label for="seat_' . $i . '">Select Seat:</label>';
@@ -116,6 +111,7 @@ for ($i = 1; $i <= $passenger_count; $i++) {
     echo '<option value="Middle">Middle Seat</option>';
     echo '</select>';
     echo '</div>';
+    
     // Accommodation Selection for each passenger
     echo '<div class="flight-accommodations">';
     echo '<label for="accommodation_' . $i . '">Select Accommodation:</label>';
@@ -132,12 +128,23 @@ for ($i = 1; $i <= $passenger_count; $i++) {
     // Display and calculate ticket price for each passenger
     echo '<div class="ticket-price">Ticket Price: ₱<span id="displayed_ticket_price_' . $i . '" class="displayed_price">' . $ticket_price . '</span></div>';
     echo '<input type="hidden" id="hidden_ticket_price_' . $i . '" name="hidden_ticket_price_' . $i . '" value="' . $ticket_price . '">';
-
+    
     // Add the ticket price for this passenger to the total ticket price
     $totalTicketPrice += $ticket_price;
+
+    // Add upload image feature for passengers if count is more than 1 and passenger is not the first one
+    if ($passenger_count > 1 && $i > 1) {
+        echo '<label for="profs_'  . $i . '">Upload Valid ID: <b style="color: red">*</b></label>';
+        echo '<input type="file" name="profs_' . $i . '" id="profs_' . $i . '" accept="image/*" required onchange="previewImage(event, ' . $i . ')">';
+        echo '<br>';
+        echo '<img id="IDPreview' . $i . '" src="#" alt="Image Preview" style="width: 290px; height: 190px; display: none;">';
+        echo '<br>';
+    }
+
     echo '</div>'; // End of passenger-info
 }
 ?>
+
 <input type="hidden" name="mainEmail" id="mainEmail" value="<?php echo $user; ?>">
     <input type="hidden" name="mainticket" id="mainticket1" value="<?php echo $ticket_price; ?>">
 <!-- Overall Price Display -->
@@ -161,12 +168,12 @@ for ($i = 1; $i <= $passenger_count; $i++) {
             </li>
         </ul>
     </div>
-   <div>
-        <h2>Prof Of Payment:</h2>
-        <label for="prof">Upload ScreenShoot: <b style="color: red">*</b></label>
-        <input type="file" name="prof" id="prof" accept="image/*" required onchange="previewImage(event)">
+    <div>
+        <h2>Proof Of Payment:</h2>
+        <label for="prof">Upload Screenshot: <b style="color: red">*</b></label>
+        <input type="file" name="prof" id="prof" accept="image/*" required onchange="previewImage(event, 'prof')">
         <br>
-        <img id="imagePreview" src="#" alt="Image Preview" style="width: 290px; height: 290px; display: none;">
+        <img id="imagePreview" src="#" alt="Image Preview" style="width: 290px; height: 190px; display: none;">
         <br>
     </div>
     <!-- Submit Button -->
@@ -258,42 +265,58 @@ for ($i = 1; $i <= $passenger_count; $i++) {
     </div>
 </div>
 
-<!-- JavaScript for SweetAlert -->
 <script>
-    document.getElementById('doneButton').addEventListener('click', function() {
-        swal({
-            title: "Gcash",
-            text: "Thanks for choosing Skyline Airways",
-            icon: "success",
-            button: "Confirm",
-        });
+document.getElementById('doneButton').addEventListener('click', function() {
+    swal({
+        title: "Gcash",
+        text: "Thanks for choosing Skyline Airways",
+        icon: "success",
+        button: "Confirm",
     });
+});
 </script>
 
-  
-<script src="./js/confirm_booking.js"></script>
-
 <script>
-    function updateOverallPrice() {
-        var overallPrice = 0;
-        var passengerCount = <?php echo $passenger_count; ?>;
-        for (var i = 1; i <= passengerCount; i++) {
-            overallPrice += parseFloat(document.getElementById("hidden_ticket_price_" + i).value);
-        }
-        var formattedPrice = overallPrice.toFixed(2);
-        document.getElementById("displayed_overall_price").textContent = formattedPrice;
-        document.getElementById("total_price").value = formattedPrice;
-        document.getElementById("gcash-amount").textContent = "₱" + formattedPrice; // Update the displayed amount
-        document.getElementById("gcash-amount").setAttribute("value", formattedPrice); // Update the value attribute
-        document.getElementById("paypal-amount").textContent = "₱" + formattedPrice; // Update the displayed amount
-        document.getElementById("paypal-amount").setAttribute("value", formattedPrice); // Update the value attribute
-        document.getElementById("amount-due").textContent = "₱" + formattedPrice; // Update the displayed amount
-        document.getElementById("amount-due").setAttribute("value", formattedPrice); // Update the value attribute
-        document.getElementById("amount-d").textContent = "₱" + formattedPrice; // Update the displayed amount
-        document.getElementById("amount-d").setAttribute("value", formattedPrice); // Update the value attribute
+function updateOverallPrice() {
+    var overallPrice = 0;
+    var passengerCount = <?php echo $passenger_count; ?>;
+    for (var i = 1; i <= passengerCount; i++) {
+        overallPrice += parseFloat(document.getElementById("hidden_ticket_price_" + i).value);
     }
+    var formattedPrice = overallPrice.toFixed(2);
+    document.getElementById("displayed_overall_price").textContent = formattedPrice;
+    document.getElementById("total_price").value = formattedPrice;
+    document.getElementById("gcash-amount").textContent = "₱" + formattedPrice; // Update the displayed amount
+    document.getElementById("gcash-amount").setAttribute("value", formattedPrice); // Update the value attribute
+    document.getElementById("paypal-amount").textContent = "₱" + formattedPrice; // Update the displayed amount
+    document.getElementById("paypal-amount").setAttribute("value", formattedPrice); // Update the value attribute
+    document.getElementById("amount-due").textContent = "₱" + formattedPrice; // Update the displayed amount
+    document.getElementById("amount-due").setAttribute("value", formattedPrice); // Update the value attribute
+    document.getElementById("amount-d").textContent = "₱" + formattedPrice; // Update the displayed amount
+    document.getElementById("amount-d").setAttribute("value", formattedPrice); // Update the value attribute
+}
 </script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script>
+function previewImage(event, index) {
+    var reader = new FileReader();
+    reader.onload = function() {
+        var output;
+        if (index === 'prof') {
+            output = document.getElementById('imagePreview');
+        } else {
+            output = document.getElementById('IDPreview' + index);
+        }
+        output.src = reader.result;
+        output.style.display = 'block';
+    };
+    reader.readAsDataURL(event.target.files[0]);
+}
+
+function calculateTotalPrice(index) {
+    // Your logic to calculate total price based on date of birth and accommodation
+}
+</script>
 </main>
 </body>
 </html>

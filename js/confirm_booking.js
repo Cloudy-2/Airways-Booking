@@ -109,3 +109,17 @@ function previewImage(event) {
         console.error("Radio button element not found.");
     }
 }
+function previewImage(event) {
+    var imagePreview = document.getElementById('IDPreview');
+    var fileInput = event.target.files[0]; // Get the selected file
+    var reader = new FileReader();
+
+    reader.onload = function() {
+        imagePreview.src = reader.result; // Set the source of the image to the file reader's result
+        imagePreview.style.display = 'block'; // Make the image visible
+    }
+
+    if (fileInput) {
+        reader.readAsDataURL(fileInput); // Read the file as a data URL
+    }
+}
