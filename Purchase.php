@@ -1,4 +1,3 @@
-
 <?php 
 session_start();
 include './config/database.php';
@@ -10,7 +9,7 @@ if(isset($_SESSION['username'])) {
     $email = $_SESSION['username'];
 
     // Check if the logged-in user has any booking history or ongoing booking as a main passenger
-    $sql_main = "SELECT `Flight_ID`, `MainPassenger`, `first_name`, `last_name`, `email`, `contact_number`, `dob`, `seat`, `accommodation`, `ticket_price`, `total_price`, `Seat_Number`, `Status` FROM `main_passengers` WHERE email = '$email'";
+    $sql_main = "SELECT `Flight_ID`, `MainPassenger`, `first_name`, `last_name`, `email`, `contact_number`, `dob`, `seat`, `accommodation`, `ticket_price`, `total_price`, `Seat_Number`, `Status`, `Airline` FROM `main_passengers` WHERE email = '$email'";
     $result_main = $conn->query($sql_main);
 }
 
@@ -28,7 +27,7 @@ if ($result_main->num_rows > 0) {
         $mainPassengerID = $main_passenger['MainPassenger'];
 
         // Execute the query to retrieve other passenger data based on the MainPassengerID
-        $sql_other = "SELECT `Flight_ID`, `id`, `MainPassenger`, `first_name`, `last_name`, `email`, `contact_number`, `dob`, `seat`, `accommodation`, `ticket_price`, `Seat_Number`, `Status`  FROM `other_passengers` WHERE MainPassenger = '$mainPassengerID'";
+        $sql_other = "SELECT `Flight_ID`, `id`, `MainPassenger`, `first_name`, `last_name`, `email`, `contact_number`, `dob`, `seat`, `accommodation`, `ticket_price`, `Seat_Number`, `Status`, `Airline`  FROM `other_passengers` WHERE MainPassenger = '$mainPassengerID'";
         $result_other = $conn->query($sql_other);
 
         // Fetch and store the other passenger data in the array
@@ -42,6 +41,7 @@ $sql = "SELECT * FROM tripsum WHERE trip_email= '$email'";
 $result = $conn->query($sql);
 if ($result && $result->num_rows > 0) {
     $row = $result->fetch_assoc();
+    $airline = $row["Airline"]; // Move this line here
 }
 ?>
 
@@ -190,6 +190,7 @@ if ($result && $result->num_rows > 0) {
                         </div>
                         <div class="airline-name">
                             <span id="Airline"></span>
+                            <h2><?php echo $airline ?></h2>
                             <h1>SKYLINE AIRWAYS</h1>
                             <p style="padding-left: 0;">Your Trusted Airline Companion</p>
                         </div>

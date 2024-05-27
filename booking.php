@@ -62,8 +62,8 @@ if ($checkResult->num_rows > 0) {
     exit();
 }
 // Insert trip summary data into the database
-$insertSql = "INSERT INTO tripsum (trip_id, trip_fno, trip_dep, trip_depdate, trip_deptime, trip_arrival, trip_ardate, trip_artime, trip_price, trip_email) 
-              VALUES ('$flight_id', '{$flight['flight_number']}', '{$flight['departure_location']}', '{$_GET['departure_date']}', '{$flight['Departure-Time']}', '{$flight['arrival_location']}', '{$_GET['arrival_date']}', '{$flight['Arrival-Time']}', '{$flight['price']}', '{$_SESSION['username']}')";
+$insertSql = "INSERT INTO tripsum (trip_id, trip_fno, trip_dep, trip_depdate, trip_deptime, trip_arrival, trip_ardate, trip_artime, trip_price, Airline, trip_email) 
+              VALUES ('$flight_id', '{$flight['flight_number']}', '{$flight['departure_location']}', '{$_GET['departure_date']}', '{$flight['Departure-Time']}', '{$flight['arrival_location']}', '{$_GET['arrival_date']}', '{$flight['Arrival-Time']}', '{$flight['price']}','{$flight['Airline']}','{$_SESSION['username']}')";
 
 if ($conn->query($insertSql) === TRUE) {
     echo "Trip summary inserted successfully.";

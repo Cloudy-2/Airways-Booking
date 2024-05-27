@@ -11,17 +11,18 @@ $arrival = $_GET['Arrival'];
 $arrivalDate = $_GET['Arrival_Date'];
 $arrivalTime = $_GET['Arrival_Time'];
 $price = $_GET['Price'];
+$airline = $_GET['Airline'];
 $passengerEmail = $_GET['Passenger_Email'];
 
 // Prepare SQL statement
-$sql = "INSERT INTO tripsum (trip_fno, trip_dep, trip_depdate, trip_deptime, trip_arrival, trip_ardate, trip_artime, trip_price, trip_email)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+$sql = "INSERT INTO tripsum (trip_fno, trip_dep, trip_depdate, trip_deptime, trip_arrival, trip_ardate, trip_artime, trip_price, trip_email, Airline)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
 // Prepare statement
 $stmt = $conn->prepare($sql);
 
 // Bind parameters
-$stmt->bind_param("sssssssss", $flightNumber, $departure, $departureDate, $departureTime, $arrival, $arrivalDate, $arrivalTime, $price, $passengerEmail);
+$stmt->bind_param("ssssssssss", $flightNumber, $departure, $departureDate, $departureTime, $arrival, $arrivalDate, $arrivalTime, $price, $passengerEmail, $airline);
 
 // Execute statement
 if ($stmt->execute()) {

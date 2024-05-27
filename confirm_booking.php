@@ -130,18 +130,19 @@ for ($i = 1; $i <= $passenger_count; $i++) {
 
     // Add the ticket price for this passenger to the total ticket price
     $totalTicketPrice += $ticket_price;
+
+    if ($passenger_count > 1 && $i > 1) {
+        echo '<label for="IDprofs_'  . $i . '">Upload Valid ID: <b style="color: red">*</b></label>';
+        echo '<input type="file" name="IDprofs_' . $i . '" id="IDprofs_' . $i . '" accept="image/*" required onchange="previewImage(event, ' . $i . ')">';
+        echo '<br>';
+        echo '<img id="IDPreview' . $i . '" src="#" alt="Image Preview" style="width: 290px; height: 190px; display: none;">';
+        echo '<br>';
+    }
+    
     echo '</div>'; // End of passenger-info
 }
 // Add upload image feature for passengers if count is more than 1 and passenger is not the first one
-if ($passenger_count > 1 && $i > 1) {
-    echo '<label for="profs_'  . $i . '">Upload Valid ID: <b style="color: red">*</b></label>';
-    echo '<input type="file" name="profs_' . $i . '" id="profs_' . $i . '" accept="image/*" required onchange="previewImage(event, ' . $i . ')">';
-    echo '<br>';
-    echo '<img id="IDPreview' . $i . '" src="#" alt="Image Preview" style="width: 290px; height: 190px; display: none;">';
-    echo '<br>';
-}
 
-echo '</div>'; // End of passenger-info
 
 ?>
 
@@ -298,9 +299,6 @@ function previewImage(event, index) {
     reader.readAsDataURL(event.target.files[0]);
 }
 
-function calculateTotalPrice(index) {
-    // Your logic to calculate total price based on date of birth and accommodation
-}
 </script>
 <script>
     function updateOverallPrice() {

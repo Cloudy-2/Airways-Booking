@@ -15,8 +15,10 @@ if (isset($_GET['email'])) {
     if ($result->num_rows > 0) {
         // Fetch user information from logindata table
         $userData = $result->fetch_assoc();
+    } else {
+        echo "No user found with the provided email.";
+        exit;
     }
-    
 } else {
     echo "Email not provided";
     exit; // Terminate script execution if email not provided
@@ -29,11 +31,40 @@ if (isset($_GET['email'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Information</title>
+    <style>
+        table {
+            width: 80%;
+            border-collapse: collapse;
+        }
+        table, th, td {
+            border: 1px solid black;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+        .image-container {
+            margin-bottom: 40px;
+        }
+        .back-button {
+            margin-top: 20px;
+            
+        }
+    </style>
 </head>
 <body>
     <h1>User Information</h1>
     <h2>Main Passenger</h2>
-    <table border="1">
+
+    <?php if (!empty($userData['reg_idUpload'])): ?>
+        <div class="image-container">
+            <img src="data:image/jpeg;base64,<?php echo base64_encode($userData['reg_idUpload']); ?>" alt="ID Upload" style="max-width: 400px; max-height: 400px;">
+        </div>
+    <?php else: ?>
+        <div class="image-container">No ID uploaded</div>
+    <?php endif; ?>
+
+    <table>
         <tr>
             <th>First Name</th>
             <th>Last Name</th>
@@ -48,7 +79,6 @@ if (isset($_GET['email'])) {
             <th>Status</th>
             <th>Phone</th>
             <th>Nationality</th>
-            <th>ID Upload</th>
         </tr>
         <tr>
             <td><?php echo $userData['reg_firstname']; ?></td>
@@ -64,8 +94,11 @@ if (isset($_GET['email'])) {
             <td><?php echo $userData['status']; ?></td>
             <td><?php echo $userData['phone']; ?></td>
             <td><?php echo $userData['nationality']; ?></td>
-            <td><img src="data:image/jpeg;base64,<?php echo base64_encode($userData['reg_idUpload']); ?>" alt="ID Upload" style="max-width: 200px; max-height: 200px;"></td>
         </tr>
     </table>
+
+    <div class="back-button">
+        <button type="button" onclick="location.href='admin.php'">Back</button>
+    </div>
 </body>
 </html>
