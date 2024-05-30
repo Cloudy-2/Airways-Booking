@@ -100,9 +100,8 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-
-// Define a JavaScript function to handle seat selection mainpassenger
-function handleSeatSelection(mainPassengerId, seatId) {
+// Define a JavaScript function to handle seat selection
+function handleSeatSelection(passengerType, passengerId, seatId) {
     // Check if the seat is already occupied or selected
     var seatElement = document.getElementById(seatId);
     if (seatElement.classList.contains('occupied') || seatElement.classList.contains('selected')) {
@@ -110,21 +109,62 @@ function handleSeatSelection(mainPassengerId, seatId) {
         return;
     }
 
-    // Clear previously selected seats
-    var selectedSeats = document.querySelectorAll('.seat.selected');
+    // Clear previously selected seats for the same passenger type and ID
+    var selectedSeats = document.querySelectorAll(`.seat.selected[data-passenger-type='${passengerType}'][data-passenger-id='${passengerId}']`);
     selectedSeats.forEach(function(seat) {
         seat.classList.remove('selected');
+        seat.removeAttribute('data-passenger-type');
+        seat.removeAttribute('data-passenger-id');
     });
 
-    // Mark the selected seat as 'selected'
+    // Mark the selected seat as 'selected' and set data attributes
     seatElement.classList.add('selected');
+    seatElement.setAttribute('data-passenger-type', passengerType);
+    seatElement.setAttribute('data-passenger-id', passengerId);
 
     // Update the selected seat number in the dropdown
-    var seatSelectDropdown = document.getElementById('SeatSelect' + mainPassengerId);
+    var seatSelectDropdown = document.getElementById(`${passengerType}_SeatSelect${passengerId}`);
     if (seatSelectDropdown) {
         seatSelectDropdown.value = seatId;
     }
 }
+
+// Function to clear selected seats when the modal is closed
+function clearSelectedSeatsOnModalClose(passengerType, passengerId) {
+    var selectedSeats = document.querySelectorAll(`.seat.selected[data-passenger-type='${passengerType}'][data-passenger-id='${passengerId}']`);
+    selectedSeats.forEach(function(seat) {
+        seat.classList.remove('selected');
+        seat.removeAttribute('data-passenger-type');
+        seat.removeAttribute('data-passenger-id');
+    });
+    // Reset the dropdown value
+    var seatSelectDropdown = document.getElementById(`${passengerType}_SeatSelect${passengerId}`);
+    if (seatSelectDropdown) {
+        seatSelectDropdown.value = '';
+    }
+}
+
+// Add event listeners to clear selected seats when the modal is closed
+document.addEventListener('DOMContentLoaded', function() {
+    var mainPassengerModals = document.querySelectorAll('.modal[id^="seatSelectionModal"]');
+    var otherPassengerModals = document.querySelectorAll('.modal[id^="OtherseatSelectionModal"]');
+
+    mainPassengerModals.forEach(function(modal) {
+        modal.addEventListener('hidden.bs.modal', function() {
+            var passengerId = modal.getAttribute('id').replace('seatSelectionModal', '');
+            clearSelectedSeatsOnModalClose('main', passengerId);
+        });
+    });
+
+    otherPassengerModals.forEach(function(modal) {
+        modal.addEventListener('hidden.bs.modal', function() {
+            var passengerId = modal.getAttribute('id').replace('OtherseatSelectionModal', '');
+            clearSelectedSeatsOnModalClose('other', passengerId);
+        });
+    });
+});
+
+
 
 // Add hover effect for a few seconds
 document.querySelectorAll('.seat').forEach(function(seat) {

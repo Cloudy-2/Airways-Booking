@@ -1,183 +1,162 @@
-
 body {
-    font-family: 'Montserrat', sans-serif; /* Use the Montserrat font */
+  font-family: 'Montserrat', sans-serif;
+  background-image: url("../assets/images/registration.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: fixed;
 }
 
 /* Header Styles */
 header {
-    font-style: normal;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background-color: rgba(0, 0, 0, 0.9);
-    width: 100%;
-    box-sizing: border-box;
-    margin: 0;
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 9999999;
-  }
-  
-  .logo {
-    display: flex;
-    align-items: center;
-    padding-left: 10px;
-  }
-  
-  .logo img {
-    height: 50px;
-    margin-right: 15px;
-  }
-  
-  .title h1 {
-    font-size: 26px;
-    margin: 0;
-    color: #fff;
-    font-size: 20px;
-    justify-content: left;
-    width: 300px;
-    font-family: 'Montserrat', sans-serif; /* Use the Montserrat font */
-    font-weight: 500; /* Adjust font weight as needed */ 
-  }
-  
-  nav {
-    max-width: 1600px; /* Adjust the max-width value as needed */
-    width: 100%;
-    padding: 1.8rem 2rem; /* Increase the padding to add more space */
-    display: flex;
-    justify-content: space-between;
-    font-family: 'Montserrat', sans-serif; /* Use the Montserrat font */
-    transition: transform 0.3s ease-in-out; /* Add transition for transform property */
-  }
-  
-  nav:hover {
-    transform: translateZ(5px); /* Move the nav bar forward slightly on hover */
-  }
-  nav ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    margin-left: auto; /* Align the nav ul content to the right */
-  }
-  nav li {
-    margin-top: 7px;
-  }
-  nav ul li:not(:last-child) {
-    margin-right: 5px; /* Add margin between list items */
-  }
-  
-  nav ul li a {
-    font-size: 20px;
-    text-decoration: none;
-    font-weight: 500;
-    padding: 5px 20px;
-    border-radius: 5px;
-    color: white; /* Base color */
-    transition: color 0.3s ease-in-out, transform 0.3s ease-in-out; /* Add transform transition */
-  }
-  
-  nav ul li a:hover {
-    cursor: pointer;
-    color: yellow; /* Bright color on hover */
-    transform: translateZ(5px); /* Move menu item forward on hover */
-  }
-  
-  
-  /* Add this to style the dropdown button */
-  nav .dropdown .dropbtn {
-    font-family: 'Montserrat', sans-serif; /* Use the Montserrat font */
-    color: #fff;
-    text-decoration: none;
-    font-weight: bold;
-    padding: 10px 20px;
-    border-radius: 5px;
-    transition: color 0.3s ease-in-out, transform 0.3s ease-in-out; 
-    cursor: pointer; /* Change cursor to pointer */
-  }
-  
-  nav .dropdown .dropbtn:hover {
-    color: yellow;
-  }
-  
-  .dropdown {
-    position: relative;
-    display: inline-block;
-  }
-  
-  .dropbtn {
-    background-color: transparent;
-    color: white;
-    padding: 10px 20px;
-    font-size: 16px;
-    border: none;
-    cursor: pointer;
-    font-family: Arial, sans-serif;
-    transition: background-color 0.3s;
-  }
-  
-  .dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #333; /* Background color of the dropdown */
-    min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
-    border-radius: 5px;
-    padding: 10px;
-  }
-  
-  .dropdown-content a {
-    color: white;
-    padding: 10px 0;
-    text-decoration: none;
-    display: block;
-    transition: color 0.3s;
-  }
-  
-  .dropdown-content a:hover {
-    color: yellow;
-  }
-  
-  .dropdown.active .dropdown-content {
-    display: block;
-  }
-  
-  .dropdown-content a.logout {
-    color: white; /* Color for logout link */
-  }
-  .dropdown-content a.logout:hover{
-    color: red; /* Color for logout link */
-  }
-  /* inbox.css */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #000;
+  width: 100%;
+  box-sizing: border-box;
+  margin: 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999999;
+}
 
+.logo {
+  display: flex;
+  align-items: center;
+  padding-left: 10px;
+}
+
+.logo img {
+  height: 50px;
+  margin-right: 15px;
+}
+
+.title h1 {
+  font-size: 20px;
+  margin: 0;
+  color: #fff;
+  width: 300px;
+  font-weight: 500;
+}
+
+nav {
+  max-width: 1600px;
+  width: 100%;
+  padding: 1.8rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  transition: transform 0.3s ease-in-out;
+}
+
+nav:hover {
+  transform: translateZ(5px);
+}
+
+nav ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  margin-left: auto;
+}
+
+nav ul li:not(:last-child) {
+  margin-right: 5px;
+}
+
+nav ul li a {
+  font-size: 20px;
+  text-decoration: none;
+  font-weight: 500;
+  padding: 5px 20px;
+  border-radius: 5px;
+  color: white;
+  transition: color 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+nav ul li a:hover {
+  cursor: pointer;
+  color: yellow;
+  transform: translateZ(5px);
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropbtn {
+  background-color: #000;
+  color: white;
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.dropbtn:hover {
+  color: yellow;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #333;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+  border-radius: 5px;
+  padding: 10px;
+}
+
+.dropdown-content a {
+  color: white;
+  padding: 10px 0;
+  text-decoration: none;
+  display: block;
+  transition: color 0.3s;
+}
+
+.dropdown-content a:hover {
+  color: yellow;
+}
+
+.dropdown.active .dropdown-content {
+  display: block;
+}
+
+.dropdown-content a.logout:hover {
+  color: red;
+}
+
+/* Inbox Styles */
 .inbox-title {
   font-size: 40px;
   font-weight: bold;
 }
+
 .inbox {
-  width: 80%;
-  margin: 120px auto 0; /* Added margin-top of 20px */
+  width: 60%;
+  margin: 120px auto 0;
   padding: 20px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.8); /* Added box shadow */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
+  background-color: white;
 }
 
 .email {
-    border-bottom: 1px solid #ccc;
-    padding: 10px 0;
+  border-bottom: 1px solid #ccc;
+  padding: 10px 0;
 }
 
 .sender {
-    font-weight: bold;
+  font-weight: bold;
 }
 
 .subject {
-    color: #555;
-}
-
-.date {
-    color: #888;
+  color: #555;
 }
 
 .btn-primary {
@@ -188,10 +167,9 @@ header {
   border-radius: 4px;
   text-decoration: none;
   cursor: pointer;
-  margin-top: 20px; /* Add margin to the top */
+  margin-top: 20px;
 }
 
-
 .btn-primary:hover {
-    background-color: #0056b3;
+  background-color: #0056b3;
 }

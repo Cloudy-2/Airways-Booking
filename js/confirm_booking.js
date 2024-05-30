@@ -23,8 +23,7 @@ document.getElementById('confirmButton').addEventListener('click', function() {
 document.getElementById('PconfirmButton').addEventListener('click', function() {
     // Check if the required inputs are filled
     var emailOrMobile = document.getElementById('paypal-email-or-mobile').value.trim();
-    var password = document.getElementById('paypal-password').value.trim();
-    if (emailOrMobile === '' || password === '') {
+    if (emailOrMobile === '') {
         alert("Please fill in all required fields.");
         return; // Prevent further execution
     }
