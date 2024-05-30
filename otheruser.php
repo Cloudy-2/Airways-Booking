@@ -27,64 +27,95 @@ if (isset($_GET['email'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User Information</title>
+    <title>Skyline - View Profile</title>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
+    <link rel="icon" href="./assets/images/favicon.jpg">
     <style>
         body {
+            margin: 0;
+            padding: 0;
             background-image: url("../assets/images/registration.jpg");
-            font-family: Arial, sans-serif;
             background-size: cover; 
             background-repeat: no-repeat; 
             background-position: center;
             background-attachment: fixed; 
+            background-color: #f4f4f4;
             color: #333;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
+            font-family: Arial, sans-serif;
             min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start; /* Align content at the start of the flex container */
+            align-items: center; /* Center content horizontally */
         }
-        h1, h2 {
+        body:before {
+            content: "";
+            background-color: rgba(0, 0, 0, 0.5); /* Transparent gray color */
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1; /* Place the pseudo-element behind other content */
+        }
+        h1 {
+            padding-top: 20px;
+            font-family: 'Oswald', sans-serif;
+            color: white;
+            font-size: 50px;
             text-align: center;
-            margin-bottom: 20px;
+            margin: 20px 0; /* Added margin to separate from container */
+        }
+
+        h2 {
+            padding-bottom: 20px;
+            margin: 0;
+            font-family: 'Montserrat', sans-serif;
+            color: white;
+            text-align: center;
         }
         .container {
-            background-color: #ddd;
+            background: rgba(255, 255, 255, 0.1);
             padding: 20px;
             border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            width: 90%;
-            max-width: 1200px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 1);
+            width: 100%;
+            max-width: 1800px;
+            margin-top: 70px; /* Adjust margin-top as needed */
         }
         table {
             width: 100%;
             border-collapse: collapse;
-            margin-bottom: 20px;
-        }
-        table, th, td {
+            color: white;
             
-            font-size: 15px;
-            border: 1px solid #ddd;
         }
         th, td {
-            font-weight: 3px bold;
-            padding: 15px;
-            text-align: left;
+            padding: 8px;
+            text-align: center;
+            font-weight: bold;
+            border-bottom: 1px solid #ddd;
+            border: solid black 2px;
+            background-color: rgba(242, 242, 242, 0.75);
+            color: black;
         }
         th {
-            background-color: #f2f2f2;
+            background-color: black;
+            color: white;
         }
         .image-container {
             text-align: center;
             margin-bottom: 20px;
         }
+
         .image-container img {
-            max-width: 50%;
+            padding-top: 20px;
+            max-width: 25%; /* Adjust the width as needed */
             height: auto;
             border-radius: 8px;
         }
         .back-button {
+            padding-top: 20px;
             display: flex;
             justify-content: center;
         }
@@ -101,12 +132,14 @@ if (isset($_GET['email'])) {
         .back-button button:hover {
             background-color: #0056b3;
         }
+
     </style>
 </head>
 <body>
+    <h1>User Information</h1>
+
     <div class="container">
-        <h1>User Information</h1>
-        <h2>Other Passengers</h2>
+        <h2>Main Passenger</h2>
 
         <?php
         // Fetch one row to display the image separately
@@ -151,6 +184,7 @@ if (isset($_GET['email'])) {
                 </tr>
             <?php } ?>
         </table>
+
         <div class="back-button">
             <button type="button" onclick="location.href='admin.php'">Back</button>
         </div>

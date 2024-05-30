@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500&display=swap" rel="stylesheet">
     <title>Skyline - Contact</title>
     <link rel="stylesheet" href="../css/admin_ui_css/contact.css">
     <link rel="icon" href="../assets/images/favicon.jpg">
@@ -24,7 +25,6 @@
             <li><a href="./admin_user.php">User</a></li>
             <?php
             session_start();
-            // Start the session
             if(isset($_SESSION['username'])) {
                 if ($_SESSION['username'] === 'Skylineairways@gmail.com') {
                 }
@@ -50,26 +50,21 @@
             </thead>
             <tbody>
             <?php
-            // Include the database configuration file
             include '../config/database.php';
 
-            // Query to fetch contact information
             $query = "SELECT `name`, `email`, `message` FROM `admin_reply`";
             $result = mysqli_query($conn, $query);
 
-            // Check if there are any contact records
             if (mysqli_num_rows($result) > 0) {
-                // Iterate over each contact record and display it in a table row
                 while ($row = mysqli_fetch_assoc($result)) {
                     echo "<tr>";
                     echo "<td style='text-align: center;'><b>" . $row['name'] . "</b></td>";
                     echo "<td>" . $row['email'] . "</td>";
                     echo "<td>" . $row['message'] . "</td>";
-                   echo "<td style='text-align: center;'><button class='btn btn-primary reply-btn' data-email='" . $row['email'] . "'>Reply</button></td>";
+                    echo "<td style='text-align: center;'><button class='btn btn-primary reply-btn' data-email='" . $row['email'] . "'>Reply</button></td>";
                     echo "</tr>";
                 }
             } else {
-                // If no contact records found, display a message
                 echo "<tr><td colspan='5'>No contact found</td></tr>";
             }
 
@@ -89,7 +84,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form action="../reply.php" method="POST">
+                <form action="../reply.php" method="POST" id="replyForm">
                     <div class="mb-3">
                         <label for="To" class="form-label">To:</label>
                         <input type="email" class="form-control" id="To" name="To" readonly>
@@ -105,9 +100,7 @@
                     <input type="hidden" id="replyEmail" name="replyEmail">
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <form action="reply.php" method="POST">
                         <button type="submit" class="btn btn-primary" id="sendReplyBtn">Send</button>
-                        </form>
                     </div>
                 </form>
             </div>
@@ -116,9 +109,20 @@
 </div>
 
 <script src="../assets/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script>
+    document.getElementById('replyForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+        swal({
+            title: "Reply Sent",
+            icon: "success",
+            button: "Okay",
+        }).then(() => {
+            this.submit();
+        });
+    });
+
     document.addEventListener("DOMContentLoaded", function() {
-        // Reply Button Click Event
         const replyButtons = document.querySelectorAll('.reply-btn');
         const replyModal = new bootstrap.Modal(document.getElementById('replyModal'));
 
