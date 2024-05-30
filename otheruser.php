@@ -29,77 +29,131 @@ if (isset($_GET['email'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Information</title>
     <style>
-         table {
-            width: 80%;
-            border-collapse: collapse;
+        body {
+            background-image: url("../assets/images/registration.jpg");
+            font-family: Arial, sans-serif;
+            background-size: cover; 
+            background-repeat: no-repeat; 
+            background-position: center;
+            background-attachment: fixed; 
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            min-height: 100vh;
         }
-        table, th, td {
-            border: 1px solid black;
-        }
-        th, td {
-            padding: 10px;
-            text-align: left;
-            font-size: large;
-            
-        }
-        .image-container {
+        h1, h2 {
+            text-align: center;
             margin-bottom: 20px;
         }
-        .back-button {
-            margin-top: 20px;
+        .container {
+            background-color: #ddd;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 90%;
+            max-width: 1200px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        table, th, td {
             
+            font-size: 15px;
+            border: 1px solid #ddd;
+        }
+        th, td {
+            font-weight: 3px bold;
+            padding: 15px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .image-container {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .image-container img {
+            max-width: 50%;
+            height: auto;
+            border-radius: 8px;
+        }
+        .back-button {
+            display: flex;
+            justify-content: center;
+        }
+        .back-button button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .back-button button:hover {
+            background-color: #0056b3;
         }
     </style>
 </head>
 <body>
-    <h1>User Information</h1>
-    <h2>Other Passengers</h2>
+    <div class="container">
+        <h1>User Information</h1>
+        <h2>Other Passengers</h2>
 
-    <?php
-    // Fetch one row to display the image separately
-    $row = $result_other_passenger->fetch_assoc();
-    if (!empty($row['IDUpload'])) {
-        echo '<div><img src="data:image/jpeg;base64,' . base64_encode($row['IDUpload']) . '" alt="ID Upload" style="max-width: 400px; max-height: 400px;"></div>';
-    } else {
-        echo '<div>No ID uploaded</div>';
-    }
+        <?php
+        // Fetch one row to display the image separately
+        $row = $result_other_passenger->fetch_assoc();
+        if (!empty($row['IDUpload'])) {
+            echo '<div class="image-container"><img src="data:image/jpeg;base64,' . base64_encode($row['IDUpload']) . '" alt="ID Upload"></div>';
+        } else {
+            echo '<div class="image-container">No ID uploaded</div>';
+        }
 
-    // Reset the pointer to the beginning
-    $result_other_passenger->data_seek(0);
-    ?>
+        // Reset the pointer to the beginning
+        $result_other_passenger->data_seek(0);
+        ?>
 
-    <table>
-        <tr>
-            <th>Other Passenger ID</th>
-            <th>Main Passenger ID</th>
-            <th>Flight Number</th>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Email</th>
-            <th>Contact Number</th>
-            <th>Seat</th>
-            <th>Accommodation</th>
-            <th>Status</th>
-            <th>Seat#</th>
-        </tr>
-        <?php while ($row = $result_other_passenger->fetch_assoc()) { ?>
+        <table>
             <tr>
-                <td><?php echo $row['id']; ?></td>
-                <td><?php echo $row['MainPassenger']; ?></td>
-                <td><?php echo $row['Flight_ID']; ?></td>
-                <td><?php echo $row['first_name']; ?></td>
-                <td><?php echo $row['last_name']; ?></td>
-                <td><?php echo $row['email']; ?></td>
-                <td><?php echo $row['contact_number']; ?></td>
-                <td><?php echo $row['seat']; ?></td>
-                <td><?php echo $row['accommodation']; ?></td>
-                <td><?php echo $row['Status']; ?></td>
-                <td><?php echo $row['Seat_Number']; ?></td>
+                <th>Other Passenger ID</th>
+                <th>Main Passenger ID</th>
+                <th>Flight Number</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Email</th>
+                <th>Contact Number</th>
+                <th>Seat</th>
+                <th>Accommodation</th>
+                <th>Status</th>
+                <th>Seat#</th>
             </tr>
-        <?php } ?>
-    </table>
-    <div class="back-button">
-        <button type="button" onclick="location.href='admin.php'">Back</button>
+            <?php while ($row = $result_other_passenger->fetch_assoc()) { ?>
+                <tr>
+                    <td><?php echo $row['id']; ?></td>
+                    <td><?php echo $row['MainPassenger']; ?></td>
+                    <td><?php echo $row['Flight_ID']; ?></td>
+                    <td><?php echo $row['first_name']; ?></td>
+                    <td><?php echo $row['last_name']; ?></td>
+                    <td><?php echo $row['email']; ?></td>
+                    <td><?php echo $row['contact_number']; ?></td>
+                    <td><?php echo $row['seat']; ?></td>
+                    <td><?php echo $row['accommodation']; ?></td>
+                    <td><?php echo $row['Status']; ?></td>
+                    <td><?php echo $row['Seat_Number']; ?></td>
+                </tr>
+            <?php } ?>
+        </table>
+        <div class="back-button">
+            <button type="button" onclick="location.href='admin.php'">Back</button>
+        </div>
     </div>
 </body>
 </html>
